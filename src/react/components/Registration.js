@@ -1,17 +1,17 @@
 import React from "react";
 import Spinner from "react-spinkit";
 import { connect } from "react-redux";
-import { login } from "../../redux";
+import { createUser } from "../../redux";
 import "./LoginForm.css";
-import { NavLink } from "react-router-dom";
+
 import { Card, Image, Form, Checkbox, Button } from "semantic-ui-react";
 
-class LoginForm extends React.Component {
-  state = { username: "", password: "" };
+class Registration extends React.Component {
+  state = { username: "", password: "", displayName: "" };
 
-  handleLogin = e => {
+  handleRegistration = e => {
     e.preventDefault();
-    this.props.login(this.state);
+    this.props.createUser(this.state);
   };
 
   handleChange = e => {
@@ -25,12 +25,12 @@ class LoginForm extends React.Component {
         <Card>
           <Image src="/images/avatar/large/rachel.png" wrapped ui={false} />
           <Card.Content>
-            <Card.Header>Login</Card.Header>
+            <Card.Header>Sign Up</Card.Header>
             <Card.Meta>
-              <span className="date">Please login to ge started</span>
+              <span>Please </span>
             </Card.Meta>
 
-            <Form onSubmit={this.handleLogin}>
+            <Form onSubmit={this.handleRegistration}>
               <Form.Field>
                 <label htmlFor="username">Username:</label>
                 <input
@@ -40,6 +40,17 @@ class LoginForm extends React.Component {
                   required
                   onChange={this.handleChange}
                   placeholder="Choose a username"
+                />
+              </Form.Field>
+              <Form.Field>
+                <label htmlFor="displayName">Display Name:</label>
+                <input
+                  type="text"
+                  name="displayName"
+                  autoFocus
+                  required
+                  onChange={this.handleChange}
+                  placeholder="Choose a display name"
                 />
               </Form.Field>
 
@@ -62,12 +73,6 @@ class LoginForm extends React.Component {
               </Button>
             </Form>
           </Card.Content>
-          <Card.Content>
-            <Card.Description>
-              <NavLink to="/forgotpassword"> Forgot Password?</NavLink>
-              Not a member? Sign up <NavLink to="/users">Here </NavLink>
-            </Card.Description>
-          </Card.Content>
         </Card>
 
         {loading && <Spinner name="circle" color="blue" />}
@@ -79,9 +84,9 @@ class LoginForm extends React.Component {
 
 export default connect(
   state => ({
-    result: state.auth.login.result,
-    loading: state.auth.login.loading,
-    error: state.auth.login.error
+    result: state.users.createUser.result,
+    loading: state.users.createUser.loading,
+    error: state.users.createUser.error
   }),
-  { login }
-)(LoginForm);
+  { createUser }
+)(Registration);
