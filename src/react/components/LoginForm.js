@@ -65,7 +65,7 @@ class LoginForm extends React.Component {
           <Card.Content>
             <Card.Description>
               <NavLink to="/forgotpassword"> Forgot Password?</NavLink>
-              Not a member? Sign up <NavLink to="/users">Here </NavLink>
+              Not a member? Sign up <NavLink to="/registration">Here </NavLink>
             </Card.Description>
           </Card.Content>
         </Card>

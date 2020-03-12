@@ -1,0 +1,26 @@
+.heading {
+  text-align: center;
+  font-size: 50px;
+}
+
+#profile-body {
+  display: flex;
+  align-content: center;
+  flex-wrap: wrap;
+  /* margin: auto; */
+  justify-content: center;
+}
+
+.user-info-card {
+  width: auto;
+  border: 1px dotted black;
+  /* margin: auto; */
+}
+
+.message-feed-card {
+  display: flex;
+  /* border: 1px solid green; */
+  margin: 100px;
+  width: 50%;
+  flex-direction: column;
+}

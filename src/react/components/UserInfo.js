@@ -7,7 +7,7 @@ class UserInfo extends Component {
   state = {
     displayName: "",
     password: "",
-    about: ""
+    about: "Update profile to add something about yourself."
   };
 
   handleUserUpdate = e => {
@@ -18,19 +18,21 @@ class UserInfo extends Component {
   handleChange = e => {
     this.setState({ [e.target.name]: e.target.value });
   };
-  ss;
+
+  handleGoToMessages = e => {};
+
   componentDidMount() {
     this.props.getUser(this.props.username);
   }
   render() {
     const { error } = this.props;
     const user = this.state;
-    console.log(user);
-    console.log(this.props.createResult);
+
     if (!this.props.updateResult) {
       return (
         <React.Fragment>
           <Card
+            className="user-info-card"
             image="https://react.semantic-ui.com/images/avatar/large/rachel.png"
             header={this.props.username}
             meta="@username"
@@ -38,7 +40,11 @@ class UserInfo extends Component {
             extra=""
           />
 
-          <Modal trigger={<Button>Update Profile</Button>}>
+          <Modal
+            trigger={
+              <Button className="user-modal-button">Update Profile</Button>
+            }
+          >
             <Modal.Header>Update Profile</Modal.Header>
             <Modal.Content image>
               <Image
@@ -83,7 +89,10 @@ class UserInfo extends Component {
                     ></input>
                   </Form.Field>
 
-                  <Button type="submit"> Update</Button>
+                  <Button type="submit" className="button">
+                    {" "}
+                    Update
+                  </Button>
                 </Form>
               </Modal.Description>
             </Modal.Content>
@@ -98,8 +107,11 @@ class UserInfo extends Component {
           <Card
             image="https://react.semantic-ui.com/images/avatar/large/rachel.png"
             header={this.props.updateResult.user.displayName}
-            meta={this.props.updateResult.user.username}
-            description={this.props.updateResult.user.about}
+            meta={"@" + this.props.updateResult.user.username}
+            description={
+              this.props.updateResult.user.about ||
+              "Tell us something about yourself"
+            }
             extra=""
           />
 
@@ -147,12 +159,13 @@ class UserInfo extends Component {
                       onChange={this.handleChange}
                     ></input>
                   </Form.Field>
-
+                  <Button type="submit"> Upload Picture</Button>
                   <Button type="submit"> Update</Button>
                 </Form>
               </Modal.Description>
             </Modal.Content>
           </Modal>
+          <Button className="get-messages-button">My Kweets</Button>
 
           {error && <p style={{ color: "red" }}>{error.message}</p>}
         </React.Fragment>
