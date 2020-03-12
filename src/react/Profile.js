@@ -9,7 +9,7 @@ class Profile extends React.Component {
       <>
         <Menu isAuthenticated={this.props.isAuthenticated} />
         <h2>Profile</h2>
-        <Card>
+        <Card style={{ marginLeft: 600,}} >
           <Image src="https://www.blexar.com/avatar.png" wrapped ui={false} />
           <Card.Content>
             <Card.Header>Darion Suggs</Card.Header>
@@ -25,6 +25,12 @@ class Profile extends React.Component {
               <Icon name="user" />
               22 Friends
             </a>
+          </Card.Content>
+          <Card.Content extra>
+            <button>Upload image</button>
+          </Card.Content>
+          <Card.Content extra>
+            <button>Change Profile Pic</button>
           </Card.Content>
         </Card>
       </>
