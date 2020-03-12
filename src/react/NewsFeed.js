@@ -10,7 +10,6 @@ class NewsFeed extends React.Component {
       <div>
         <Menu isAuthenticated={this.props.isAuthenticated} />
         <NewTweet/>
-        <Button style={{ marginLeft: 1030, marginTop: 10 }}>Post</Button>
         <Card style={{ marginLeft: 700, marginTop: 10, width: 500 }}>
           <Card.Content>
             <Card.Header>Recent Activity</Card.Header>
