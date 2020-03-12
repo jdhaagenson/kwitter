@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import "./Menu.css";
 import { connect } from "react-redux";
 import { logout } from "../../redux";
+import SearchBar from "../components/SearchBar"
 
 class Menu extends React.Component {
   handleLogout = event => {
@@ -13,10 +14,12 @@ class Menu extends React.Component {
   render() {
     return (
       <div id="menu">
-        <h1>Kwitter</h1>
+        <h1>ThoughtBlog</h1>
         {this.props.isAuthenticated && (
           <div id="menu-links">
-            <Link to="/messagefeed">Message Feed</Link>
+            <SearchBar />
+            <Link to="/NewsFeed">Home</Link>
+            <Link exact to="/profiles/:username">Profile</Link>
             <Link to="/" onClick={this.handleLogout}>
               Logout
             </Link>
