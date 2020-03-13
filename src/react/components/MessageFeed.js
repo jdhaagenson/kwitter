@@ -1,9 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { createMessage } from "../../redux";
-import { Messages } from "../components";
-import { Card, Form, Button } from "semantic-ui-react";
-
+import { Feed, Card, Form, Button } from "semantic-ui-react";
+import moment from "moment";
 import "./MessageFeed.css";
 
 class MessageFeed extends Component {
