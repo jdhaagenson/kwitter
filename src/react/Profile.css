@@ -2,25 +2,31 @@
   text-align: center;
   font-size: 50px;
 }
+.menu {
+  /* background-color: aqua; */
+  margin: 10px;
+  height: inherit;
+}
 
 #profile-body {
   display: flex;
   align-content: center;
   flex-wrap: wrap;
-  /* margin: auto; */
+  margin: auto;
   justify-content: center;
 }
 
 .user-info-card {
   width: auto;
   border: 1px dotted black;
-  /* margin: auto; */
+  margin: 10px;
 }
 
 .message-feed-card {
   display: flex;
+
   /* border: 1px solid green; */
-  margin: 100px;
+  margin: 50px;
   width: 50%;
   flex-direction: column;
 }

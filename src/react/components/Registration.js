@@ -5,6 +5,7 @@ import { createUser } from "../../redux";
 import "./LoginForm.css";
 
 import { Card, Image, Form, Checkbox, Button } from "semantic-ui-react";
+import { NavLink } from "react-router-dom";
 
 class Registration extends React.Component {
   state = { username: "", password: "", displayName: "" };
@@ -68,8 +69,7 @@ class Registration extends React.Component {
                 <Checkbox label="I agree to the Terms and Conditions" />
               </Form.Field>
               <Button type="submit" disabled={loading}>
-                {" "}
-                Login
+                <NavLink to="/"> Sign Up</NavLink>
               </Button>
             </Form>
           </Card.Content>

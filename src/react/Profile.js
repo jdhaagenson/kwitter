@@ -8,9 +8,14 @@ class Profile extends React.Component {
   render() {
     return (
       <>
-        <Menu isAuthenticated={this.props.isAuthenticated} />
         <h2 className="heading">Profile</h2>
         <div id="profile-body">
+          <div className="menu">
+            <Menu
+              isAuthenticated={this.props.isAuthenticated}
+              className="menu"
+            />
+          </div>
           <div className="user-info-card">
             <UserInfo username={this.props.match.params.username} />
           </div>

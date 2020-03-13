@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { login } from "../../redux";
 import "./LoginForm.css";
 import { NavLink } from "react-router-dom";
-import { Card, Image, Form, Checkbox, Button } from "semantic-ui-react";
+import { Card, Image, Form, Checkbox, Button, Icon } from "semantic-ui-react";
 
 class LoginForm extends React.Component {
   state = { username: "", password: "" };
@@ -56,15 +56,23 @@ class LoginForm extends React.Component {
               <Form.Field>
                 <Checkbox label="I agree to the Terms and Conditions" />
               </Form.Field>
+
               <Button type="submit" disabled={loading}>
                 {" "}
+                <Icon name="key" />
                 Login
+              </Button>
+              <Button>
+                <Icon name="google plus" />
+                Google Sign in
               </Button>
             </Form>
           </Card.Content>
           <Card.Content>
             <Card.Description>
               <NavLink to="/forgotpassword"> Forgot Password?</NavLink>
+            </Card.Description>
+            <Card.Description>
               Not a member? Sign up <NavLink to="/registration">Here </NavLink>
             </Card.Description>
           </Card.Content>
