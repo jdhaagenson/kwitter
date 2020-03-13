@@ -15,6 +15,7 @@ class MessageFeed extends Component {
     e.preventDefault();
     this.props.createMessage(this.state.text);
     this.setState({ text: "" });
+    this.setState({ value: "" });
   };
 
   handleChange = e => {

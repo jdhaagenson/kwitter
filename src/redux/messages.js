@@ -11,7 +11,7 @@ import {
 const url = domain + "/messages";
 
 const CREATE_MESSAGE = createActions("createMessage");
-export const createMessage = messageData => (dispatch, getState) => {
+const _createMessage = messageData => (dispatch, getState) => {
   dispatch(CREATE_MESSAGE.START());
   const token = getState().auth.login.result.token;
   return fetch(url, {
@@ -38,6 +38,12 @@ export const getMessage = messageData => (dispatch, getState) => {
       });
     })
     .catch(err => Promise.reject(dispatch(GET_MESSAGE.FAIL(err))));
+};
+
+export const createMessage = messageData => (dispatch, getState) => {
+  dispatch(_createMessage(messageData)).then(() => {
+    dispatch(getMessage());
+  });
 };
 
 export const reducers = {
