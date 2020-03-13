@@ -1,19 +1,15 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { createMessage, getMessage } from "../../redux";
-import { Feed, Card, Form, Button } from "semantic-ui-react";
-import moment from "moment";
+import { createMessage } from "../../redux";
+import { Messages } from "../components";
+import { Card, Form, Button } from "semantic-ui-react";
+
 import "./MessageFeed.css";
 
 class MessageFeed extends Component {
   state = {
-    // token: this.props.token,
     text: ""
   };
-
-  // componentDidMount() {
-  //   this.props.getMessage(this.props.users);
-  // }
 
   handleKweet = e => {
     e.preventDefault();
@@ -27,16 +23,6 @@ class MessageFeed extends Component {
   };
 
   render() {
-    const messages = [
-      {
-        date: moment().fromNow(),
-        image: "https://react.semantic-ui.com/images/avatar/small/rachel.png",
-
-        extraText: "testing message feed xtratext",
-        summary: "testing message feed"
-      }
-    ];
-
     return (
       <React.Fragment>
         <Card className="kweet-form-card" style={{ width: "100%" }}>
@@ -65,7 +51,7 @@ class MessageFeed extends Component {
 
         <Card style={{ width: "100%" }}>
           <Card.Content>
-            <Feed className="message-feed" events={messages} />
+            <Messages />
           </Card.Content>
         </Card>
       </React.Fragment>

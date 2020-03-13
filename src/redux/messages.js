@@ -25,16 +25,18 @@ export const createMessage = messageData => (dispatch, getState) => {
 };
 
 const GET_MESSAGE = createActions("getMessage");
-export const getMessage = messageData => dispatch => {
+export const getMessage = messageData => (dispatch, getState) => {
   dispatch(GET_MESSAGE.START());
-
-  return fetch(url, {
-    method: "GET",
-    headers: jsonHeaders,
-    body: JSON.stringify(messageData)
-  })
+  const token = getState().auth.login.result.token;
+  return fetch(url + "?limit=100&offset=0")
     .then(handleJsonResponse)
-    .then(result => dispatch(GET_MESSAGE.SUCCESS(result)))
+    .then(result => {
+      result = Object.keys(result.messages).map(key => result.messages[key]);
+      dispatch({
+        type: GET_MESSAGE.SUCCESS,
+        payload: result
+      });
+    })
     .catch(err => Promise.reject(dispatch(GET_MESSAGE.FAIL(err))));
 };
 

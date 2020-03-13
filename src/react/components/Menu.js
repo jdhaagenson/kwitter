@@ -1,28 +1,86 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import "./Menu.css";
 import { connect } from "react-redux";
 import { logout } from "../../redux";
+import { Dropdown, Icon, Input, Menu } from "semantic-ui-react";
 
-class Menu extends React.Component {
+class MainMenu extends React.Component {
   handleLogout = event => {
     event.preventDefault();
     this.props.logout();
   };
 
+  handleItemClick = (e, { name }) => this.setState({ activeItem: name });
+  state = {};
+
   render() {
+    const { activeItem } = this.state;
     return (
-      <div id="menu">
-        <h1>Kwitter</h1>
+      <React.Fragment>
         {this.props.isAuthenticated && (
-          <div id="menu-links">
-            <Link to="/messagefeed">Message Feed</Link>
-            <Link to="/" onClick={this.handleLogout}>
-              Logout
-            </Link>
-          </div>
+          <Menu fluid="true" vertical>
+            <Menu.Item>
+              <Input placeholder="Search..." />
+            </Menu.Item>
+
+            <Menu.Item>
+              Home
+              <Menu.Menu>
+                <Menu.Item
+                  name="search"
+                  active={activeItem === "search"}
+                  onClick={this.handleItemClick}
+                >
+                  Search
+                </Menu.Item>
+                <Menu.Item
+                  name="add"
+                  active={activeItem === "add"}
+                  onClick={this.handleItemClick}
+                >
+                  Add
+                </Menu.Item>
+                <Menu.Item
+                  name="about"
+                  active={activeItem === "about"}
+                  onClick={this.handleItemClick}
+                >
+                  Remove
+                </Menu.Item>
+              </Menu.Menu>
+            </Menu.Item>
+
+            <Menu.Item
+              name="browse"
+              active={activeItem === "browse"}
+              onClick={this.handleItemClick}
+            >
+              <Icon name="grid layout" />
+              Browse
+            </Menu.Item>
+            <Menu.Item
+              name="messages"
+              active={activeItem === "messages"}
+              onClick={this.handleItemClick}
+            >
+              <NavLink to="/messagefeed">Messages </NavLink>
+            </Menu.Item>
+
+            <Dropdown item text="More">
+              <Dropdown.Menu>
+                <Dropdown.Item icon="edit" text="Edit Profile" />
+                <Dropdown.Item icon="settings" text="Account Settings" />
+                <Dropdown.Item
+                  icon="key"
+                  text="logout"
+                  onClick={this.handleLogout}
+                />
+              </Dropdown.Menu>
+            </Dropdown>
+          </Menu>
         )}
-      </div>
+      </React.Fragment>
     );
   }
 }
@@ -34,4 +92,4 @@ export default connect(
     error: state.auth.logout.error
   }),
   { logout }
-)(Menu);
+)(MainMenu);

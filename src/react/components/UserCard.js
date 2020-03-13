@@ -10,6 +10,8 @@ class UserInfo extends Component {
     about: "Update profile to add something about yourself."
   };
 
+  handleModal = () => {};
+
   handleUserUpdate = e => {
     e.preventDefault();
     this.props.updateUser(this.state);
@@ -42,7 +44,9 @@ class UserInfo extends Component {
 
           <Modal
             trigger={
-              <Button className="user-modal-button">Update Profile</Button>
+              <Button className="user-modal-button" open="true">
+                Update Profile
+              </Button>
             }
           >
             <Modal.Header>Update Profile</Modal.Header>
@@ -89,7 +93,7 @@ class UserInfo extends Component {
                     ></input>
                   </Form.Field>
 
-                  <Button type="submit" className="button">
+                  <Button type="submit" className="button" open="false">
                     {" "}
                     Update
                   </Button>
@@ -115,7 +119,10 @@ class UserInfo extends Component {
             extra=""
           />
 
-          <Modal trigger={<Button>Update Profile</Button>}>
+          <Modal
+            trigger={<Button>Update Profile</Button>}
+            id="update-user-modal"
+          >
             <Modal.Header>Update Profile</Modal.Header>
             <Modal.Content image>
               <Image
