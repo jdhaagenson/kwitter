@@ -19,7 +19,7 @@ class MainMenu extends React.Component {
     return (
       <React.Fragment>
         {this.props.isAuthenticated && (
-          <Menu fluid="true" vertical>
+          <Menu fluid={true} vertical>
             <Menu.Item>
               <Input placeholder="Search..." />
             </Menu.Item>
