@@ -40,7 +40,7 @@ export const updateUser = userData => (dispatch, getState) => {
 };
 
 const GET_USER = createActions("updateUser");
-export const getUser = username => (dispatch, getState) => {
+export const getUser = username => dispatch => {
   dispatch(GET_USER.START());
 
   return fetch(url + "/" + username, {
@@ -50,6 +50,19 @@ export const getUser = username => (dispatch, getState) => {
     .then(handleJsonResponse)
     .then(result => dispatch(GET_USER.SUCCESS(result)))
     .catch(err => Promise.reject(dispatch(GET_USER.FAIL(err))));
+};
+
+const SEARCH_USER = createActions('searchUser');
+export const searchUser = username => dispatch => {
+  dispatch(SEARCH_USER.START());
+
+  return fetch(url + "/" + username, {
+    method: "GET",
+    headers: jsonHeaders
+  })
+    .then(handleJsonResponse)
+    .then(result => dispatch(SEARCH_USER.SUCCESS(result)))
+    .catch(err => Promise.reject(dispatch(SEARCH_USER.FAIL(err))));
 };
 
 export const reducers = {
@@ -62,5 +75,8 @@ export const reducers = {
 
   getUser: createReducer(asyncInitialState, {
     ...asyncCases(GET_USER)
+  }),
+  searchUser: createReducer(asyncInitialState, {
+    ...asyncCases(SEARCH_USER)
   })
 };
