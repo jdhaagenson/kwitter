@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {searchUser} from '../../redux';
-import {Feed, Button, Card, Form} from 'semantic-ui-react';
+import {Feed, Button, Icon, Search} from 'semantic-ui-react';
 import moment from "moment";
 import './SearchBar.css';
 
@@ -13,12 +13,12 @@ class SearchBar extends Component {
         }
 
     handleChange = e => {
-        e.preventDefault()
+        // e.preventDefault()
         this.setState({text:e.target.value});
     }
 
     handleSearch = e => {
-        e.preventDefault()
+        // e.preventDefault()
         this.props.searchUser(this.state.searchTerm)
         this.setState({searchTerm: ""})
     }
@@ -34,7 +34,15 @@ class SearchBar extends Component {
         ];
         return (
             <React.Fragment>
-                <Card></Card>
+                <Search
+                    placeholder="Search users"
+                    autoFocus
+                    onFocus={this.handleChange}
+                >
+                    <Icon name="search"
+                    onClick={this.handleSearch}
+                    position="right"/>
+                </Search>
             </React.Fragment>
         )
     }
@@ -46,5 +54,5 @@ export default connect(
         loading: state.users.searchUser.loading,
         error: state.users.searchUser.error
     }),
-    {}
+    {searchUser}
 )(SearchBar)

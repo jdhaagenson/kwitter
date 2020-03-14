@@ -21,7 +21,7 @@ class UserInfo extends Component {
   handleModal = () => {};
 
   handleUserUpdate = e => {
-    e.preventDefault();
+    // e.preventDefault();
     this.props.updateUser(this.state);
   };
 

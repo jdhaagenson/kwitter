@@ -7,7 +7,7 @@ import { Dropdown, Icon, Input, Menu } from "semantic-ui-react";
 
 class MainMenu extends React.Component {
   handleLogout = event => {
-    event.preventDefault();
+    // event.preventDefault();
     this.props.logout();
   };
 

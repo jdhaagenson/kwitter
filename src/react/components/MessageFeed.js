@@ -12,14 +12,14 @@ class MessageFeed extends Component {
   };
 
   handleKweet = e => {
-    e.preventDefault();
+    // e.preventDefault();
     this.props.createMessage(this.state.text);
     this.setState({ text: "" });
-    this.setState({ value: "" });
+    // this.setState({ value: "" });
   };
 
   handleChange = e => {
-    e.preventDefault();
+    // e.preventDefault();
     this.setState({ text: e.target.value });
   };
 

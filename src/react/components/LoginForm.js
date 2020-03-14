@@ -1,3 +1,4 @@
+
 import React from "react";
 import Spinner from "react-spinkit";
 import { connect } from "react-redux";
@@ -10,7 +11,7 @@ class LoginForm extends React.Component {
   state = { username: "", password: "" };
 
   handleLogin = e => {
-    e.preventDefault();
+    // e.preventDefault();
     this.props.login(this.state);
   };
 
