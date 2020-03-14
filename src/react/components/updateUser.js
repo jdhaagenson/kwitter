@@ -1,21 +1,35 @@
 import React, { Component } from "react";
 import { Card, Modal, Button, Image, Header, Form } from "semantic-ui-react";
 import { connect } from "react-redux";
-import { updateUser, getUser } from "../../redux";
+import { updateUser, getUser,  } from "../../redux";
 
 class UpdateUser extends Component {
+  state = {
+    password: "",
+    displayName: "",
+    about:"",
+  }
 
+  handleChange = e => {
+    // e.preventDefault()
+    this.setState({ [e.target.name]: e.target.value })
+  };
 
+  handleUserUpdate = e => {
+    // e.preventDefault()
+    this.props.updateUser(this.state)
+  };
 
+  handleUploadPicture = e => {
+    this.props.
+  }
 
- 
   render() {
     const { error } = this.props;
-    const user = this.state;
+    // const user = this.state;
 
       return (
-       
-
+        <React.Fragment>
           <Modal trigger={<Button>Update Profile</Button>}>
             <Modal.Header>Update Profile</Modal.Header>
             <Modal.Content image>
@@ -47,7 +61,7 @@ class UpdateUser extends Component {
                       autoFocus
                       required
                       onChange={this.handleChange}
-                    ></input>
+                    />
                   </Form.Field>
 
                   <Form.Field>
@@ -58,10 +72,16 @@ class UpdateUser extends Component {
                       autoFocus
                       required
                       onChange={this.handleChange}
-                    ></input>
+                    />
                   </Form.Field>
-                  <Button type="submit"> Upload Picture</Button>
-                  <Button type="submit"> Update</Button>
+                  <Button
+                      type="submit"
+                      onClick={this.handleUploadPicture}
+                  > Upload Picture</Button>
+                  <Button
+                      type="submit"
+                      onClick={this.handleUserUpdate}
+                  > Update</Button>
                 </Form>
               </Modal.Description>
             </Modal.Content>
@@ -71,17 +91,15 @@ class UpdateUser extends Component {
           {error && <p style={{ color: "red" }}>{error.message}</p>}
         </React.Fragment>
       );
-    }
-  }
+  };
 }
 
 export default connect(
-  (state, ownProps) => ({
+  (state) => ({
     updateResult: state.users.updateUser.result,
     updateLoading: state.users.updateUser.loading,
     updateError: state.users.updateUser.error,
-    createResult: state.users.getUser.result,
-    username: ownProps.username
+    createResult: state.users.getUser.result.password
   }),
   { updateUser, getUser }
 )(UpdateUser);
