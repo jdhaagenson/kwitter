@@ -21,7 +21,7 @@ class NewsFeed extends React.Component {
                 <Feed.Content>
                   <Feed.Date content="1 day ago" />
                   <Feed.Summary>
-                    You added <a>Jenny Hess</a> to your <a>coworker</a> group.
+                    {/* You added <a>Jenny Hess</a> to your <a>coworker</a> group. */}
                     <Button as="div" labelPosition="right">
                       <Button icon>
                         <Icon name="heart" />
@@ -40,7 +40,7 @@ class NewsFeed extends React.Component {
                 <Feed.Content>
                   <Feed.Date content="3 days ago" />
                   <Feed.Summary>
-                    You added <a>Molly Malone</a> as a friend.
+                    {/* You added <a>Molly Malone</a> as a friend. */}
                     <Button as="div" labelPosition="right">
                       <Button icon>
                         <Icon name="heart" />
@@ -59,8 +59,8 @@ class NewsFeed extends React.Component {
                 <Feed.Content>
                   <Feed.Date content="4 days ago" />
                   <Feed.Summary>
-                    You added <a>Elliot Baker</a> to your <a>musicians</a>{" "}
-                    group.
+                    {/* You added <a>Elliot Baker</a> to your <a>musicians</a>{" "}
+                    group. */}
                     <Button as="div" labelPosition="right">
                       <Button icon>
                         <Icon name="heart" />

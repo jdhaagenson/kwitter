@@ -1,7 +1,7 @@
 import React from "react";
 import { Menu } from "./components";
 import { userIsAuthenticated } from "./HOCs";
-import { Card, Icon, Image } from "semantic-ui-react";
+import { Card} from "semantic-ui-react";
 
 class Profile extends React.Component {
   render() {
@@ -10,7 +10,7 @@ class Profile extends React.Component {
         <Menu isAuthenticated={this.props.isAuthenticated} />
         <h2>Profile</h2>
         <Card style={{ marginLeft: 600,}} >
-          <Image src="https://www.blexar.com/avatar.png" wrapped ui={false} />
+          {/* <Image src="https://www.blexar.com/avatar.png" wrapped ui={false} /> */}
           <Card.Content>
             <Card.Header>Darion Suggs</Card.Header>
             <Card.Meta>
@@ -21,13 +21,13 @@ class Profile extends React.Component {
             </Card.Description>
           </Card.Content>
           <Card.Content extra>
-            <a>
+            {/* <a>
               <Icon name="user" />
               22 Friends
-            </a>
+            </a> */}
           </Card.Content>
           <Card.Content extra>
-            <button>Upload image</button>
+            <button>Upload Image</button>
           </Card.Content>
           <Card.Content extra>
             <button>Change Profile Pic</button>
