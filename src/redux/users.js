@@ -9,6 +9,7 @@ import {
 } from "./helpers";
 
 const url = domain + "/users";
+const token = this.getState().auth.login.result.token
 
 const CREATE_USER = createActions("createUser");
 export const createUser = userData => dispatch => {
@@ -65,6 +66,35 @@ export const searchUser = username => dispatch => {
     .catch(err => Promise.reject(dispatch(SEARCH_USER.FAIL(err))));
 };
 
+const UPLOAD_PHOTO = createActions('uploadPhoto');
+export const uploadPhoto = (username, picture) => dispatch => {
+  dispatch(UPLOAD_PHOTO.START());
+
+  return fetch(url + "/" + username + "/picture", {
+    method: "PUT",
+    headers: { Authorization: "Bearer " + token, ...jsonHeaders },
+    body: picture
+  })
+    .then(handleJsonResponse)
+    .then(result => dispatch(UPLOAD_PHOTO.SUCCESS(result)))
+    .catch(err => Promise.reject(dispatch(UPLOAD_PHOTO.FAIL(err))))
+};
+
+const GET_PHOTO = createActions('getPhoto');
+export const getPhoto = username => dispatch => {
+  dispatch(GET_PHOTO.START());
+
+  return fetch(url + "/" + username + "/picture", {
+    method: "GET",
+    headers: jsonHeaders
+  })
+    .then(handleJsonResponse)
+    .then(result=> dispatch(GET_PHOTO.SUCCESS(result)))
+    .catch(err => Promise.reject(dispatch(GET_PHOTO.FAIL(err))))
+};
+
+
+
 export const reducers = {
   updateUser: createReducer(asyncInitialState, {
     ...asyncCases(UPDATE_USER)
@@ -78,5 +108,11 @@ export const reducers = {
   }),
   searchUser: createReducer(asyncInitialState, {
     ...asyncCases(SEARCH_USER)
+  }),
+  uploadPhoto: createReducer(asyncInitialState, {
+    ...asyncCases(UPLOAD_PHOTO)
+  }),
+  getPhoto: createReducer(asyncInitialState, {
+    ...asyncCases(GET_PHOTO)
   })
 };
