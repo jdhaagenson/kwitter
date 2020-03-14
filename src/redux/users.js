@@ -9,7 +9,6 @@ import {
 } from "./helpers";
 
 const url = domain + "/users";
-const token = this.getState().auth.login.result.token
 
 const CREATE_USER = createActions("createUser");
 export const createUser = userData => dispatch => {
@@ -67,8 +66,10 @@ export const searchUser = username => dispatch => {
 };
 
 const UPLOAD_PHOTO = createActions('uploadPhoto');
-export const uploadPhoto = (username, picture) => dispatch => {
+export const uploadPhoto = (username, picture) => (dispatch, getState) => {
   dispatch(UPLOAD_PHOTO.START());
+  const token = getState().auth.login.result.token;
+
 
   return fetch(url + "/" + username + "/picture", {
     method: "PUT",

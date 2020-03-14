@@ -5,3 +5,6 @@ export { default as UserInfo } from "./UserCard";
 export { default as MessageFeed } from "./MessageFeed";
 export { default as Messages } from "./Messages";
 export { default as Likes } from "./Likes";
+export { default as UpdateUser } from "./UpdateUser";
+export { default as UploadPhoto } from "./UploadPhoto";
+export { default as SearchBar } from "./SearchBar";

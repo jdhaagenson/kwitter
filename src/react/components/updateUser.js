@@ -1,14 +1,15 @@
 import React, { Component } from "react";
-import { Card, Modal, Button, Image, Header, Form } from "semantic-ui-react";
+import { Modal, Button, Image, Header, Form } from "semantic-ui-react";
 import { connect } from "react-redux";
-import { updateUser, getUser,  } from "../../redux";
+import { updateUser, getUser} from "../../redux";
+import UploadPhoto from "./UploadPhoto";
 
 class UpdateUser extends Component {
   state = {
     password: "",
     displayName: "",
     about:"",
-  }
+  };
 
   handleChange = e => {
     // e.preventDefault()
@@ -20,9 +21,6 @@ class UpdateUser extends Component {
     this.props.updateUser(this.state)
   };
 
-  handleUploadPicture = e => {
-    this.props.
-  }
 
   render() {
     const { error } = this.props;
@@ -74,10 +72,7 @@ class UpdateUser extends Component {
                       onChange={this.handleChange}
                     />
                   </Form.Field>
-                  <Button
-                      type="submit"
-                      onClick={this.handleUploadPicture}
-                  > Upload Picture</Button>
+
                   <Button
                       type="submit"
                       onClick={this.handleUserUpdate}
@@ -99,7 +94,7 @@ export default connect(
     updateResult: state.users.updateUser.result,
     updateLoading: state.users.updateUser.loading,
     updateError: state.users.updateUser.error,
-    createResult: state.users.getUser.result.password
+    createResult: state.users.getUser.result
   }),
   { updateUser, getUser }
 )(UpdateUser);

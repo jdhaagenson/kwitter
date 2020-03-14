@@ -43,6 +43,7 @@ class SearchBar extends Component {
                     onClick={this.handleSearch}
                     position="right"/>
                 </Search>
+
             </React.Fragment>
         )
     }
