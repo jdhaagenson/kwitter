@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Modal, Button, Image, Header, Form, Input } from "semantic-ui-react";
+import { Modal, Button, Image, Form, Input } from "semantic-ui-react";
 import { connect } from "react-redux";
 import { uploadPhoto, getUser } from "../../redux";
 
