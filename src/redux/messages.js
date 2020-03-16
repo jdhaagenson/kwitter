@@ -27,7 +27,6 @@ export const createMessage = messageData => (dispatch, getState) => {
 const GET_MESSAGE = createActions("getMessage");
 export const getMessage = messageData => (dispatch, getState) => {
   dispatch(GET_MESSAGE.START());
-  const token = getState().auth.login.result.token;
 
   return fetch(url + "?limit=100&offset=0")
     .then(handleJsonResponse)
@@ -40,6 +39,16 @@ export const getMessage = messageData => (dispatch, getState) => {
     })
     .catch(err => Promise.reject(dispatch(GET_MESSAGE.FAIL(err))));
 };
+
+const SEARCH_MESSAGE = createActions('searchMessage');
+export const searchMessage = messageId => dispatch=>{
+  dispatch(SEARCH_MESSAGE.START());
+
+  return fetch(url + messageId)
+    .then(handleJsonResponse)
+    .then(result => dispatch(SEARCH_MESSAGE.SUCCESS(result)))
+    .catch
+}
 
 export const reducers = {
   createMessage: createReducer(asyncInitialState, {
