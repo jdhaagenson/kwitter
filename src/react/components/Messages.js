@@ -28,7 +28,7 @@ class Messages extends Component {
                   <Feed.Label image="https://react.semantic-ui.com/images/avatar/large/rachel.png" />
                   <Feed.Content>
                     <Feed.Summary>
-                      {each.username} posted on his page
+                      {each.username} posted on their page
                       <Feed.Date>
                         <Icon name="clock outline" />
                         {moment(each.createdAt).fromNow()}

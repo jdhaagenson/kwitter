@@ -72,9 +72,9 @@ export const searchUser = username => dispatch => {
     .catch(err => Promise.reject(dispatch(SEARCH_USER.FAIL(err))));
 };
 
-const UPLOAD_PHOTO = createActions('uploadPhoto');
-export const uploadPhoto = (username, picture) => (dispatch, getState) => {
-  dispatch(UPLOAD_PHOTO.START());
+const SET_PHOTO = createActions('setPhoto');
+export const setPhoto = (username, picture) => (dispatch, getState) => {
+  dispatch(SET_PHOTO.START());
   const token = getState().auth.login.result.token;
 
   return fetch(url + "/" + username + "/picture", {
@@ -83,8 +83,8 @@ export const uploadPhoto = (username, picture) => (dispatch, getState) => {
     body: picture
   })
     .then(handleJsonResponse)
-    .then(result => dispatch(UPLOAD_PHOTO.SUCCESS(result)))
-    .catch(err => Promise.reject(dispatch(UPLOAD_PHOTO.FAIL(err))))
+    .then(result => dispatch(SET_PHOTO.SUCCESS(result)))
+    .catch(err => Promise.reject(dispatch(SET_PHOTO.FAIL(err))))
 };
 
 const GET_PHOTO = createActions('getPhoto');
@@ -116,8 +116,8 @@ export const reducers = {
   searchUser: createReducer(asyncInitialState, {
     ...asyncCases(SEARCH_USER)
   }),
-  uploadPhoto: createReducer(asyncInitialState, {
-    ...asyncCases(UPLOAD_PHOTO)
+  setPhoto: createReducer(asyncInitialState, {
+    ...asyncCases(SET_PHOTO)
   }),
   getPhoto: createReducer(asyncInitialState, {
     ...asyncCases(GET_PHOTO)

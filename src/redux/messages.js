@@ -12,8 +12,8 @@ const url = domain + "/messages";
 
 const CREATE_MESSAGE = createActions("createMessage");
 export const createMessage = messageData => (dispatch, getState) => {
-  const token = getState().auth.login.result.token
   dispatch(CREATE_MESSAGE.START());
+  const token = getState().auth.login.result.token
 
   return fetch(url, {
     method: "POST",

@@ -8,3 +8,5 @@ export { default as Likes } from "./Likes";
 export { default as UpdateUser } from "./UpdateUser";
 export { default as UploadPhoto } from "./UploadPhoto";
 export { default as SearchBar } from "./SearchBar";
+export { default as Avatar } from "./Avatar";
+export { default as UserList } from './UserList';
