@@ -2,8 +2,9 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { createMessage } from "../../redux";
 import { Feed, Card, Form, Button } from "semantic-ui-react";
-import moment from "moment";
+// import moment from "moment";
 import "./MessageFeed.css";
+import Messages from "./Messages"
 
 class MessageFeed extends Component {
   state = {
@@ -11,14 +12,14 @@ class MessageFeed extends Component {
   };
 
   handleKweet = e => {
-    e.preventDefault();
+    // e.preventDefault();
     this.props.createMessage(this.state.text);
     this.setState({ text: "" });
-    this.setState({ value: "" });
+    // this.setState({ value: "" });
   };
 
   handleChange = e => {
-    e.preventDefault();
+    // e.preventDefault();
     this.setState({ text: e.target.value });
   };
 
@@ -51,7 +52,7 @@ class MessageFeed extends Component {
 
         <Card style={{ width: "100%" }}>
           <Card.Content>
-            <Messages />
+            <Messages/>
           </Card.Content>
         </Card>
       </React.Fragment>

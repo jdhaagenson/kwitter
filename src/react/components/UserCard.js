@@ -21,7 +21,7 @@ class UserInfo extends Component {
   handleModal = () => {};
 
   handleUserUpdate = e => {
-    e.preventDefault();
+    // e.preventDefault();
     this.props.updateUser(this.state);
   };
 
@@ -120,7 +120,7 @@ class UserInfo extends Component {
                       autoFocus
                       required
                       onChange={this.handleChange}
-                    ></input>
+                    />
                   </Form.Field>
 
                   <Form.Field>
@@ -131,7 +131,7 @@ class UserInfo extends Component {
                       autoFocus
                       required
                       onChange={this.handleChange}
-                    ></input>
+                    />
                   </Form.Field>
                   <Button type="submit"> Upload Picture</Button>
                   <Button type="submit"> Update</Button>

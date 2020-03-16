@@ -4,10 +4,13 @@ import "./Menu.css";
 import { connect } from "react-redux";
 import { logout } from "../../redux";
 import { Dropdown, Icon, Input, Menu } from "semantic-ui-react";
+import SearchBar from "./SearchBar";
+import UpdateUser from "./UpdateUser";
 
 class MainMenu extends React.Component {
+
   handleLogout = event => {
-    event.preventDefault();
+    // event.preventDefault();
     this.props.logout();
   };
 
@@ -19,9 +22,9 @@ class MainMenu extends React.Component {
     return (
       <React.Fragment>
         {this.props.isAuthenticated && (
-          <Menu fluid="true" vertical>
+          <Menu fluid={true} vertical>
             <Menu.Item>
-              <Input placeholder="Search..." />
+              <SearchBar/>
             </Menu.Item>
 
             <Menu.Item>
@@ -69,7 +72,11 @@ class MainMenu extends React.Component {
 
             <Dropdown item text="More">
               <Dropdown.Menu>
-                <Dropdown.Item icon="edit" text="Edit Profile" />
+                <Dropdown.Item
+                    icon="edit"
+                    text="Edit Profile"
+                />
+                <UpdateUser/>
                 <Dropdown.Item icon="settings" text="Account Settings" />
                 <Dropdown.Item
                   icon="key"

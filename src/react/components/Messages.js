@@ -22,7 +22,7 @@ class Messages extends Component {
         <Card.Content>
           {this.props.result.map(each => (
             <React.Fragment>
-              <Feed>
+              <Feed key={each.id}>
                 <Feed.Event>
                   <Feed.Label image="https://react.semantic-ui.com/images/avatar/large/rachel.png" />
                   <Feed.Content>

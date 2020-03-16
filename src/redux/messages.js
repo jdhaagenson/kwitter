@@ -11,7 +11,7 @@ import {
 const url = domain + "/messages";
 
 const CREATE_MESSAGE = createActions("createMessage");
-const _createMessage = messageData => (dispatch, getState) => {
+export const createMessage = messageData => (dispatch, getState) => {
   dispatch(CREATE_MESSAGE.START());
   const token = getState().auth.login.result.token;
   return fetch(url, {
@@ -28,6 +28,7 @@ const GET_MESSAGE = createActions("getMessage");
 export const getMessage = messageData => (dispatch, getState) => {
   dispatch(GET_MESSAGE.START());
   const token = getState().auth.login.result.token;
+
   return fetch(url + "?limit=100&offset=0")
     .then(handleJsonResponse)
     .then(result => {
@@ -38,12 +39,6 @@ export const getMessage = messageData => (dispatch, getState) => {
       });
     })
     .catch(err => Promise.reject(dispatch(GET_MESSAGE.FAIL(err))));
-};
-
-export const createMessage = messageData => (dispatch, getState) => {
-  dispatch(_createMessage(messageData)).then(() => {
-    dispatch(getMessage());
-  });
 };
 
 export const reducers = {
