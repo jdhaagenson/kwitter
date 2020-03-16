@@ -38,7 +38,7 @@ export const unlike = messageData => (dispatch, getState) => {
     .catch(err => Promise.reject(dispatch(UNLIKE.FAIL(err))));
 };
 
-export const Reducers = {
+export const reducers = {
   like: createReducer(asyncInitialState, {
     ...asyncCases(LIKE)
   }),
