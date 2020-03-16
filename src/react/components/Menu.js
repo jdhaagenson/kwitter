@@ -8,6 +8,7 @@ import SearchBar from "./SearchBar";
 import UpdateUser from "./UpdateUser";
 
 class MainMenu extends React.Component {
+  state = {};
 
   handleLogout = event => {
     // event.preventDefault();
@@ -15,7 +16,6 @@ class MainMenu extends React.Component {
   };
 
   handleItemClick = (e, { name }) => this.setState({ activeItem: name });
-  state = {};
 
   render() {
     const { activeItem } = this.state;
@@ -24,7 +24,9 @@ class MainMenu extends React.Component {
         {this.props.isAuthenticated && (
           <Menu fluid={true} vertical>
             <Menu.Item>
-              <SearchBar/>
+              <SearchBar
+                results
+              />
             </Menu.Item>
 
             <Menu.Item>
