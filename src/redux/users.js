@@ -39,7 +39,7 @@ export const updateUser = userData => (dispatch, getState) => {
     .catch(err => Promise.reject(dispatch(UPDATE_USER.FAIL(err))));
 };
 
-const GET_USER = createActions("updateUser");
+const GET_USER = createActions("getUser");
 export const getUser = username => dispatch => {
   dispatch(GET_USER.START());
 
@@ -56,12 +56,18 @@ const SEARCH_USER = createActions('searchUser');
 export const searchUser = username => dispatch => {
   dispatch(SEARCH_USER.START());
 
-  return fetch(url + "/" + username, {
+  return fetch(url + "?limit=100&offset=0", {
     method: "GET",
     headers: jsonHeaders
   })
     .then(handleJsonResponse)
-    .then(result => dispatch(SEARCH_USER.SUCCESS(result)))
+    .then(result => {
+      result = Object.keys(result.userData).map(key => result.userData[key]);
+      dispatch({
+        type: SEARCH_USER.SUCCESS,
+        payload: result
+      });
+    })
     .catch(err => Promise.reject(dispatch(SEARCH_USER.FAIL(err))));
 };
 
