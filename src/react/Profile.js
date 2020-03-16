@@ -1,7 +1,7 @@
 import React from "react";
 import { Menu } from "./components";
 import { userIsAuthenticated } from "./HOCs";
-import { UserInfo, MessageFeed } from "../react/components";
+import { UserInfo, MessageFeed, UpdateUser } from "../react/components";
 import "./Profile.css";
 
 class Profile extends React.Component {
@@ -17,7 +17,12 @@ class Profile extends React.Component {
             />
           </div>
           <div className="user-info-card">
-            <UserInfo username={this.props.match.params.username} />
+            <UserInfo
+            displayName={this.props.match.params.username}
+            username={this.props.match.params.username}
+            description={this.props.match.params.about}
+             />
+            <UpdateUser/>
           </div>
           <div className="message-feed-card">
             <MessageFeed />
