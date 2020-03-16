@@ -27,8 +27,9 @@ export const createUser = userData => dispatch => {
 const UPDATE_USER = createActions("updateUser");
 export const updateUser = userData => (dispatch, getState) => {
   dispatch(UPDATE_USER.START());
+  const token=getState().auth.login.result.token
+  const username=getState().auth.login.result.username
 
-  const { username, token } = getState().auth.login.result;
   return fetch(url + "/" + username, {
     method: "PATCH",
     headers: { Authorization: "Bearer " + token, ...jsonHeaders },

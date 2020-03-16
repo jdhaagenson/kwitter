@@ -12,8 +12,9 @@ const url = domain + "/messages";
 
 const CREATE_MESSAGE = createActions("createMessage");
 export const createMessage = messageData => (dispatch, getState) => {
+  const token = getState().auth.login.result.token
   dispatch(CREATE_MESSAGE.START());
-  const token = getState().auth.login.result.token;
+
   return fetch(url, {
     method: "POST",
     headers: { Authorization: "Bearer " + token, ...jsonHeaders },
@@ -47,8 +48,8 @@ export const searchMessage = messageId => dispatch=>{
   return fetch(url + messageId)
     .then(handleJsonResponse)
     .then(result => dispatch(SEARCH_MESSAGE.SUCCESS(result)))
-    .catch
-}
+    .catch(err => Promise.reject(dispatch(SEARCH_MESSAGE.FAIL(err))));
+};
 
 export const reducers = {
   createMessage: createReducer(asyncInitialState, {
@@ -56,5 +57,8 @@ export const reducers = {
   }),
   getMessage: createReducer(asyncInitialState, {
     ...asyncCases(GET_MESSAGE)
+  }),
+  searchMessage: createReducer(asyncInitialState, {
+    ...asyncCases(SEARCH_MESSAGE)
   })
 };

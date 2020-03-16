@@ -1,16 +1,13 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { getMessage } from "../../redux";
-import { NavLink } from 'react-router-dom'
+import { getUser } from "../../redux";
 import { Feed, Card, Icon } from "semantic-ui-react";
-import Likes from "./Likes";
+import Likes from "./Likes"
+import moment from "moment"
 
-import moment from "moment";
-import "./MessageFeed.css";
-
-class Messages extends Component {
+class UserList extends Component {
   componentDidMount() {
-    this.props.getMessage();
+    this.props.getUser();
   }
 
   render() {
@@ -22,13 +19,13 @@ class Messages extends Component {
       <Card style={{ width: "100%" }}>
         <Card.Content>
           {this.props.result.map(each => (
-            <React.Fragment key={each.id}>
-              <Feed>
+            <React.Fragment>
+              <Feed key={each.id}>
                 <Feed.Event>
                   <Feed.Label image="https://react.semantic-ui.com/images/avatar/large/rachel.png" />
                   <Feed.Content>
                     <Feed.Summary>
-                      {each.username} posted on his page
+                      <a href="/messagefeed">{each.username}</a> posted on his page
                       <Feed.Date>
                         <Icon name="clock outline" />
                         {moment(each.createdAt).fromNow()}
@@ -56,9 +53,9 @@ class Messages extends Component {
 
 export default connect(
   state => ({
-    result: state.messages.getMessage.result,
-    loading: state.messages.getMessage.loading,
-    error: state.messages.getMessage.error
+    result: state.messages.getUser.result,
+    loading: state.messages.getUser.loading,
+    error: state.messages.getUser.error
   }),
-  { getMessage }
-)(Messages);
+  { getUser }
+)(UserList);

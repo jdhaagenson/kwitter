@@ -6,6 +6,7 @@ import { logout } from "../../redux";
 import { Dropdown, Icon, Input, Menu } from "semantic-ui-react";
 import SearchBar from "./SearchBar";
 import UpdateUser from "./UpdateUser";
+import users from '../users.json';
 
 class MainMenu extends React.Component {
   state = {};
@@ -25,7 +26,10 @@ class MainMenu extends React.Component {
           <Menu fluid={true} vertical>
             <Menu.Item>
               <SearchBar
-                results
+                results={users}
+                loading={this.props.isLoading}
+                value={this.props.value}
+                {...this.props}
               />
             </Menu.Item>
 
