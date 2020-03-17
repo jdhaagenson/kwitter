@@ -15,6 +15,7 @@ class UserList extends Component {
     }
 
     return (
+      <>
       <Card style={{ width: "100%" }}>
         <Card.Content>
           {this.props.result.map(each => (
@@ -27,15 +28,16 @@ class UserList extends Component {
           {/* <Feed className="message-feed" events={handleMessages} /> */}
         </Card.Content>
       </Card>
+      </>
     );
   }
 }
 
 export default connect(
   state => ({
-    result: state.messages.searchUser.result,
-    loading: state.messages.searchUser.loading,
-    error: state.messages.searchUser.error
+    result: state.users.searchUser.result,
+    loading: state.users.searchUser.loading,
+    error: state.users.searchUser.error
   }),
   { searchUser }
 )(UserList);

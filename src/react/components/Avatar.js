@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Button, Header, Input, Image, Modal} from 'semantic-ui-react';
-import {setPhoto} from '../../redux'
+import {setPhoto} from '../../redux';
+import { connect } from 'react-redux';
 
 const defaultImages = [
     'rachel.png', 'ade.jpg', 'chris.jpg', 'christian.jpg', 'daniel.jpg', 'elliot.jpg', 'elyse.png',
@@ -92,4 +93,11 @@ class Avatar extends Component {
 
 }
 
-export default Avatar;
+export default connect(
+    (state) => ({
+        result: state.users.setPhoto.result,
+        loading: state.users.setPhoto.loading,
+        error: state.users.setPhoto.error
+    }),
+    {setPhoto}
+)(Avatar)
