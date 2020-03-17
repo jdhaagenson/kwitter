@@ -19,7 +19,7 @@ class MessageFeed extends Component {
   };
 
   handleChange = e => {
-    // e.preventDefault();
+    e.preventDefault();
     this.setState({ text: e.target.value });
   };
 
@@ -38,7 +38,6 @@ class MessageFeed extends Component {
                 autoFocus
                 required
                 onChange={this.handleChange}
-                onKeyDown={this.handleKweet}
               ></input>
             </Form.Field>
           </Form>
@@ -46,7 +45,6 @@ class MessageFeed extends Component {
             className="kweet-button"
             type="submit"
             onClick={this.handleKweet}
-            onSubmit={this.handleKweet}
           >
             Kweet
           </Button>

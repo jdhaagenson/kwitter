@@ -28,7 +28,7 @@ class LoginForm extends React.Component {
           <Card.Content>
             <Card.Header>Login</Card.Header>
             <Card.Meta>
-              <span className="date">Please login to ge started</span>
+              <span className="date">Please login to get started</span>
             </Card.Meta>
 
             <Form onSubmit={this.handleLogin}>

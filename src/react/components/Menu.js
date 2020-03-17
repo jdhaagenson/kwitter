@@ -37,9 +37,9 @@ class MainMenu extends React.Component {
               Home
               <Menu.Menu>
                 <Menu.Item
-                  name="search"
-                  active={activeItem === "search"}
-                  onClick={this.handleItemClick}
+                  name="Logout"
+                  active={activeItem === "logout"}
+                  onClick={this.handleLogout}
                 >
                   Search
                 </Menu.Item>

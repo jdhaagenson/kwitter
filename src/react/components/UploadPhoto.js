@@ -1,7 +1,20 @@
 import React, { Component } from "react";
 import { Modal, Button, Image, Form, Input } from "semantic-ui-react";
 import { connect } from "react-redux";
-import { uploadPhoto, getUser } from "../../redux";
+import { setPhoto, getUser } from "../../redux";
+
+const defaultImages = [
+    'rachel.png', 'ade.jpg', 'chris.jpg', 'christian.jpg', 'daniel.jpg', 'elliot.jpg', 'elyse.png',
+    'helen.jpg', 'jenny.jpg', 'joe.jpg', 'justen.jpg', 'kristy.png', 'laura.jpg', 'matt.jpg', 'matthew.png',
+    'molly.png', 'nan.jpg', 'nom.jpg', 'patrick.png', 'steve.jpg', 'stevie.jpg', 'tom.jpg', 'veronika.jpg', 'zoe.jpg'
+  ]
+  const imageURL = 'https://react.semantic-ui.com/images/avatar/large/'
+  const randomAvatar = () => {
+    let min = 0;
+    let max = 24;
+    let r = Math.floor(Math.random()*(max-min+1))+min
+    return imageURL+defaultImages[r]
+  }
 
 class UpdateUser extends Component {
     state = {
@@ -16,7 +29,7 @@ class UpdateUser extends Component {
 
     handleUserUpdate = e => {
         // e.preventDefault()
-        this.props.uploadPhoto(this.getStateusername, this.state)
+        this.props.uploadPhoto(this.getState().username, this.state)
     };
 
     componentDidMount() {
@@ -64,5 +77,5 @@ export default connect(
         updateError: state.users.uploadPhoto.error,
         createResult: state.users.getUser.result
     }),
-    { uploadPhoto, getUser }
+    { uploadPhoto: setPhoto, getUser }
 )(UpdateUser);

@@ -54,7 +54,7 @@ export const getUser = username => dispatch => {
 };
 
 const SEARCH_USER = createActions('searchUser');
-export const searchUser = username => dispatch => {
+export const searchUser = () => dispatch => {
   dispatch(SEARCH_USER.START());
 
   return fetch(url + "?limit=100&offset=0", {
@@ -63,7 +63,7 @@ export const searchUser = username => dispatch => {
   })
     .then(handleJsonResponse)
     .then(result => {
-      result = Object.keys(result.userData).map(key => result.userData[key]);
+      result = Object.keys(result.users).map(key => result.users[key]);
       dispatch({
         type: SEARCH_USER.SUCCESS,
         payload: result
@@ -72,9 +72,9 @@ export const searchUser = username => dispatch => {
     .catch(err => Promise.reject(dispatch(SEARCH_USER.FAIL(err))));
 };
 
-const UPLOAD_PHOTO = createActions('uploadPhoto');
-export const uploadPhoto = (username, picture) => (dispatch, getState) => {
-  dispatch(UPLOAD_PHOTO.START());
+const SET_PHOTO = createActions('setPhoto');
+export const setPhoto = (username, picture) => (dispatch, getState) => {
+  dispatch(SET_PHOTO.START());
   const token = getState().auth.login.result.token;
 
   return fetch(url + "/" + username + "/picture", {
@@ -83,8 +83,8 @@ export const uploadPhoto = (username, picture) => (dispatch, getState) => {
     body: picture
   })
     .then(handleJsonResponse)
-    .then(result => dispatch(UPLOAD_PHOTO.SUCCESS(result)))
-    .catch(err => Promise.reject(dispatch(UPLOAD_PHOTO.FAIL(err))))
+    .then(result => dispatch(SET_PHOTO.SUCCESS(result)))
+    .catch(err => Promise.reject(dispatch(SET_PHOTO.FAIL(err))))
 };
 
 const GET_PHOTO = createActions('getPhoto');
@@ -116,8 +116,8 @@ export const reducers = {
   searchUser: createReducer(asyncInitialState, {
     ...asyncCases(SEARCH_USER)
   }),
-  uploadPhoto: createReducer(asyncInitialState, {
-    ...asyncCases(UPLOAD_PHOTO)
+  setPhoto: createReducer(asyncInitialState, {
+    ...asyncCases(SET_PHOTO)
   }),
   getPhoto: createReducer(asyncInitialState, {
     ...asyncCases(GET_PHOTO)
