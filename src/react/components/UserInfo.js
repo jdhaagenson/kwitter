@@ -57,9 +57,7 @@ class UserInfo extends Component {
         <React.Fragment>
           <Card
             className="user-info-card"
-            image={this.state.image}
             header={this.props.displayName}
-            meta={this.props.username}
             description={user.about}
           >
             <Image

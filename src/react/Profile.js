@@ -3,7 +3,7 @@ import { Menu } from "./components";
 import { userIsAuthenticated } from "./HOCs";
 import { UserInfo, MessageFeed } from "../react/components";
 import "./Profile.css";
-import UserList from './components'
+import UserList from './components/UserList'
 
 
 class Profile extends React.Component {
