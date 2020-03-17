@@ -19,7 +19,7 @@ class MessageFeed extends Component {
   };
 
   handleChange = e => {
-    // e.preventDefault();
+    e.preventDefault();
     this.setState({ text: e.target.value });
   };
 

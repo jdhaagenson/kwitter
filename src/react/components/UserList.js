@@ -2,6 +2,21 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { searchUser } from "../../redux";
 import { Card, Image } from "semantic-ui-react";
+import users from '../users.json'
+
+
+const defaultImages = [
+  'rachel.png', 'ade.jpg', 'chris.jpg', 'christian.jpg', 'daniel.jpg', 'elliot.jpg', 'elyse.png',
+  'helen.jpg', 'jenny.jpg', 'joe.jpg', 'justen.jpg', 'kristy.png', 'laura.jpg', 'matt.jpg', 'matthew.png',
+  'molly.png', 'nan.jpg', 'nom.jpg', 'patrick.png', 'steve.jpg', 'stevie.jpg', 'tom.jpg', 'veronika.jpg', 'zoe.jpg'
+]
+const imageURL = 'https://react.semantic-ui.com/images/avatar/large/'
+const randomAvatar = () => {
+  let min = 0;
+  let max = 24;
+  let r = Math.floor(Math.random()*(max-min+1))+min
+  return imageURL+defaultImages[r]
+}
 
 class UserList extends Component {
   componentDidMount() {
@@ -20,7 +35,7 @@ class UserList extends Component {
         <Card.Content>
           {this.props.result.map(each => (
             <React.Fragment key={each.id}>
-                <Image Avatar src={each.pictureLocation}/>
+                <Image Avatar src={randomAvatar()}/>
                 <p>{each.username}</p>
             </React.Fragment>
           ))}

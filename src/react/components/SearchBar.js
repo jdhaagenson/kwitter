@@ -1,13 +1,12 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {searchUser} from '../../redux';
-import {Search, Grid, Label} from 'semantic-ui-react';
+import {Search, Grid, Label, Loader} from 'semantic-ui-react';
 // import moment from "moment";
 import './SearchBar.css';
 import users from "../users.json";
 import faker from 'faker';
 import _ from 'lodash';
-import UserList from "./UserList"
 
 const initialState = { isLoading: false, results:[], value:'' }
 
@@ -27,7 +26,7 @@ const resultRenderer = ({ username }) => <Label content={username} />
 class SearchBar extends Component {
     state = {
         isLoading: false,
-        results: [],
+        result: [],
         value: ""
     }
 
@@ -73,20 +72,20 @@ class SearchBar extends Component {
         //         summary: "test"
         //     }
         // ];
-        const {isLoading, value, results} = this.state
+        const {loading, error, result} = this.props
         return (
             <React.Fragment>
                 <Grid>
                     <Grid.Column width={6}>
                 <Search
                     placeholder="Search users"
-                    loading={isLoading}
+                    loading={loading}
                     onResultSelect={this.handleResultSelect}
                     onSearchChange={_.debounce(this.handleSearchChange, 500, {
                         leading: true,
                     })}
-                    results={results}
-                    value={value}
+                    results={result}
+                    value={this.state.value}
                     resultRenderer={resultRenderer}
 
                 >
@@ -96,6 +95,9 @@ class SearchBar extends Component {
 
                     </Grid.Column>
                 </Grid>
+                {loading && <Loader/>}
+                {error && <p style={{ color: "red" }}>{error.message}</p>}
+
             </React.Fragment>
         )
     }

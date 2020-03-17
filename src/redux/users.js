@@ -54,7 +54,7 @@ export const getUser = username => dispatch => {
 };
 
 const SEARCH_USER = createActions('searchUser');
-export const searchUser = username => dispatch => {
+export const searchUser = () => dispatch => {
   dispatch(SEARCH_USER.START());
 
   return fetch(url + "?limit=100&offset=0", {
@@ -63,7 +63,7 @@ export const searchUser = username => dispatch => {
   })
     .then(handleJsonResponse)
     .then(result => {
-      result = Object.keys(result.userData).map(key => result.userData[key]);
+      result = Object.keys(result.users).map(key => result.users[key]);
       dispatch({
         type: SEARCH_USER.SUCCESS,
         payload: result
