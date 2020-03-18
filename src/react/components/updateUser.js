@@ -28,6 +28,7 @@ class UpdateUser extends Component {
 
       return (
         <React.Fragment>
+          <div>
           <Modal trigger={<Button>Update Profile</Button>}>
             <Modal.Header>Update Profile</Modal.Header>
             <Modal.Content image>
@@ -35,7 +36,7 @@ class UpdateUser extends Component {
                 wrapped
                 size="medium"
                 src="https://react.semantic-ui.com/images/avatar/large/rachel.png"
-              />
+                />
               <Modal.Description>
                 <Header>User info</Header>
                 <Form onSubmit={this.handleUserUpdate}>
@@ -48,7 +49,7 @@ class UpdateUser extends Component {
                       required
                       onChange={this.handleChange}
                       placeholder="Choose a new display name"
-                    />
+                      />
                   </Form.Field>
 
                   <Form.Field>
@@ -59,7 +60,7 @@ class UpdateUser extends Component {
                       autoFocus
                       required
                       onChange={this.handleChange}
-                    />
+                      />
                   </Form.Field>
 
                   <Form.Field>
@@ -70,18 +71,19 @@ class UpdateUser extends Component {
                       autoFocus
                       required
                       onChange={this.handleChange}
-                    />
+                      />
                   </Form.Field>
 
                   <Button
                       type="submit"
                       onClick={this.handleUserUpdate}
-                  > Update</Button>
+                      > Update</Button>
                 </Form>
               </Modal.Description>
             </Modal.Content>
           </Modal>
           <Button className="get-messages-button">My Kweets</Button>
+        </div>
 
           {error && <p style={{ color: "red" }}>{error.message}</p>}
         </React.Fragment>

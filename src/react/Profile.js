@@ -1,7 +1,7 @@
 import React from "react";
 import { Menu } from "./components";
 import { userIsAuthenticated } from "./HOCs";
-import { UserInfo, MessageFeed } from "../react/components";
+import { UserInfo, MessageFeed, UpdateUser, Avatar } from "../react/components";
 import "./Profile.css";
 import UserList from './components/UserList'
 
@@ -26,6 +26,7 @@ class Profile extends React.Component {
             description={this.props.match.params.about}
             extra=""
              />
+             <UpdateUser/>
           </div>
           <div className="message-feed-card">
             <MessageFeed />

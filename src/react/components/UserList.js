@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { searchUser } from "../../redux";
-import { Card, Image } from "semantic-ui-react";
+import { Card, Image, Divider, Header } from "semantic-ui-react";
 import users from '../users.json'
 
 
@@ -24,6 +24,7 @@ class UserList extends Component {
   }
 
 
+
   render() {
     if (this.props.result === null) {
       return <div>empty</div>;
@@ -31,12 +32,16 @@ class UserList extends Component {
 
     return (
       <>
+      <Header>Users</Header>
       <Card style={{ width: "100%" }}>
         <Card.Content>
           {this.props.result.map(each => (
             <React.Fragment key={each.id}>
-                <Image Avatar src={randomAvatar()}/>
-                <p>{each.username}</p>
+                <Image src={
+                  each.pictureLocation || randomAvatar()
+                  } avatar/>
+                <span>{each.username}</span>
+                <Divider/>
             </React.Fragment>
           ))}
 
