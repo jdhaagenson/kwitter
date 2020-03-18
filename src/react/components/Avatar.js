@@ -8,7 +8,7 @@ const imageURL = 'https://react.semantic-ui.com/images/avatar/large/'
 
 class Avatar extends Component {
     state={
-        image:"",
+        image:"https://techformist.com/uploads/quokka-js-playground-vscode.gif",
         modalOpen:false
     };
 
@@ -16,8 +16,8 @@ class Avatar extends Component {
 
     handleClose = (e) => {this.setState({modalOpen:false})}
 
-    handleSelect = (e) => {
-        this.setState({image:e.target.src})
+    handleSelect = (event) => {
+        this.setState({image:event.target.src})
     }
 
     handleSetAvatar = (e) => {
