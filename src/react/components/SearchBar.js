@@ -4,7 +4,7 @@ import {searchUser} from '../../redux';
 import {Search, Grid, Label, Loader} from 'semantic-ui-react';
 // import moment from "moment";
 import './SearchBar.css';
-import users from "../users.json";
+// import users from "../users.json";
 import faker from 'faker';
 import _ from 'lodash';
 
