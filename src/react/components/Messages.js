@@ -8,6 +8,19 @@ import Likes from "./Likes";
 import moment from "moment";
 import "./MessageFeed.css";
 
+const defaultImages = [
+  'rachel.png', 'ade.jpg', 'chris.jpg', 'christian.jpg', 'daniel.jpg', 'elliot.jpg', 'elyse.png',
+  'helen.jpg', 'jenny.jpg', 'joe.jpg', 'justen.jpg', 'kristy.png', 'laura.jpg', 'matt.jpg', 'matthew.png',
+  'molly.png', 'nan.jpg', 'nom.jpg', 'patrick.png', 'steve.jpg', 'stevie.jpg', 'tom.jpg', 'veronika.jpg', 'zoe.jpg'
+]
+const imageURL = 'https://react.semantic-ui.com/images/avatar/large/'
+const randomAvatar = () => {
+  let min = 0;
+  let max = 24;
+  let r = Math.floor(Math.random()*(max-min+1))+min
+  return imageURL+defaultImages[r]
+}
+
 class Messages extends Component {
   componentDidMount() {
     this.props.getMessage();
@@ -25,7 +38,7 @@ class Messages extends Component {
             <React.Fragment key={each.id}>
               <Feed>
                 <Feed.Event>
-                  <Feed.Label image="https://react.semantic-ui.com/images/avatar/large/rachel.png" />
+                  <Feed.Label image={randomAvatar()} />
                   <Feed.Content>
                     <Feed.Summary>
                       {each.username} posted on their page

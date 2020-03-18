@@ -20,7 +20,7 @@ const defaultImages = [
 const imageURL = 'https://react.semantic-ui.com/images/avatar/large/'
 const randomAvatar = () => {
   let min = 0;
-  let max = 24;
+  let max = 23;
   let r = Math.floor(Math.random()*(max-min+1))+min
   return imageURL+defaultImages[r]
 }
