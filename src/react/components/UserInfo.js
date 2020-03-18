@@ -8,14 +8,28 @@ import {
   Form,
   Icon
 } from "semantic-ui-react";
+import Avatar from './Avatar'
 import { connect } from "react-redux";
 import { updateUser, getUser } from "../../redux";
 
+const defaultImages = [
+  'rachel.png', 'ade.jpg', 'chris.jpg', 'christian.jpg', 'daniel.jpg', 'elliot.jpg', 'elyse.png',
+  'helen.jpg', 'jenny.jpg', 'joe.jpg', 'justen.jpg', 'kristy.png', 'laura.jpg', 'matt.jpg', 'matthew.png',
+  'molly.png', 'nan.jpg', 'nom.jpg', 'patrick.png', 'steve.jpg', 'stevie.jpg', 'tom.jpg', 'veronika.jpg', 'zoe.jpg'
+]
+const imageURL = 'https://react.semantic-ui.com/images/avatar/large/'
+const randomAvatar = () => {
+  let min = 0;
+  let max = 23;
+  let r = Math.floor(Math.random()*(max-min+1))+min
+  return imageURL+defaultImages[r]
+}
 class UserInfo extends Component {
   state = {
     displayName: "",
     password: "",
-    about: "Update profile to add something about yourself."
+    about: "Update profile to add something about yourself.",
+    image: randomAvatar()
   };
 
   handleModal = () => {};
@@ -43,12 +57,26 @@ class UserInfo extends Component {
         <React.Fragment>
           <Card
             className="user-info-card"
-            image="https://react.semantic-ui.com/images/avatar/large/rachel.png"
             header={this.props.displayName}
-            meta={this.props.username}
             description={user.about}
-            extra=""
-          />
+          >
+            <Image
+              src={this.state.image}
+            />
+            <Header>{this.props.displayName}</Header>
+            <Card.Meta>
+              {this.props.username}
+            </Card.Meta>
+            <Card.Description>{user.about}</Card.Description>
+          </Card>
+          <Avatar/>
+          <Button className="get-messages-button">
+            <Icon name="comment alternate outline" />
+            My Kweets
+          </Button>
+
+
+
         </React.Fragment>
       );
     } else {
@@ -74,10 +102,8 @@ class UserInfo extends Component {
               </Card.Description>
             </Card.Content>
             <Card.Content extra>
-              <a>
                 <Icon name="user" />
                 22 Friends
-              </a>
             </Card.Content>
           </Card>
 
@@ -120,7 +146,7 @@ class UserInfo extends Component {
                       autoFocus
                       required
                       onChange={this.handleChange}
-                    ></input>
+                    />
                   </Form.Field>
 
                   <Form.Field>
@@ -131,7 +157,7 @@ class UserInfo extends Component {
                       autoFocus
                       required
                       onChange={this.handleChange}
-                    ></input>
+                    />
                   </Form.Field>
                   <Button type="submit"> Upload Picture</Button>
                   <Button type="submit"> Update</Button>

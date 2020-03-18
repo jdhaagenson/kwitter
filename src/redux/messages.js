@@ -11,9 +11,10 @@ import {
 const url = domain + "/messages";
 
 const CREATE_MESSAGE = createActions("createMessage");
-const _createMessage = messageData => (dispatch, getState) => {
+export const createMessage = messageData => (dispatch, getState) => {
   dispatch(CREATE_MESSAGE.START());
   const token = getState().auth.login.result.token;
+
   return fetch(url, {
     method: "POST",
     headers: { Authorization: "Bearer " + token, ...jsonHeaders },
@@ -33,7 +34,7 @@ export const createMessage = messageData => dispatch => {
 const GET_MESSAGE = createActions("getMessage");
 export const getMessage = messageData => (dispatch, getState) => {
   dispatch(GET_MESSAGE.START());
-  const token = getState().auth.login.result.token;
+
   return fetch(url + "?limit=100&offset=0")
     .then(handleJsonResponse)
     .then(result => {
@@ -46,11 +47,24 @@ export const getMessage = messageData => (dispatch, getState) => {
     .catch(err => Promise.reject(dispatch(GET_MESSAGE.FAIL(err))));
 };
 
+const SEARCH_MESSAGE = createActions("searchMessage");
+export const searchMessage = messageId => dispatch => {
+  dispatch(SEARCH_MESSAGE.START());
+
+  return fetch(url + messageId)
+    .then(handleJsonResponse)
+    .then(result => dispatch(SEARCH_MESSAGE.SUCCESS(result)))
+    .catch(err => Promise.reject(dispatch(SEARCH_MESSAGE.FAIL(err))));
+};
+
 export const reducers = {
   createMessage: createReducer(asyncInitialState, {
     ...asyncCases(CREATE_MESSAGE)
   }),
   getMessage: createReducer(asyncInitialState, {
     ...asyncCases(GET_MESSAGE)
+  }),
+  searchMessage: createReducer(asyncInitialState, {
+    ...asyncCases(SEARCH_MESSAGE)
   })
 };

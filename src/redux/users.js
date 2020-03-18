@@ -27,8 +27,9 @@ export const createUser = userData => dispatch => {
 const UPDATE_USER = createActions("updateUser");
 export const updateUser = userData => (dispatch, getState) => {
   dispatch(UPDATE_USER.START());
+  const token=getState().auth.login.result.token
+  const username=getState().auth.login.result.username
 
-  const { username, token } = getState().auth.login.result;
   return fetch(url + "/" + username, {
     method: "PATCH",
     headers: { Authorization: "Bearer " + token, ...jsonHeaders },
@@ -39,8 +40,8 @@ export const updateUser = userData => (dispatch, getState) => {
     .catch(err => Promise.reject(dispatch(UPDATE_USER.FAIL(err))));
 };
 
-const GET_USER = createActions("updateUser");
-export const getUser = username => (dispatch, getState) => {
+const GET_USER = createActions("getUser");
+export const getUser = username => dispatch => {
   dispatch(GET_USER.START());
 
   return fetch(url + "/" + username, {
@@ -52,6 +53,55 @@ export const getUser = username => (dispatch, getState) => {
     .catch(err => Promise.reject(dispatch(GET_USER.FAIL(err))));
 };
 
+const SEARCH_USER = createActions('searchUser');
+export const searchUser = () => dispatch => {
+  dispatch(SEARCH_USER.START());
+
+  return fetch(url + "?limit=100&offset=0", {
+    method: "GET",
+    headers: jsonHeaders
+  })
+    .then(handleJsonResponse)
+    .then(result => {
+      result = Object.keys(result.users).map(key => result.users[key]);
+      dispatch({
+        type: SEARCH_USER.SUCCESS,
+        payload: result
+      });
+    })
+    .catch(err => Promise.reject(dispatch(SEARCH_USER.FAIL(err))));
+};
+
+const SET_PHOTO = createActions('setPhoto');
+export const setPhoto = (username, picture) => (dispatch, getState) => {
+  dispatch(SET_PHOTO.START());
+  const token = getState().auth.login.result.token;
+
+  return fetch(url + "/" + username + "/picture", {
+    method: "PUT",
+    headers: { Authorization: "Bearer " + token, ...jsonHeaders },
+    body: picture
+  })
+    .then(handleJsonResponse)
+    .then(result => dispatch(SET_PHOTO.SUCCESS(result)))
+    .catch(err => Promise.reject(dispatch(SET_PHOTO.FAIL(err))))
+};
+
+const GET_PHOTO = createActions('getPhoto');
+export const getPhoto = username => dispatch => {
+  dispatch(GET_PHOTO.START());
+
+  return fetch(url + "/" + username + "/picture", {
+    method: "GET",
+    headers: jsonHeaders
+  })
+    .then(handleJsonResponse)
+    .then(result=> dispatch(GET_PHOTO.SUCCESS(result)))
+    .catch(err => Promise.reject(dispatch(GET_PHOTO.FAIL(err))))
+};
+
+
+
 export const reducers = {
   updateUser: createReducer(asyncInitialState, {
     ...asyncCases(UPDATE_USER)
@@ -62,5 +112,14 @@ export const reducers = {
 
   getUser: createReducer(asyncInitialState, {
     ...asyncCases(GET_USER)
+  }),
+  searchUser: createReducer(asyncInitialState, {
+    ...asyncCases(SEARCH_USER)
+  }),
+  setPhoto: createReducer(asyncInitialState, {
+    ...asyncCases(SET_PHOTO)
+  }),
+  getPhoto: createReducer(asyncInitialState, {
+    ...asyncCases(GET_PHOTO)
   })
 };

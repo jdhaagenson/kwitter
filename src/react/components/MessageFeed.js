@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { createMessage } from "../../redux";
-import { Messages } from "../components";
 import { Card, Form, Button } from "semantic-ui-react";
-
+// import moment from "moment";
 import "./MessageFeed.css";
+import Messages from "./Messages";
 
 class MessageFeed extends Component {
   state = {
@@ -15,6 +15,7 @@ class MessageFeed extends Component {
     e.preventDefault();
     this.props.createMessage(this.state.text);
     this.setState({ text: "" });
+    // this.setState({ value: "" });
   };
 
   handleChange = e => {

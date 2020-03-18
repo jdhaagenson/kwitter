@@ -47,5 +47,5 @@ export const reducers = {
   }),
   logout: createReducer(asyncInitialState, {
     ...asyncCases(LOGOUT)
-  })
+  }),
 };
