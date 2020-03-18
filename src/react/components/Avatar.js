@@ -40,34 +40,34 @@ class Avatar extends Component {
                 <Form>
             <div>
                 <Image.Group >
-                    <Image onClick={this.handleSelect} centered bordered size="tiny" src={imageURL + "ade.jpg"} />
-                    <Image onClick={this.handleSelect} centered bordered size="tiny" src={imageURL + "rachel.png"}/>
-                    <Image onClick={this.handleSelect} centered bordered size="tiny" src={imageURL + "chris.jpg"}/>
-                    <Image onClick={this.handleSelect} centered bordered size="tiny" src={imageURL + "christian.jpg"}/>
-                    <Image onClick={this.handleSelect} centered bordered size="tiny" src={imageURL + "daniel.jpg"}/>
-                    <Image onClick={this.handleSelect} centered bordered size="tiny" src={imageURL + "elliot.jpg"}/>
-                    <Image onClick={this.handleSelect} centered bordered size="tiny" src={imageURL + "elyse.png"}/>
-                    <Image onClick={this.handleSelect} centered bordered size="tiny" src={imageURL + "helen.jpg"}/>
+                    <Image onClick={this.handleSelect} centered as='button' bordered size="tiny" src={imageURL + "ade.jpg"} />
+                    <Image onClick={this.handleSelect} centered as='button' bordered size="tiny" src={imageURL + "rachel.png"}/>
+                    <Image onClick={this.handleSelect} centered as='button' bordered size="tiny" src={imageURL + "chris.jpg"}/>
+                    <Image onClick={this.handleSelect} centered as='button' bordered size="tiny" src={imageURL + "christian.jpg"}/>
+                    <Image onClick={this.handleSelect} centered as='button' bordered size="tiny" src={imageURL + "daniel.jpg"}/>
+                    <Image onClick={this.handleSelect} centered as='button' bordered size="tiny" src={imageURL + "elliot.jpg"}/>
+                    <Image onClick={this.handleSelect} centered as='button' bordered size="tiny" src={imageURL + "elyse.png"}/>
+                    <Image onClick={this.handleSelect} centered as='button' bordered size="tiny" src={imageURL + "helen.jpg"}/>
                 </Image.Group>
                 <Image.Group>
-                    <Image onClick={this.handleSelect} centered bordered size="tiny" src={imageURL + "jenny.jpg"}/>
-                    <Image onClick={this.handleSelect} centered bordered size="tiny" src={imageURL + "joe.jpg"}/>
-                    <Image onClick={this.handleSelect} centered bordered size="tiny" src={imageURL + "justen.jpg"}/>
-                    <Image onClick={this.handleSelect} centered bordered size="tiny" src={imageURL + "kristy.png"}/>
-                    <Image onClick={this.handleSelect} centered bordered size="tiny" src={imageURL + "laura.jpg"}/>
-                    <Image onClick={this.handleSelect} centered bordered size="tiny" src={imageURL + "matt.jpg"}/>
-                    <Image onClick={this.handleSelect} centered bordered size="tiny" src={imageURL + "matthew.png"}/>
-                    <Image onClick={this.handleSelect} centered bordered size="tiny" src={imageURL + "molly.png"}/>
+                    <Image onClick={this.handleSelect} centered as='button' bordered size="tiny" src={imageURL + "jenny.jpg"}/>
+                    <Image onClick={this.handleSelect} centered as='button' bordered size="tiny" src={imageURL + "joe.jpg"}/>
+                    <Image onClick={this.handleSelect} centered as='button' bordered size="tiny" src={imageURL + "justen.jpg"}/>
+                    <Image onClick={this.handleSelect} centered as='button' bordered size="tiny" src={imageURL + "kristy.png"}/>
+                    <Image onClick={this.handleSelect} centered as='button' bordered size="tiny" src={imageURL + "laura.jpg"}/>
+                    <Image onClick={this.handleSelect} centered as='button' bordered size="tiny" src={imageURL + "matt.jpg"}/>
+                    <Image onClick={this.handleSelect} centered as='button' bordered size="tiny" src={imageURL + "matthew.png"}/>
+                    <Image onClick={this.handleSelect} centered as='button' bordered size="tiny" src={imageURL + "molly.png"}/>
                 </Image.Group>
                 <Image.Group>
-                    <Image onClick={this.handleSelect} centered bordered size="tiny" src={imageURL + "nan.jpg"}/>
-                    <Image onClick={this.handleSelect} centered bordered size="tiny" src={imageURL + "nom.jpg"}/>
-                    <Image onClick={this.handleSelect} centered bordered size="tiny" src={imageURL + "patrick.png"}/>
-                    <Image onClick={this.handleSelect} centered bordered size="tiny" src={imageURL + "steve.jpg"}/>
-                    <Image onClick={this.handleSelect} centered bordered size="tiny" src={imageURL + "stevie.jpg"}/>
-                    <Image onClick={this.handleSelect} centered bordered size="tiny" src={imageURL + "tom.jpg"}/>
-                    <Image onClick={this.handleSelect} centered bordered size="tiny" src={imageURL + "veronika.jpg"}/>
-                    <Image onClick={this.handleSelect} centered bordered size="tiny" src={imageURL + "zoe.jpg"}/>
+                    <Image onClick={this.handleSelect} centered as='button' bordered size="tiny" src={imageURL + "nan.jpg"}/>
+                    <Image onClick={this.handleSelect} centered as='button' bordered size="tiny" src={imageURL + "nom.jpg"}/>
+                    <Image onClick={this.handleSelect} centered as='button' bordered size="tiny" src={imageURL + "patrick.png"}/>
+                    <Image onClick={this.handleSelect} centered as='button' bordered size="tiny" src={imageURL + "steve.jpg"}/>
+                    <Image onClick={this.handleSelect} centered as='button' bordered size="tiny" src={imageURL + "stevie.jpg"}/>
+                    <Image onClick={this.handleSelect} centered as='button' bordered size="tiny" src={imageURL + "tom.jpg"}/>
+                    <Image onClick={this.handleSelect} centered as='button' bordered size="tiny" src={imageURL + "veronika.jpg"}/>
+                    <Image onClick={this.handleSelect} centered as='button' bordered size="tiny" src={imageURL + "zoe.jpg"}/>
                 </Image.Group>
                 <Divider hidden/>
             </div>
