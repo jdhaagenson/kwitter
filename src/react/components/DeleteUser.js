@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { deleteUser } from "../../redux";
-import { Button, Modal, Header } from "semantic-ui-react";
+import { Button, Modal, Icon, Header } from "semantic-ui-react";
 import {getState} from 'redux'
 
 class DeleteUser extends Component{
@@ -35,15 +35,18 @@ class DeleteUser extends Component{
           <Header>Are you sure you want to delete your account?</Header>
           <Button
             basic
-            icon="ban"
             color='red'
             onClick={this.handleClose}
-          >Cancel</Button>
+          >
+            <Icon name='ban'/>
+          Cancel</Button>
           <Button
             icon="checkmark"
             color='red'
             onClick={this.handleDelete}
-          >Confirm</Button>
+          >
+            <Icon name="checkmark"/>
+          Confirm</Button>
         </Modal>
       </div>
     )
