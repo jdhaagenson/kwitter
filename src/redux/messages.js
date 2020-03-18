@@ -24,6 +24,12 @@ const _createMessage = messageData => (dispatch, getState) => {
     .catch(err => Promise.reject(dispatch(CREATE_MESSAGE.FAIL(err))));
 };
 
+export const createMessage = messageData => dispatch => {
+  dispatch(_createMessage(messageData)).then(() => {
+    dispatch(getMessage());
+  });
+};
+
 const GET_MESSAGE = createActions("getMessage");
 export const getMessage = messageData => (dispatch, getState) => {
   dispatch(GET_MESSAGE.START());
@@ -38,12 +44,6 @@ export const getMessage = messageData => (dispatch, getState) => {
       });
     })
     .catch(err => Promise.reject(dispatch(GET_MESSAGE.FAIL(err))));
-};
-
-export const createMessage = messageData => (dispatch, getState) => {
-  dispatch(_createMessage(messageData)).then(() => {
-    dispatch(getMessage());
-  });
 };
 
 export const reducers = {

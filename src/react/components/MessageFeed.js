@@ -15,7 +15,6 @@ class MessageFeed extends Component {
     e.preventDefault();
     this.props.createMessage(this.state.text);
     this.setState({ text: "" });
-    this.setState({ value: "" });
   };
 
   handleChange = e => {
@@ -34,6 +33,7 @@ class MessageFeed extends Component {
               <input
                 type="text"
                 name="text"
+                value={this.state.text}
                 placeholder="What's on your mind..."
                 autoFocus
                 required
