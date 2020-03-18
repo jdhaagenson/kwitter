@@ -100,6 +100,20 @@ export const getPhoto = username => dispatch => {
     .catch(err => Promise.reject(dispatch(GET_PHOTO.FAIL(err))))
 };
 
+const DELETE_USER = createActions('deleteUser');
+export const deleteUser = username => (dispatch, getState) => {
+  const token = getState().auth.login.result.token
+  dispatch(DELETE_USER.START());
+
+  return fetch(url + '/' + username, {
+    method: "DELETE",
+    headers: { Authorization: "Bearer " + token, ...jsonHeaders }
+  })
+    .then(handleJsonResponse)
+    .then(result => dispatch(DELETE_USER.SUCCESS(result)))
+    .catch(err => Promise.reject(dispatch(DELETE_USER.FAIL(err))))
+};
+
 
 
 export const reducers = {
@@ -109,7 +123,6 @@ export const reducers = {
   createUser: createReducer(asyncInitialState, {
     ...asyncCases(CREATE_USER)
   }),
-
   getUser: createReducer(asyncInitialState, {
     ...asyncCases(GET_USER)
   }),
@@ -121,5 +134,8 @@ export const reducers = {
   }),
   getPhoto: createReducer(asyncInitialState, {
     ...asyncCases(GET_PHOTO)
+  }),
+  deleteUser: createReducer(asyncInitialState, {
+    ...asyncCases(DELETE_USER)
   })
 };

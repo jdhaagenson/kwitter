@@ -62,7 +62,7 @@ class UpdateUser extends Component {
 
                     </Modal.Content>
                 </Modal>
-                <Button className="get-messages-button">My Kweets</Button>
+                <Button float className="get-messages-button">My Kweets</Button>
 
                 {error && <p style={{ color: "red" }}>{error.message}</p>}
             </React.Fragment>
