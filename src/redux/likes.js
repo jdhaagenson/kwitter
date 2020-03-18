@@ -21,14 +21,14 @@ const likeMessage = messageData => (dispatch, getState) => {
   })
     .then(handleJsonResponse)
     .then(result => dispatch(LIKE_MESSAGE.SUCCESS(result)))
-    .catch(err => Promise.reject(dispatch(CREATE_MESSAGE.FAIL(err))));
+    .catch(err => Promise.reject(dispatch(LIKE_MESSAGE.FAIL(err))));
 };
 
-export const createMessage = messageData => dispatch => {
-  dispatch(_createMessage(messageData)).then(() => {
-    dispatch(getMessage());
-  });
-};
+// export const likeMessage = messageData => dispatch => {
+//   dispatch(likeMessage(messageData)).then(() => {
+//     dispatch(likeMessage());
+//   });
+// };
 
 const UNLIKE_MESSAGE = createActions("unlikeMessage");
 export const unlikeMessage = messageData => (dispatch, getState) => {
@@ -39,15 +39,15 @@ export const unlikeMessage = messageData => (dispatch, getState) => {
     .then(result => {
       result = Object.keys(result.messages).map(key => result.messages[key]);
       dispatch({
-        type: GET_MESSAGE.SUCCESS,
+        type: UNLIKE_MESSAGE.SUCCESS,
         payload: result
       });
     })
-    .catch(err => Promise.reject(dispatch(GET_MESSAGE.FAIL(err))));
+    .catch(err => Promise.reject(dispatch(UNLIKE_MESSAGE.FAIL(err))));
 };
 
 export const reducers = {
-  likwMessage: createReducer(asyncInitialState, {
+  likeMessage: createReducer(asyncInitialState, {
     ...asyncCases(LIKE_MESSAGE)
   }),
   unlikeMessage: createReducer(asyncInitialState, {
