@@ -36,12 +36,7 @@ export const getMessage = messageData => (dispatch, getState) => {
     })
     .catch(err => Promise.reject(dispatch(GET_MESSAGE.FAIL(err))));
 };
-<<<<<<< HEAD
-
-export const createMessage = messageData => (dispatch, getState) => {
-=======
 export const createMessage = messageData => dispatch => {
->>>>>>> 34694e76f979d553ebcc87c6d92c8291ba9ad7c6
   dispatch(_createMessage(messageData)).then(() => {
     dispatch(getMessage());
   });
