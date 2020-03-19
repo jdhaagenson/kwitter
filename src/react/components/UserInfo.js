@@ -11,7 +11,7 @@ import {
 import Avatar from "./Avatar";
 import { connect } from "react-redux";
 import { updateUser, getUser } from "../../redux";
-import UpdateUser from "./UpdateUser";
+import UpdateUser from "./updateUser";
 
 const defaultImages = [
   "rachel.png",

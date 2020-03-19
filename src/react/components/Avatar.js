@@ -1,102 +1,293 @@
-import React, {Component} from 'react';
-import {Button, Header, Form, Input, Divider, Image, Modal} from 'semantic-ui-react';
-import {setPhoto} from '../../redux';
-import { connect } from 'react-redux';
+import React, { Component } from "react";
+import {
+  Button,
+  Header,
+  Input,
+  Divider,
+  Image,
+  Modal
+} from "semantic-ui-react";
+import  setPhoto  from "../../redux";
+import { connect } from "react-redux";
 
-
-const imageURL = 'https://react.semantic-ui.com/images/avatar/large/'
+const imageURL = "https://react.semantic-ui.com/images/avatar/large/";
 
 class Avatar extends Component {
-    state={
-        image:"https://techformist.com/uploads/quokka-js-playground-vscode.gif",
-        modalOpen:false
-    };
+    constructor(props) {
+        super(props)
 
-    handleOpen = (e) => {this.setState({modalOpen:true})}
+        this.handleClose = this.handleClose.bind(this)
+        this.handleUploadImage = this.handleUploadImage.bind(this)
+        this.handleOpen = this.handleOpen.bind(this)
+        this.handleSelect = this.handleSelect.bind(this)
 
-    handleClose = (e) => {this.setState({modalOpen:false})}
-
-    handleSelect = (event) => {
-        this.setState({image:event.target.src})
+        this.state = {
+            image: "",
+            modalOpen: false
+        }
     }
 
-    handleSetAvatar = (e) => {
-        this.props.setPhoto(this.props.username, this.state.image)
-    }
+//   const {open, modalOpen} = React.useState(false);
 
+  handleOpen() {
+    this.setState({ modalOpen: true });
+  };
 
+  handleClose() {
+    this.setState({ modalOpen: false });
+  };
 
-    render() {
-        return(
-            <div>
-            <Modal
-            wrapped
-            trigger={<Button onClick={this.handleOpen}>Change Avatar</Button>}
-            open={this.state.modalOpen}
-            onClose={this.handleClose}
-            centered={false}>
-            <Header>Select an Avatar</Header>
-            <Modal.Content image>
-                <Form>
-            <div>
-                <Image.Group >
-                    <Image onClick={this.handleSelect} centered bordered size="tiny" src={imageURL + "ade.jpg"} />
-                    <Image onClick={this.handleSelect} centered bordered size="tiny" src={imageURL + "rachel.png"}/>
-                    <Image onClick={this.handleSelect} centered bordered size="tiny" src={imageURL + "chris.jpg"}/>
-                    <Image onClick={this.handleSelect} centered bordered size="tiny" src={imageURL + "christian.jpg"}/>
-                    <Image onClick={this.handleSelect} centered bordered size="tiny" src={imageURL + "daniel.jpg"}/>
-                    <Image onClick={this.handleSelect} centered bordered size="tiny" src={imageURL + "elliot.jpg"}/>
-                    <Image onClick={this.handleSelect} centered bordered size="tiny" src={imageURL + "elyse.png"}/>
-                    <Image onClick={this.handleSelect} centered bordered size="tiny" src={imageURL + "helen.jpg"}/>
-                </Image.Group>
-                <Image.Group>
-                    <Image onClick={this.handleSelect} centered bordered size="tiny" src={imageURL + "jenny.jpg"}/>
-                    <Image onClick={this.handleSelect} centered bordered size="tiny" src={imageURL + "joe.jpg"}/>
-                    <Image onClick={this.handleSelect} centered bordered size="tiny" src={imageURL + "justen.jpg"}/>
-                    <Image onClick={this.handleSelect} centered bordered size="tiny" src={imageURL + "kristy.png"}/>
-                    <Image onClick={this.handleSelect} centered bordered size="tiny" src={imageURL + "laura.jpg"}/>
-                    <Image onClick={this.handleSelect} centered bordered size="tiny" src={imageURL + "matt.jpg"}/>
-                    <Image onClick={this.handleSelect} centered bordered size="tiny" src={imageURL + "matthew.png"}/>
-                    <Image onClick={this.handleSelect} centered bordered size="tiny" src={imageURL + "molly.png"}/>
-                </Image.Group>
-                <Image.Group>
-                    <Image onClick={this.handleSelect} centered bordered size="tiny" src={imageURL + "nan.jpg"}/>
-                    <Image onClick={this.handleSelect} centered bordered size="tiny" src={imageURL + "nom.jpg"}/>
-                    <Image onClick={this.handleSelect} centered bordered size="tiny" src={imageURL + "patrick.png"}/>
-                    <Image onClick={this.handleSelect} centered bordered size="tiny" src={imageURL + "steve.jpg"}/>
-                    <Image onClick={this.handleSelect} centered bordered size="tiny" src={imageURL + "stevie.jpg"}/>
-                    <Image onClick={this.handleSelect} centered bordered size="tiny" src={imageURL + "tom.jpg"}/>
-                    <Image onClick={this.handleSelect} centered bordered size="tiny" src={imageURL + "veronika.jpg"}/>
-                    <Image onClick={this.handleSelect} centered bordered size="tiny" src={imageURL + "zoe.jpg"}/>
-                </Image.Group>
-                <Divider hidden/>
+  handleSelect(e) {
+    this.setState({ image: e.src });
+  };
+
+  handleSetAvatar(e) {
+    e.preventDefault();
+    this.props.setPhoto(e.target);
+  };
+
+  handleUploadImage(event) {
+    // this.setState({ image: })
+    event.preventDefault();
+    //this.props.handleUploadImage(event.target);
+  };
+
+  renderImages() {
+      let images = ['ade.jpg']
+      return images.map((img, i) => {
+          return (
+              <div>
+            <Image
+            onClick={this.handleSelect}
+            centered
+            bordered
+            as="Button"
+            size="tiny"
+            src={imageURL + img}
+            key={'img-' + i}
+            />
+             <Image
+                onClick={this.handleSelect}
+                centered
+                bordered
+                as="Button"
+                size="tiny"
+                src={imageURL + "rachel.png"}
+                />
+              <Image
+                onClick={this.handleSelect}
+                centered
+                bordered
+                as="Button"
+                size="tiny"
+                src={imageURL + "chris.jpg"}
+                />
+              <Image
+                onClick={this.handleSelect}
+                centered
+                bordered
+                as="Button"
+                size="tiny"
+                src={imageURL + "christian.jpg"}
+                />
+                <Image
+                onClick={this.handleSelect}
+                centered
+                bordered
+                as="Button"
+                size="tiny"
+                src={imageURL + "daniel.jpg"}
+                />
+              <Image
+                onClick={this.handleSelect}
+                centered
+                bordered
+                as="Button"
+                size="tiny"
+                src={imageURL + "elliot.jpg"}
+                />
+              <Image
+                onClick={this.handleSelect}
+                centered
+                bordered
+                as="Button"
+                size="tiny"
+                src={imageURL + "elyse.png"}
+                />
+              <Image
+                onClick={this.handleSelect}
+                centered
+                bordered
+                as="Button"
+                size="tiny"
+                src={imageURL + "helen.jpg"}
+                />
+                 <Image
+                onClick={this.handleSelect}
+                centered
+                bordered
+                as="Button"
+                size="tiny"
+                src={imageURL + "jenny.jpg"}
+                />
+              <Image
+                onClick={this.handleSelect}
+                centered
+                bordered
+                as="Button"
+                size="tiny"
+                src={imageURL + "joe.jpg"}
+                />
+              <Image
+                onClick={this.handleSelect}
+                centered
+                bordered
+                as="Button"
+                size="tiny"
+                src={imageURL + "justen.jpg"}
+                />
+              <Image
+                onClick={this.handleSelect}
+                centered
+                bordered
+                as="Button"
+                size="tiny"
+                src={imageURL + "kristy.png"}
+                />
+                <Image
+                onClick={this.handleSelect}
+                centered
+                bordered
+                as="Button"
+                size="tiny"
+                src={imageURL + "laura.jpg"}
+                />
+              <Image
+                onClick={this.handleSelect}
+                centered
+                bordered
+                as="Button"
+                size="tiny"
+                src={imageURL + "matt.jpg"}
+                />
+              <Image
+                onClick={this.handleSelect}
+                centered
+                bordered
+                as="Button"
+                size="tiny"
+                src={imageURL + "matthew.png"}
+                />
+              <Image
+                onClick={this.handleSelect}
+                centered
+                bordered
+                as="Button"
+                size="tiny"
+                src={imageURL + "molly.png"}
+                />
+                <Image
+                onClick={this.handleSelect}
+                centered
+                bordered
+                as="Button"
+                size="tiny"
+                src={imageURL + "nan.jpg"}
+                />
+              <Image
+                onClick={this.handleSelect}
+                centered
+                bordered
+                as="Button"
+                size="tiny"
+                src={imageURL + "nom.jpg"}
+                />
+              <Image
+                onClick={this.handleSelect}
+                centered
+                bordered
+                as="Button"
+                size="tiny"
+                src={imageURL + "patrick.png"}
+                />
+              <Image
+                onClick={this.handleSelect}
+                centered
+                bordered
+                as="Button"
+                size="tiny"
+                src={imageURL + "steve.jpg"}
+                />
+                <Image
+                onClick={this.handleSelect}
+                centered
+                bordered
+                as="Button"
+                size="tiny"
+                src={imageURL + "bob.jpg"}
+                />
             </div>
-            <span>
-                <Modal.Actions>
-                    <Button type='image'>Upload Image</Button>
-                    <Input type='image'/>
-                    <Divider hidden/>
-                    <Button
-                        onClick={this.handleSetAvatar}
-                        onSubmit={this.handleSetAvatar}
-                        >Done</Button>
-                </Modal.Actions>
-            </span>
-                </Form>
-            </Modal.Content>
-        </Modal>
-        </div>
-        )
-    }
+          )
+      })
+  }
+  render() {
+    //   if (this.state.modalOpen === true) {
 
+          return (
+              <>
+              {this.state.modalOpen &&
+        <Modal
+          wrapped
+          open={this.handleOpen}
+          onClose={this.handleClose}
+          centered={false}
+          >
+          <Modal.Header>Select an Avatar</Modal.Header>
+          <Modal.Content image>
+            <Image.Group>
+                {this.renderImages()}
+            </Image.Group>
+            <Image.Group>
+              
+            </Image.Group>
+            <Divider hidden />
+            <Image.Group>
+    
+            </Image.Group>
+            <Image.Group>
+              
+            </Image.Group>
+            <Divider hidden />
+            <Image.Group>
+            
+            </Image.Group>
+            <Image.Group>
+            </Image.Group>
+            <Divider hidden />
+            
+            <Modal.Actions>
+              <form onSubmit={this.handleUploadImage}>
+                <input floated="right" type="file" icon="file" name="picture" />
+                <input type="submit" value="Upload Picture" />
+              </form>
+              <Divider hidden />
+              <Button onClick={this.handleClose}>Done</Button>
+            </Modal.Actions>
+          </Modal.Content>
+        </Modal>
+  }
+  <button className="ui button " onClick={this.handleOpen}>Open</button>
+      </>
+    );
+}
+// }
 }
 
 export default connect(
-    (state) => ({
+    state => ({
         result: state.users.setPhoto.result,
         loading: state.users.setPhoto.loading,
-        error: state.users.setPhoto.error,
-        username: state.auth.login.result.username
-    }),
-    {setPhoto}
-)(Avatar)
+    error: state.users.setPhoto.error
+  }),
+  { setPhoto }
+)(Avatar);
