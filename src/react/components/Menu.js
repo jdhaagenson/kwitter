@@ -3,7 +3,6 @@ import { NavLink } from "react-router-dom";
 import "./Menu.css";
 import { connect } from "react-redux";
 import { logout } from "../../redux";
-<<<<<<< HEAD
 import { Dropdown, Icon, Input, Menu } from "semantic-ui-react";
 import SearchBar from "./SearchBar";
 import UpdateUser from "./updateUser";
@@ -11,9 +10,6 @@ import users from '../users.json';
 
 class MainMenu extends React.Component {
   state = {};
-=======
-import SearchBar from "../components/SearchBar"
->>>>>>> 84a54c11d1088ae159168e8ea6e651d202233127
 
   handleLogout = event => {
     // event.preventDefault();
@@ -25,7 +21,6 @@ import SearchBar from "../components/SearchBar"
   render() {
     const { activeItem } = this.state;
     return (
-<<<<<<< HEAD
       <React.Fragment>
         {this.props.isAuthenticated && (
           <Menu fluid={true} vertical>
@@ -97,19 +92,6 @@ import SearchBar from "../components/SearchBar"
               </Dropdown.Menu>
             </Dropdown>
           </Menu>
-=======
-      <div id="menu">
-        <h1>ThoughtBlog</h1>
-        {this.props.isAuthenticated && (
-          <div id="menu-links">
-            <SearchBar />
-            <Link to="/NewsFeed">Home</Link>
-            <Link exact to="/profiles/:username">Profile</Link>
-            <Link to="/" onClick={this.handleLogout}>
-              Logout
-            </Link>
-          </div>
->>>>>>> 84a54c11d1088ae159168e8ea6e651d202233127
         )}
       </React.Fragment>
     );

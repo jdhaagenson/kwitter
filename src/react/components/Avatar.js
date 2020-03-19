@@ -276,7 +276,7 @@ class Avatar extends Component {
           </Modal.Content>
         </Modal>
   }
-  <button className="ui button " onClick={this.handleOpen}>Open</button>
+  <button className="ui button " onClick={this.handleOpen}>Change Avatar</button>
       </>
     );
 }
