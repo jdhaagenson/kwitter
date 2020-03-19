@@ -4,7 +4,7 @@ import { createMessage } from "../../redux";
 import { Card, Form, Button } from "semantic-ui-react";
 // import moment from "moment";
 import "./MessageFeed.css";
-import Messages from "./Messages"
+import Messages from "./Messages";
 
 class MessageFeed extends Component {
   state = {
@@ -34,6 +34,7 @@ class MessageFeed extends Component {
               <input
                 type="text"
                 name="text"
+                value={this.state.text}
                 placeholder="What's on your mind..."
                 autoFocus
                 required
@@ -52,7 +53,7 @@ class MessageFeed extends Component {
 
         <Card style={{ width: "100%" }}>
           <Card.Content>
-            <Messages/>
+            <Messages />
           </Card.Content>
         </Card>
       </React.Fragment>
