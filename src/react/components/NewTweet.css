@@ -1,0 +1,9 @@
+.NewTweet{
+  width: 300px;
+  height: 100px;
+  border: 1px solid blue;
+  padding: 20px;
+  text-align: center;
+  display: flex;
+  margin-left: 750px;
+}

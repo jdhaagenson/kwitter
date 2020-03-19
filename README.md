@@ -1,50 +1,68 @@
-## Overview
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-You will be working in teams to make a clone of a common micro-blogging platform. You will be given a back-end API for you to form your front-end application around. 
-The API will include endpoints relating to authentication, users, messages, and likes. Your project must incorporate a majority of the endpoints given in the API.
+## Available Scripts
 
-A portion of your grade will be based on your team-working ability. Please see [this document](https://gitlab.com/kenzie-academy/se_public_files/team-guidelines/-/tree/master)
-for guidelines.
+In the project directory, you can run:
 
-You will also be following the Scrum process and, although everyone will be a developer and individual contributor, your team should account for the roles of Product Owner, 
-Scrum Master, and QA Tester. Please see [this document](https://gitlab.com/kenzie-academy/se_public_files/scrum-guidelines/-/blob/master/README.md) for more details. 
+### `yarn start`
 
-Client memo:
+Runs the app in the development mode.<br />
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-_The logged in user's experience is the core of this application. So we want to establish this core experience first._
-_Since this is a social application, we would like the application to emphasize engagement and engaging with other users as much as possible._
-_We are also interested in establishing the look and feel of our visual brand early so that it can be reused throughout the rest of the application._
+The page will reload if you make edits.<br />
+You will also see any lint errors in the console.
 
-## Learning Objectives
+### `yarn test`
 
-- Practice building larger applications with React + Redux
-- Practice using react-router-dom or connected-react-router
-- Practice building a system architecture for an application
-- Practice reading and understanding a 3rd-party back-end API
-- Practice using a component library
-- Practice following Scrum processes and performing Scrum roles
-- Practice communicating/working together as a team
+Launches the test runner in the interactive watch mode.<br />
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-An optional starter scaffolding is provided [here.](https://gitlab.com/kenzie-academy/se/fe/final-projects/assessment---kwitter-frontend) An overview of the 
-starting scaffolding architecture can be found in [this dependency graph](https://kenzie-academy.gitlab.io/se/fe/final-projects/assessment---kwitter-frontend/dependencygraph.html)
+### `yarn build`
 
-## Getting Started...
+Builds the app for production to the `build` folder.<br />
+It correctly bundles React in production mode and optimizes the build for the best performance.
 
-1. Create a Scrum board (trello, github/gitlab project board, etc.) 
-    - [trello scrum example](https://trello.com/b/0xzkRjTH/scrum-project-management-board)
-2. Plan out your first week sprint goals.
-3. Familiarize yourself with [the API](https://kwitter-api.herokuapp.com/docs/)
-4. Create mock ups for possible pages
-5. Break each page out into possible components
-6. Discuss API endpoints you'll hit, how you'll store data in your Redux store, and which components will need access to the store
-7. Discuss and research what component library you would like to use and explore its components
-8. Begin creating and using components to establish a general foundation for your app
+The build is minified and the filenames include the hashes.<br />
+Your app is ready to be deployed!
 
-## Submission
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-1. git repo url - this is the url that has your frontend kwitter project source code
-2. heroku frontend url - this is the url for your front-end deployment (in-class activity)
-3. heroku backend url - this is the url for your copy of the backend kwitter api deployment (in-class activity)
-4. Scrum board - this shows your scrum board which has tickets with descriptions and assignees. it could be a trello board or a gitlab/github project board or similar.
-5. Retrospective board or notes - show that your team discussed how to improve its process through notes about what went well/what went poorly/action items. 
-It could be general notes or a funretro.io board.
+### `yarn eject`
+
+**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+
+If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+
+Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+
+You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+
+## Learn More
+
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+
+To learn React, check out the [React documentation](https://reactjs.org/).
+
+### Code Splitting
+
+This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+
+### Analyzing the Bundle Size
+
+This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+
+### Making a Progressive Web App
+
+This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+
+### Advanced Configuration
+
+This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
+
+### Deployment
+
+This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
+
+### `yarn build` fails to minify
+
+This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
