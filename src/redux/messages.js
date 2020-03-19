@@ -25,7 +25,7 @@ const GET_MESSAGE = createActions("getMessage");
 export const getMessage = messageData => (dispatch, getState) => {
   dispatch(GET_MESSAGE.START());
   const token = getState().auth.login.result.token;
-  return fetch(url + "?limit=100&offset=0")
+  return fetch(url + "?limit=65&offset=0")
     .then(handleJsonResponse)
     .then(result => {
       result = Object.keys(result.messages).map(key => result.messages[key]);

@@ -21,7 +21,10 @@ class Profile extends React.Component {
           <div className="user-info-card">
             <UserInfo
               username={this.props.match.params.username}
-              displayName={this.props.match.params.username}
+              displayName={
+                this.props.match.params.displayName ||
+                this.props.match.params.username
+              }
               description={this.props.match.params.about}
               extra=""
             />

@@ -70,6 +70,10 @@ class UserInfo extends Component {
   componentDidMount() {
     this.props.getUser(this.props.username);
   }
+
+  // componentDidUpdate() {
+
+  // }
   render() {
     const { error } = this.props;
     const user = this.state;
@@ -79,8 +83,8 @@ class UserInfo extends Component {
         <React.Fragment>
           <Card
             className="user-info-card"
-            header={this.props.displayName}
-            description={user.about}
+            // header={this.props.displayName}
+            // description={user.about}
           >
             <Image src={this.state.image} />
             <Header>{this.props.displayName}</Header>

@@ -1,30 +1,56 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { getMessage } from "../../redux";
-import { NavLink } from 'react-router-dom'
+import { NavLink } from "react-router-dom";
 import { Feed, Card, Icon } from "semantic-ui-react";
-import Likes from "./Likes";
+import { likeMessage } from "../../redux";
 
 import moment from "moment";
 import "./MessageFeed.css";
 
 const defaultImages = [
-  'rachel.png', 'ade.jpg', 'chris.jpg', 'christian.jpg', 'daniel.jpg', 'elliot.jpg', 'elyse.png',
-  'helen.jpg', 'jenny.jpg', 'joe.jpg', 'justen.jpg', 'kristy.png', 'laura.jpg', 'matt.jpg', 'matthew.png',
-  'molly.png', 'nan.jpg', 'nom.jpg', 'patrick.png', 'steve.jpg', 'stevie.jpg', 'tom.jpg', 'veronika.jpg', 'zoe.jpg'
-]
-const imageURL = 'https://react.semantic-ui.com/images/avatar/large/'
+  "rachel.png",
+  "ade.jpg",
+  "chris.jpg",
+  "christian.jpg",
+  "daniel.jpg",
+  "elliot.jpg",
+  "elyse.png",
+  "helen.jpg",
+  "jenny.jpg",
+  "joe.jpg",
+  "justen.jpg",
+  "kristy.png",
+  "laura.jpg",
+  "matt.jpg",
+  "matthew.png",
+  "molly.png",
+  "nan.jpg",
+  "nom.jpg",
+  "patrick.png",
+  "steve.jpg",
+  "stevie.jpg",
+  "tom.jpg",
+  "veronika.jpg",
+  "zoe.jpg"
+];
+const imageURL = "https://react.semantic-ui.com/images/avatar/large/";
 const randomAvatar = () => {
   let min = 0;
   let max = 24;
-  let r = Math.floor(Math.random()*(max-min+1))+min
-  return imageURL+defaultImages[r]
-}
+  let r = Math.floor(Math.random() * (max - min + 1)) + min;
+  return imageURL + defaultImages[r];
+};
 
 class Messages extends Component {
   componentDidMount() {
     this.props.getMessage();
   }
+
+  handleLike = (e, id) => {
+    console.log(id);
+    this.props.likeMessage(id);
+  };
 
   render() {
     if (this.props.result === null) {
@@ -50,8 +76,12 @@ class Messages extends Component {
                     <Feed.Extra text>{each.text}</Feed.Extra>
                     <Feed.Meta>
                       <Feed.Like>
-                        <Likes />
-                        {/* <Icon name="like" />5 Likes */}
+                        {/* <Likes /> */}
+                        <Icon
+                          name="like"
+                          onClick={e => this.props.likeMessage(e, each.id)}
+                        />
+                        {each.likes.length}
                       </Feed.Like>
                     </Feed.Meta>
                   </Feed.Content>
@@ -73,5 +103,5 @@ export default connect(
     loading: state.messages.getMessage.loading,
     error: state.messages.getMessage.error
   }),
-  { getMessage }
+  { getMessage, likeMessage }
 )(Messages);
