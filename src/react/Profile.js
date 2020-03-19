@@ -1,10 +1,9 @@
 import React from "react";
 import { Menu } from "./components";
 import { userIsAuthenticated } from "./HOCs";
-import { UserInfo, MessageFeed, UpdateUser, Avatar } from "../react/components";
+import { UserInfo, MessageFeed } from "../react/components";
 import "./Profile.css";
-import UserList from './components/UserList'
-
+import UserList from "./components/UserList";
 
 class Profile extends React.Component {
   render() {
@@ -17,16 +16,15 @@ class Profile extends React.Component {
               isAuthenticated={this.props.isAuthenticated}
               className="menu"
             />
-            <UserList/>
+            <UserList />
           </div>
           <div className="user-info-card">
             <UserInfo
-            username={this.props.match.params.username}
-            displayName={this.props.match.params.username}
-            description={this.props.match.params.about}
-            extra=""
-             />
-             <UpdateUser/>
+              username={this.props.match.params.username}
+              displayName={this.props.match.params.username}
+              description={this.props.match.params.about}
+              extra=""
+            />
           </div>
           <div className="message-feed-card">
             <MessageFeed />

@@ -81,7 +81,6 @@ class UpdateUser extends Component {
               </Modal.Description>
             </Modal.Content>
           </Modal>
-          <Button className="get-messages-button">My Kweets</Button>
         </div>
 
         {error && <p style={{ color: "red" }}>{error.message}</p>}
