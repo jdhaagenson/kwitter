@@ -7,9 +7,7 @@ import {
   createActions,
   createReducer
 } from "./helpers";
-
 const url = domain + "/messages";
-
 const CREATE_MESSAGE = createActions("createMessage");
 const _createMessage = messageData => (dispatch, getState) => {
   dispatch(CREATE_MESSAGE.START());
@@ -23,7 +21,6 @@ const _createMessage = messageData => (dispatch, getState) => {
     .then(result => dispatch(CREATE_MESSAGE.SUCCESS(result)))
     .catch(err => Promise.reject(dispatch(CREATE_MESSAGE.FAIL(err))));
 };
-
 const GET_MESSAGE = createActions("getMessage");
 export const getMessage = messageData => (dispatch, getState) => {
   dispatch(GET_MESSAGE.START());
@@ -39,13 +36,11 @@ export const getMessage = messageData => (dispatch, getState) => {
     })
     .catch(err => Promise.reject(dispatch(GET_MESSAGE.FAIL(err))));
 };
-
-export const createMessage = messageData => (dispatch, getState) => {
+export const createMessage = messageData => dispatch => {
   dispatch(_createMessage(messageData)).then(() => {
     dispatch(getMessage());
   });
 };
-
 export const reducers = {
   createMessage: createReducer(asyncInitialState, {
     ...asyncCases(CREATE_MESSAGE)

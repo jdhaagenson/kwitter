@@ -1,14 +1,17 @@
-import {
-  domain,
-  jsonHeaders,
-  handleJsonResponse,
-  asyncInitialState,
-  asyncCases,
-  createActions,
-  createReducer
-} from "./helpers";
+// import { store } from "../../redux/index";
+// import {
+//   domain,
+//   jsonHeaders,
+//   handleJsonResponse,
+//   getInitStateFromStorage,
+//   asyncInitialState,
+//   asyncCases,
+//   createActions,
+//   createReducer
+// } from "./helpers";
+// import { getMessage } from "./messages";
 
-const url = domain + "/likes";
+// const url = domain;
 
 const LIKE_MESSAGE = createActions("likeMessage");
 const likeMessage = messageData => (dispatch, getState) => {
