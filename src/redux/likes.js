@@ -3,7 +3,6 @@ import {
   domain,
   jsonHeaders,
   handleJsonResponse,
-  getInitStateFromStorage,
   asyncInitialState,
   asyncCases,
   createActions,
@@ -27,15 +26,36 @@ export const likeMessage = (e, id) => (dispatch, getState) => {
     body: JSON.stringify({ messageId: id })
   })
     .then(handleJsonResponse)
-    .then(result => dispatch(LIKE_MESSAGE.SUCCESS(result)))
+    .then(result => {
+      if (result.statusCode === 200) {
+        dispatch(getMessage());
+      } else {
+      }
+      dispatch(LIKE_MESSAGE.SUCCESS(result));
+    })
+
     .catch(err => Promise.reject(dispatch(LIKE_MESSAGE.FAIL(err))));
+};
+
+const UNLIKE_MESSAGE = createActions("unlikeMessage");
+export const unlikeMessage = (e, id) => (dispatch, getState) => {
+  dispatch(UNLIKE_MESSAGE.START());
+  const token = getState().auth.login.result.token;
+  return fetch(url + "/likes", {
+    method: "DELETE",
+    headers: { Authorization: "Bearer " + token, ...jsonHeaders },
+    body: JSON.stringify({ messageId: id })
+  })
+    .then(handleJsonResponse)
+    .then(result => dispatch(UNLIKE_MESSAGE.SUCCESS(result)))
+    .ctach(err => Promise.reject(dispatch(UNLIKE_MESSAGE.FAIL(err))));
 };
 
 export const reducers = {
   like: createReducer(asyncInitialState, {
     ...asyncCases(LIKE_MESSAGE)
+  }),
+  unlike: createReducer(asyncInitialState, {
+    ...asyncCases(UNLIKE_MESSAGE)
   })
-  //   unlike: createReducer(asyncInitialState, {
-  //     ...asyncCases(UNLIKE_MESSAGE)
-  //   })
 };

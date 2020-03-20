@@ -18,7 +18,7 @@ class UpdateUser extends Component {
   };
 
   handleUserUpdate = e => {
-    // e.preventDefault()
+    e.preventDefault();
     this.props.updateUser(this.state);
   };
 
