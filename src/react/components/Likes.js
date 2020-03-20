@@ -5,8 +5,7 @@ class Likes extends Component {
   render() {
     return (
       <React.Fragment>
-        <Icon name="thumbs up" />
-        <Icon name="thumbs down" />
+        <Icon name="heart" />
       </React.Fragment>
   )}
 }

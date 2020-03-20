@@ -79,8 +79,8 @@ export const setPhoto = (username, picture) => (dispatch, getState) => {
 
   return fetch(url + "/" + username + "/picture", {
     method: "PUT",
-    headers: { Authorization: "Bearer " + token, ...jsonHeaders },
-    body: picture
+    headers: { Authorization: "Bearer " + token, "Content-Location":picture, Accept:"application/json" },
+    body: JSON.stringify({picture: picture})
   })
     .then(handleJsonResponse)
     .then(result => dispatch(SET_PHOTO.SUCCESS(result)))
@@ -93,7 +93,10 @@ export const getPhoto = username => dispatch => {
 
   return fetch(url + "/" + username + "/picture", {
     method: "GET",
-    headers: jsonHeaders
+    headers: {
+      "Content-Disposition":"inline",
+      Accept: "image/png"
+    }
   })
     .then(handleJsonResponse)
     .then(result=> dispatch(GET_PHOTO.SUCCESS(result)))

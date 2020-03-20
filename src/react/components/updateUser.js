@@ -2,13 +2,14 @@ import React, { Component } from "react";
 import { Modal, Button, Image, Header, Form } from "semantic-ui-react";
 import { connect } from "react-redux";
 import { updateUser, getUser} from "../../redux";
-import UploadPhoto from "./UploadPhoto";
+// import UploadPhoto from "./UploadPhoto";
 
 class UpdateUser extends Component {
   state = {
     password: "",
     displayName: "",
     about:"",
+    modalOpen: false
   };
 
   handleChange = e => {
@@ -21,6 +22,12 @@ class UpdateUser extends Component {
     this.props.updateUser(this.state)
   };
 
+  handleOpen = e => {
+    this.setState({modalOpen:true})
+  }
+  handleClose = e => {
+    this.setState({modalOpen:false})
+  }
 
   render() {
     const { error } = this.props;
@@ -29,7 +36,11 @@ class UpdateUser extends Component {
       return (
         <React.Fragment>
           <div>
-          <Modal trigger={<Button>Update Profile</Button>}>
+          <Modal
+          trigger={<Button fluid>Update Profile</Button>}
+          open={this.state.modalOpen}
+          onClose={this.handleClose}
+          >
             <Modal.Header>Update Profile</Modal.Header>
             <Modal.Content image>
               <Image

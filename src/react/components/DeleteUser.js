@@ -2,16 +2,15 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { deleteUser } from "../../redux";
 import { Button, Modal, Icon, Header } from "semantic-ui-react";
-import {getState} from 'redux'
+
 
 class DeleteUser extends Component{
   state = {
-    username: getState().auth.login.result.token,
     modalOpen: false
   };
 
   handleDelete = e => {
-    deleteUser(this.state.username)
+    deleteUser(this.props.username)
   };
 
   handleOpen = () => {
@@ -27,7 +26,7 @@ class DeleteUser extends Component{
       <div>
         <Modal
           floated='right'
-          trigger={<Button icon="user delete" color='red' onClick={this.handleOpen}>Delete User</Button>}
+          trigger={<Button fluid icon="user delete" color='red' onClick={this.handleOpen}>Delete User</Button>}
           open={this.state.modalOpen}
           onClose={this.handleClose}
           centered={true}>
@@ -55,9 +54,10 @@ class DeleteUser extends Component{
 
 export default connect(
   (state) => ({
-    result:getState().users.deleteUser.result,
-    loading: getState().users.deleteUser.loading,
-    error: getState().users.deleteUser.error
+    result: state.users.deleteUser.result,
+    loading: state.users.deleteUser.loading,
+    error: state.users.deleteUser.error,
+    username: state.auth.login.result.username
   }),
   { deleteUser }
 )(DeleteUser)

@@ -7,14 +7,11 @@ import {
   createActions,
   createReducer
 } from "./helpers";
-
 const url = domain + "/messages";
-
 const CREATE_MESSAGE = createActions("createMessage");
-export const createMessage = messageData => (dispatch, getState) => {
+const _createMessage = messageData => (dispatch, getState) => {
   dispatch(CREATE_MESSAGE.START());
-  const token = getState().auth.login.result.token
-
+  const token = getState().auth.login.result.token;
   return fetch(url, {
     method: "POST",
     headers: { Authorization: "Bearer " + token, ...jsonHeaders },
@@ -24,11 +21,10 @@ export const createMessage = messageData => (dispatch, getState) => {
     .then(result => dispatch(CREATE_MESSAGE.SUCCESS(result)))
     .catch(err => Promise.reject(dispatch(CREATE_MESSAGE.FAIL(err))));
 };
-
 const GET_MESSAGE = createActions("getMessage");
 export const getMessage = messageData => (dispatch, getState) => {
   dispatch(GET_MESSAGE.START());
-
+  // const token = getState().auth.login.result.token;
   return fetch(url + "?limit=100&offset=0")
     .then(handleJsonResponse)
     .then(result => {
@@ -40,16 +36,25 @@ export const getMessage = messageData => (dispatch, getState) => {
     })
     .catch(err => Promise.reject(dispatch(GET_MESSAGE.FAIL(err))));
 };
-
-const SEARCH_MESSAGE = createActions('searchMessage');
-export const searchMessage = messageId => dispatch=>{
-  dispatch(SEARCH_MESSAGE.START());
-
-  return fetch(url + messageId)
-    .then(handleJsonResponse)
-    .then(result => dispatch(SEARCH_MESSAGE.SUCCESS(result)))
-    .catch(err => Promise.reject(dispatch(SEARCH_MESSAGE.FAIL(err))));
+export const createMessage = messageData => (dispatch, getState) => {
+  dispatch(_createMessage(messageData)).then(() => {
+    dispatch(getMessage());
+  });
 };
+
+const DELETE_MESSAGE = createActions('deleteMessage');
+export const deleteMessage = messageId => (dispatch, getState) => {
+  const token = getState().auth.login.result.token;
+  dispatch(DELETE_MESSAGE.START());
+
+  return fetch(url + "/" + messageId, {
+    method: "DELETE",
+    headers: { Authorization: "Bearer " + token, ...jsonHeaders }
+  })
+    .then(handleJsonResponse)
+    .then(result => dispatch(DELETE_MESSAGE.SUCCESS(result)))
+    .catch(err => Promise.reject(dispatch(DELETE_MESSAGE.FAIL(err))))
+}
 
 export const reducers = {
   createMessage: createReducer(asyncInitialState, {
@@ -58,7 +63,7 @@ export const reducers = {
   getMessage: createReducer(asyncInitialState, {
     ...asyncCases(GET_MESSAGE)
   }),
-  searchMessage: createReducer(asyncInitialState, {
-    ...asyncCases(SEARCH_MESSAGE)
+  deleteMessage: createReducer(asyncInitialState, {
+    ...asyncCases(DELETE_MESSAGE)
   })
 };

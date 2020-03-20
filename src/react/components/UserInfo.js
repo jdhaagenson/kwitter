@@ -9,7 +9,7 @@ import {
   Icon
 } from "semantic-ui-react";
 import Avatar from './Avatar';
-import DeleteUser from './DeleteUser'
+// import DeleteUser from './DeleteUser'
 import { connect } from "react-redux";
 import { updateUser, getUser } from "../../redux";
 
@@ -70,12 +70,8 @@ class UserInfo extends Component {
             </Card.Meta>
             <Card.Description>{user.about}</Card.Description>
           </Card>
+
           <Avatar/>
-          <Button className="get-messages-button">
-            <Icon name="comment alternate outline" />
-            My Kweets
-          </Button>
-          <DeleteUser/>
 
 
 
@@ -171,7 +167,6 @@ class UserInfo extends Component {
             <Icon name="comment alternate outline" />
             My Kweets
           </Button>
-          <DeleteUser/>
 
           {error && <p style={{ color: "red" }}>{error.message}</p>}
         </React.Fragment>
