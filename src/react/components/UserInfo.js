@@ -70,17 +70,26 @@ class UserInfo extends Component {
   componentDidMount() {
     this.props.getUser(this.props.username);
   }
+
+  componentDidUpdate(prevProps) {
+    if (
+      this.props.updateResult &&
+      this.props.updateResult !== prevProps.updateResult
+    ) {
+      this.props.getUser(this.props.username);
+    }
+  }
   render() {
     const { error } = this.props;
     const user = this.state;
 
-    if (!this.props.updateResult) {
+    if (!this.props.updateResult && !this.props.createResult) {
       return (
         <React.Fragment>
           <Card
             className="user-info-card"
-            header={this.props.displayName}
-            description={user.about}
+            // header={this.props.displayName}
+            // description={user.about}
           >
             <Image src={this.state.image} />
             <Header>{this.props.displayName}</Header>
@@ -106,11 +115,13 @@ class UserInfo extends Component {
         <React.Fragment>
           <Card
             className="user-info-card"
-            header={this.props.displayName}
+            header={
+              this.props.createResult.user.displayName || this.props.displayName
+            }
             description={user.about}
           >
             <Image src={this.state.image} />
-            <Header>{this.props.updateResult.user.displayName}</Header>
+            <Header>{this.props.createResult.user.displayName}</Header>
             <Card.Meta>{"@" + this.props.username}</Card.Meta>
             <Card.Meta>
               <span className="date" icon="calendar alternate outline">
@@ -120,7 +131,7 @@ class UserInfo extends Component {
             </Card.Meta>
             <Card.Description>
               {" "}
-              {this.props.updateResult.user.about ||
+              {this.props.createResult.user.about ||
                 "Tell us something about yourself"}
             </Card.Description>
           </Card>

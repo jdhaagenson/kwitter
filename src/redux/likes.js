@@ -1,59 +1,61 @@
-// import { store } from "../../redux/index";
-// import {
-//   domain,
-//   jsonHeaders,
-//   handleJsonResponse,
-//   getInitStateFromStorage,
-//   asyncInitialState,
-//   asyncCases,
-//   createActions,
-//   createReducer
-// } from "./helpers";
-// import { getMessage } from "./messages";
+import { store } from "../redux/index";
+import {
+  domain,
+  jsonHeaders,
+  handleJsonResponse,
+  asyncInitialState,
+  asyncCases,
+  createActions,
+  createReducer
+} from "./helpers";
+import { getMessage } from "./messages";
 
-// const url = domain;
+const url = domain;
 
 const LIKE_MESSAGE = createActions("likeMessage");
-const likeMessage = messageData => (dispatch, getState) => {
+
+export const likeMessage = (e, id) => (dispatch, getState) => {
   dispatch(LIKE_MESSAGE.START());
+
   const token = getState().auth.login.result.token;
-  return fetch(url, {
+  console.log(token);
+
+  return fetch(url + "/likes", {
     method: "POST",
     headers: { Authorization: "Bearer " + token, ...jsonHeaders },
-    body: JSON.stringify({ text: messageData })
+    body: JSON.stringify({ messageId: id })
   })
     .then(handleJsonResponse)
-    .then(result => dispatch(LIKE_MESSAGE.SUCCESS(result)))
+    .then(result => {
+      if (result.statusCode === 200) {
+        dispatch(getMessage());
+      } else {
+      }
+      dispatch(LIKE_MESSAGE.SUCCESS(result));
+    })
+
     .catch(err => Promise.reject(dispatch(LIKE_MESSAGE.FAIL(err))));
 };
 
-// export const likeMessage = messageData => dispatch => {
-//   dispatch(likeMessage(messageData)).then(() => {
-//     dispatch(likeMessage());
-//   });
-// };
-
 const UNLIKE_MESSAGE = createActions("unlikeMessage");
-export const unlikeMessage = messageData => (dispatch, getState) => {
+export const unlikeMessage = (e, id) => (dispatch, getState) => {
   dispatch(UNLIKE_MESSAGE.START());
   const token = getState().auth.login.result.token;
-  return fetch(url)
+  return fetch(url + "/likes", {
+    method: "DELETE",
+    headers: { Authorization: "Bearer " + token, ...jsonHeaders },
+    body: JSON.stringify({ messageId: id })
+  })
     .then(handleJsonResponse)
-    .then(result => {
-      result = Object.keys(result.messages).map(key => result.messages[key]);
-      dispatch({
-        type: UNLIKE_MESSAGE.SUCCESS,
-        payload: result
-      });
-    })
-    .catch(err => Promise.reject(dispatch(UNLIKE_MESSAGE.FAIL(err))));
+    .then(result => dispatch(UNLIKE_MESSAGE.SUCCESS(result)))
+    .ctach(err => Promise.reject(dispatch(UNLIKE_MESSAGE.FAIL(err))));
 };
 
 export const reducers = {
-  likeMessage: createReducer(asyncInitialState, {
+  like: createReducer(asyncInitialState, {
     ...asyncCases(LIKE_MESSAGE)
   }),
-  unlikeMessage: createReducer(asyncInitialState, {
+  unlike: createReducer(asyncInitialState, {
     ...asyncCases(UNLIKE_MESSAGE)
   })
 };
