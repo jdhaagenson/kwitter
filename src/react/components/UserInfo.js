@@ -102,12 +102,11 @@ class UserInfo extends Component {
             </Card.Meta>
             <Card.Description>{user.about}</Card.Description>
           </Card>
-          <Avatar />
-          <UpdateUser />
-          <Button className="get-messages-button">
-            <Icon name="comment alternate outline" />
-            My Kweets
-          </Button>
+
+          <Avatar/>
+
+
+
         </React.Fragment>
       );
     } else {
