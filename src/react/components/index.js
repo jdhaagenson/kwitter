@@ -8,9 +8,5 @@ export { default as UpdateUser } from "./UpdateUser";
 export { default as UploadPhoto } from "./UploadPhoto";
 export { default as SearchBar } from "./SearchBar";
 export { default as Avatar } from "./Avatar";
-<<<<<<< HEAD
 export { default as UserList } from './UserList';
 export { default as DeleteUser } from './DeleteUser';
-=======
-export { default as UserList } from "./UserList";
->>>>>>> 3099ddeeeb2f00f8b37f46a07745b7ccebea704c
