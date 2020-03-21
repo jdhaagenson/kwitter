@@ -45,27 +45,26 @@ const randomAvatar = () => {
 class Messages extends Component {
   state = {
     modalOpen:false,
-    confirmed:false,
-    messageId:""
+    confirmed:false
   }
 
   componentDidMount() {
     this.props.getMessage();
   }
 
-  handleDelete = (event) => {
-    console.log(event)
-    this.props.deleteMessage(this.state.messageId)
+  handleDelete = (id) => {
+    console.log(id)
+    this.props.deleteMessage(id)
     this.handleClose()
   }
   handleConfirmation = (event) => {
-    this.setState({confirmed:true, modalOpen:true, messageId:event.target.id})
+    this.setState({confirmed:true, modalOpen:true})
   }
   handleClose = () => {
-    this.setState({confirmed:false, modalOpen:false, messageId:""})
+    this.setState({confirmed:false, modalOpen:false})
   }
 
-  handleLike = (e, id) => {
+  handleLike = (id) => {
     console.log(id);
     this.props.likeMessage(id);
   };
@@ -94,7 +93,7 @@ class Messages extends Component {
                 <Divider hidden/>
                 <Button.Group widths={5}>
                   <Button basic  onClick={this.handleClose}><Icon name="ban"/>Cancel</Button>
-                  <Button  color="red" onClick={this.handleDelete}><Icon name="trash alternate"/>Delete</Button>
+                  <Button  color="red" onClick={this.handleDelete(each.id)}><Icon name="trash alternate"/>Delete</Button>
                 </Button.Group>
 
               </Modal>
@@ -115,7 +114,7 @@ class Messages extends Component {
                         {/* <Likes /> */}
                         <Icon
                           name="like"
-                          onClick={e => this.props.likeMessage(e, each.id)}
+                          onClick={ this.handleLike(each.id) }
                         />
                         {each.likes.length}
                       </Feed.Like>

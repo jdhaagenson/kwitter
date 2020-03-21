@@ -3,6 +3,7 @@ import {
   domain,
   jsonHeaders,
   handleJsonResponse,
+  getInitStateFromStorage,
   asyncInitialState,
   asyncCases,
   createActions,
@@ -14,7 +15,7 @@ const url = domain;
 
 const LIKE_MESSAGE = createActions("likeMessage");
 
-export const likeMessage = (e, id) => (dispatch, getState) => {
+export const likeMessage = (id) => (dispatch, getState) => {
   dispatch(LIKE_MESSAGE.START());
 
   const token = getState().auth.login.result.token;
@@ -23,12 +24,12 @@ export const likeMessage = (e, id) => (dispatch, getState) => {
   return fetch(url + "/likes", {
     method: "POST",
     headers: { Authorization: "Bearer " + token, ...jsonHeaders },
-    body: JSON.stringify({ messageId: id })
+    body: JSON.stringify(id)
   })
     .then(handleJsonResponse)
     .then(result => {
       if (result.statusCode === 200) {
-        dispatch(getMessage());
+        dispatch(getMessage(id));
       } else {
       }
       dispatch(LIKE_MESSAGE.SUCCESS(result));
@@ -38,13 +39,13 @@ export const likeMessage = (e, id) => (dispatch, getState) => {
 };
 
 const UNLIKE_MESSAGE = createActions("unlikeMessage");
-export const unlikeMessage = (e, id) => (dispatch, getState) => {
+export const unlikeMessage = (id) => (dispatch, getState) => {
   dispatch(UNLIKE_MESSAGE.START());
   const token = getState().auth.login.result.token;
   return fetch(url + "/likes", {
     method: "DELETE",
     headers: { Authorization: "Bearer " + token, ...jsonHeaders },
-    body: JSON.stringify({ messageId: id })
+    body: JSON.stringify(id)
   })
     .then(handleJsonResponse)
     .then(result => dispatch(UNLIKE_MESSAGE.SUCCESS(result)))
@@ -52,10 +53,11 @@ export const unlikeMessage = (e, id) => (dispatch, getState) => {
 };
 
 export const reducers = {
-  like: createReducer(asyncInitialState, {
-    ...asyncCases(LIKE_MESSAGE)
+  likeMessage: createReducer(getInitStateFromStorage('likeMessage', asyncInitialState), {
+    ...asyncCases(LIKE_MESSAGE),
+    [UNLIKE_MESSAGE.SUCCESS.toString()]: (state, action) => asyncInitialState
   }),
-  unlike: createReducer(asyncInitialState, {
+  unlikeMessage: createReducer(asyncInitialState, {
     ...asyncCases(UNLIKE_MESSAGE)
   })
 };
