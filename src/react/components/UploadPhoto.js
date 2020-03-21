@@ -46,7 +46,7 @@ class UpdateUser extends Component {
                         <Image
                             wrapped
                             size="medium"
-                            src={this.props.pictureLocation}
+                            src={this.props.pictureLocation||this.state.picture}
                         />
                         <Form>
                             <Form.Field>

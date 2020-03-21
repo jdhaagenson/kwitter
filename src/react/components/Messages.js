@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { getMessage, getPhoto, deleteMessage } from "../../redux";
-// import { NavLink } from 'react-router-dom'
+import { getMessage, getPhoto, deleteMessage, likeMessage } from "../../redux";
+import { NavLink } from 'react-router-dom'
 import { Feed, Divider, Container, Header, Card, Icon, Button, Modal } from "semantic-ui-react";
 import Likes from "./Likes";
 
@@ -9,11 +9,32 @@ import moment from "moment";
 import "./MessageFeed.css";
 
 const defaultImages = [
-  'rachel.png', 'ade.jpg', 'chris.jpg', 'christian.jpg', 'daniel.jpg', 'elliot.jpg', 'elyse.png',
-  'helen.jpg', 'jenny.jpg', 'joe.jpg', 'justen.jpg', 'kristy.png', 'laura.jpg', 'matt.jpg', 'matthew.png',
-  'molly.png', 'nan.jpg', 'nom.jpg', 'patrick.png', 'steve.jpg', 'stevie.jpg', 'tom.jpg', 'veronika.jpg', 'zoe.jpg'
-]
-const imageURL = 'https://react.semantic-ui.com/images/avatar/large/'
+  "rachel.png",
+  "ade.jpg",
+  "chris.jpg",
+  "christian.jpg",
+  "daniel.jpg",
+  "elliot.jpg",
+  "elyse.png",
+  "helen.jpg",
+  "jenny.jpg",
+  "joe.jpg",
+  "justen.jpg",
+  "kristy.png",
+  "laura.jpg",
+  "matt.jpg",
+  "matthew.png",
+  "molly.png",
+  "nan.jpg",
+  "nom.jpg",
+  "patrick.png",
+  "steve.jpg",
+  "stevie.jpg",
+  "tom.jpg",
+  "veronika.jpg",
+  "zoe.jpg"
+];
+const imageURL = "https://react.semantic-ui.com/images/avatar/large/";
 const randomAvatar = () => {
   let min = 0;
   let max = 23;
@@ -34,15 +55,20 @@ class Messages extends Component {
 
   handleDelete = (event) => {
     console.log(event)
-    this.props.deleteMessage(this.props.messageId)
+    this.props.deleteMessage(this.state.messageId)
+    this.handleClose()
   }
-  handleConfirmation = () => {
-    this.setState({confirmed:true, modalOpen:true})
+  handleConfirmation = (event) => {
+    this.setState({confirmed:true, modalOpen:true, messageId:event.target.id})
   }
   handleClose = () => {
-    this.setState({confirmed:false, modalOpen:false})
+    this.setState({confirmed:false, modalOpen:false, messageId:""})
   }
 
+  handleLike = (e, id) => {
+    console.log(id);
+    this.props.likeMessage(id);
+  };
 
   render() {
     if (this.props.result === null) {
@@ -58,6 +84,7 @@ class Messages extends Component {
               trigger={<Button floated='right' size='mini' onClick={this.handleConfirmation}><Icon name="delete"/></Button>}
               on={this.state.modalOpen}
               open={this.state.modalOpen}
+              id={each.id}
               >
                 <Header size='huge' textAlign='center'><Icon name="exclamation triangle"/></Header>
                 <Divider hidden/>
@@ -85,8 +112,12 @@ class Messages extends Component {
                     <Feed.Extra text>{each.text}</Feed.Extra>
                     <Feed.Meta>
                       <Feed.Like>
-                        <Likes />
-                        {/* <Icon name="like" />5 Likes */}
+                        {/* <Likes /> */}
+                        <Icon
+                          name="like"
+                          onClick={e => this.props.likeMessage(e, each.id)}
+                        />
+                        {each.likes.length}
                       </Feed.Like>
                     </Feed.Meta>
                   </Feed.Content>
@@ -111,5 +142,5 @@ export default connect(
     image: state.users.getPhoto.result
 
   }),
-  { getMessage, getPhoto, deleteMessage }
+  { getMessage, getPhoto, deleteMessage, likeMessage }
 )(Messages);

@@ -18,7 +18,7 @@ class Profile extends React.Component {
               isAuthenticated={this.props.isAuthenticated}
               className="menu"
             />
-            <UserList/>
+            <UserList />
           </div>
           <div className="user-info-card">
             <UserInfo

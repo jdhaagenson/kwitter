@@ -1,3 +1,4 @@
+// import { store } from "../redux/index";
 import {
   domain,
   jsonHeaders,
@@ -7,42 +8,54 @@ import {
   createActions,
   createReducer
 } from "./helpers";
+import { getMessage } from "./messages";
 
-const url = domain + "/likes";
+const url = domain;
 
-const LIKE = createActions("like");
-export const like = messageData => (dispatch, getState) => {
-  dispatch(LIKE.START());
+const LIKE_MESSAGE = createActions("likeMessage");
+
+export const likeMessage = (e, id) => (dispatch, getState) => {
+  dispatch(LIKE_MESSAGE.START());
+
   const token = getState().auth.login.result.token;
-  return fetch(url, {
+  console.log(token);
+
+  return fetch(url + "/likes", {
     method: "POST",
     headers: { Authorization: "Bearer " + token, ...jsonHeaders },
-    body: JSON.stringify({ text: messageData })
+    body: JSON.stringify({ messageId: id })
   })
     .then(handleJsonResponse)
-    .then(result => dispatch(LIKE.SUCCESS(result)))
-    .catch(err => Promise.reject(dispatch(LIKE.FAIL(err))));
+    .then(result => {
+      if (result.statusCode === 200) {
+        dispatch(getMessage());
+      } else {
+      }
+      dispatch(LIKE_MESSAGE.SUCCESS(result));
+    })
+
+    .catch(err => Promise.reject(dispatch(LIKE_MESSAGE.FAIL(err))));
 };
 
-const UNLIKE = createActions("unlike");
-export const unlike = messageData => (dispatch, getState) => {
-  dispatch(UNLIKE.START());
+const UNLIKE_MESSAGE = createActions("unlikeMessage");
+export const unlikeMessage = (e, id) => (dispatch, getState) => {
+  dispatch(UNLIKE_MESSAGE.START());
   const token = getState().auth.login.result.token;
-  return fetch(url, {
+  return fetch(url + "/likes", {
     method: "DELETE",
     headers: { Authorization: "Bearer " + token, ...jsonHeaders },
-    body: JSON.stringify({ text: messageData })
+    body: JSON.stringify({ messageId: id })
   })
     .then(handleJsonResponse)
-    .then(result => dispatch(UNLIKE.SUCCESS(result)))
-    .catch(err => Promise.reject(dispatch(UNLIKE.FAIL(err))));
+    .then(result => dispatch(UNLIKE_MESSAGE.SUCCESS(result)))
+    .ctach(err => Promise.reject(dispatch(UNLIKE_MESSAGE.FAIL(err))));
 };
 
 export const reducers = {
   like: createReducer(asyncInitialState, {
-    ...asyncCases(LIKE)
+    ...asyncCases(LIKE_MESSAGE)
   }),
   unlike: createReducer(asyncInitialState, {
-    ...asyncCases(UNLIKE)
+    ...asyncCases(UNLIKE_MESSAGE)
   })
 };

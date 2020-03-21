@@ -4,8 +4,7 @@ import {setPhoto, getPhoto} from '../../redux';
 import { connect } from 'react-redux';
 import UploadPhoto from './UploadPhoto'
 
-
-const imageURL = 'https://react.semantic-ui.com/images/avatar/large/'
+const imageURL = "https://react.semantic-ui.com/images/avatar/large/";
 
 class Avatar extends Component {
     state={
@@ -17,16 +16,22 @@ class Avatar extends Component {
 
     handleClose = () => {this.setState({modalOpen:false})}
 
-    handleSelect = (event) => {
-        this.setState({image:event.target.src})
-    }
+  handleOpen = e => {
+    this.setState({ modalOpen: true });
+  };
 
     handleSetAvatar = () => {
         this.props.setPhoto(this.props.username, this.state.image)
         this.setState({modalOpen:false})
     }
 
+  handleSelect = event => {
+    this.setState({ image: event.target.src });
+  };
 
+  handleSetAvatar = e => {
+    this.props.setPhoto(this.props.username, this.state.image);
+  };
 
     render() {
         return(
@@ -67,9 +72,9 @@ class Avatar extends Component {
                     <Image onClick={this.handleSelect} centered as='button' bordered size="tiny" src={imageURL + "veronika.jpg"}/>
                     <Image onClick={this.handleSelect} centered as='button' bordered size="tiny" src={imageURL + "zoe.jpg"}/>
                 </Image.Group>
-                <Divider hidden/>
-            </div>
-            <span>
+                <Divider hidden />
+              </div>
+              <span>
                 <Modal.Actions>
 
                     <Divider hidden/>
@@ -83,10 +88,9 @@ class Avatar extends Component {
 
             </Modal.Content>
         </Modal>
-        </div>
-        )
-    }
-
+      </div>
+    );
+  }
 }
 
 export default connect(

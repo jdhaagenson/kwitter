@@ -22,9 +22,8 @@ const _createMessage = messageData => (dispatch, getState) => {
     .catch(err => Promise.reject(dispatch(CREATE_MESSAGE.FAIL(err))));
 };
 const GET_MESSAGE = createActions("getMessage");
-export const getMessage = messageData => (dispatch, getState) => {
+export const getMessage = messageData => dispatch => {
   dispatch(GET_MESSAGE.START());
-  // const token = getState().auth.login.result.token;
   return fetch(url + "?limit=100&offset=0")
     .then(handleJsonResponse)
     .then(result => {
@@ -36,7 +35,7 @@ export const getMessage = messageData => (dispatch, getState) => {
     })
     .catch(err => Promise.reject(dispatch(GET_MESSAGE.FAIL(err))));
 };
-export const createMessage = messageData => (dispatch, getState) => {
+export const createMessage = messageData => dispatch => {
   dispatch(_createMessage(messageData)).then(() => {
     dispatch(getMessage());
   });
@@ -55,6 +54,7 @@ export const deleteMessage = messageId => (dispatch, getState) => {
     .then(result => dispatch(DELETE_MESSAGE.SUCCESS(result)))
     .catch(err => Promise.reject(dispatch(DELETE_MESSAGE.FAIL(err))))
 }
+
 
 export const reducers = {
   createMessage: createReducer(asyncInitialState, {
