@@ -12,7 +12,8 @@ import {NavLink} from 'react-router-dom'
 import Avatar from "./Avatar";
 import { connect } from "react-redux";
 import { updateUser, getUser } from "../../redux";
-import UpdateUser from "./UpdateUser";
+import { UpdateUserInfo } from ".";
+
 
 const defaultImages = [
   "rachel.png",
@@ -137,7 +138,7 @@ class UserInfo extends Component {
             </Card.Description>
           </Card>
           <Avatar />
-          <UpdateUser />
+          <UpdateUserInfo />
           <Button className="get-messages-button">
             <Icon name="comment alternate outline" />
             My Kweets

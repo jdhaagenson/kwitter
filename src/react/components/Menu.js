@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import { logout } from "../../redux";
 import { Dropdown, Icon, Input, Menu } from "semantic-ui-react";
 import SearchBar from "./SearchBar";
-import UpdateUser from "./UpdateUser";
+import UpdateUserInfo from "./UpdateUserInfo";
 import users from '../users.json';
 
 class MainMenu extends React.Component {
@@ -82,7 +82,7 @@ class MainMenu extends React.Component {
                     icon="edit"
                     text="Edit Profile"
                 />
-                <UpdateUser/>
+                <UpdateUserInfo/>
                 <Dropdown.Item icon="settings" text="Account Settings" />
                 <Dropdown.Item
                   icon="key"
