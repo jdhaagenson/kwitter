@@ -25,15 +25,12 @@ class Profile extends React.Component {
             username={this.props.match.params.username}
             displayName={this.props.match.params.username}
             description={this.props.match.params.about}
-            extra=""
+            extra="22 friends"
              />
              <UpdateUserInfo/>
              <DeleteUser/>
              <Divider/>
-             <Button fluid size='massive' className="get-messages-button">
-              <Icon name="comment alternate outline" />
-              My Kweets
-            </Button>
+
           </div>
           <div className="message-feed-card">
             <MessageFeed />

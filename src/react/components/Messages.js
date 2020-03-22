@@ -37,7 +37,7 @@ const defaultImages = [
 const imageURL = "https://react.semantic-ui.com/images/avatar/large/";
 const randomAvatar = () => {
   let min = 0;
-  let max = 23;
+  let max = 24;
   let r = Math.floor(Math.random()*(max-min+1))+min
   return imageURL+defaultImages[r]
 }
@@ -89,7 +89,7 @@ class Messages extends Component {
               open={this.state.modalOpen}
               id={each.id}
               >
-                <Header size='huge' textAlign='center'><Icon name="exclamation triangle"/></Header>
+                <Header size='huge' textAlign='center'><Icon size="massive" name="exclamation triangle"/></Header>
                 <Divider hidden/>
                 <Header size="medium" textAlign='center'>Are you sure you want to delete this message from the feed?</Header>
                 <Divider hidden/>
@@ -108,9 +108,8 @@ class Messages extends Component {
 
                     <Feed.Summary>
                       <NavLink to={`/profiles/${this.props.username}`} >
-                      {each.username}
-                      </NavLink>
-                       posted on their page
+                      {each.username }
+                      </NavLink> posted on their page
                       <Feed.Date>
                         <Icon name="clock outline" />
                         {moment(each.createdAt).fromNow()}
@@ -138,7 +137,10 @@ class Messages extends Component {
           {/* <Feed className="message-feed" events={handleMessages} /> */}
         </Card.Content>
       </Card>
-    );
+
+
+
+   );
   }
 }
 

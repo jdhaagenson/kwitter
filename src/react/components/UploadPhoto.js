@@ -16,9 +16,9 @@ import { setPhoto, getUser } from "../../redux";
 //     return imageURL+defaultImages[r]
 //   }
 
-class UpdateUser extends Component {
+class UploadPhoto extends Component {
     state = {
-        picture: ""
+        picture: this.props.getUser.pictureLocation
     };
 
 
@@ -41,12 +41,12 @@ class UpdateUser extends Component {
 
         return (
             <React.Fragment>
-                <Modal trigger={<Button fluid>Update Profile</Button>}>
+                <Modal trigger={<Button fluid>Upload Profile Picture</Button>}>
                     <Modal.Content image>
                         <Image
                             wrapped
                             size="medium"
-                            src={this.props.pictureLocation||this.state.picture}
+                            src={this.state.picture}
                         />
                         <Form>
                             <Form.Field>
@@ -77,4 +77,4 @@ export default connect(
         createResult: state.users.getUser.result
     }),
     { setPhoto, getUser }
-)(UpdateUser);
+)(UploadPhoto);

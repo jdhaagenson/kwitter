@@ -11,7 +11,7 @@ import {
 import {NavLink} from 'react-router-dom'
 import Avatar from "./Avatar";
 import { connect } from "react-redux";
-import { updateUser, getUser } from "../../redux";
+import { updateUser, getUser, setPhoto } from "../../redux";
 import { UpdateUserInfo } from ".";
 
 
@@ -123,7 +123,7 @@ class UserInfo extends Component {
           >
             <NavLink to={`/profiles/${this.props.username}`} >
             <Image src={this.state.image} />
-            <Header>{this.props.createResult.user.displayName}</Header></NavLink>
+            <Card.Header>{this.props.createResult.user.displayName}</Card.Header></NavLink>
             <Card.Meta>{"@" + this.props.username}</Card.Meta>
             <Card.Meta>
               <span className="date" icon="calendar alternate outline">
@@ -155,8 +155,14 @@ export default connect(
     updateResult: state.users.updateUser.result,
     updateLoading: state.users.updateUser.loading,
     updateError: state.users.updateUser.error,
+
     createResult: state.users.getUser.result,
-    username: ownProps.username
+    createLoading:state.users.getUser.loading,
+    createError:state.users.getUser.error,
+
+    setPhoto_result:state.users.setPhoto.result,
+    setPhoto_loading:state.users.setPhoto.loading,
+    setPhoto_error:state.users.setPhoto.error
   }),
-  { updateUser, getUser }
+  { updateUser, getUser, setPhoto }
 )(UserInfo);

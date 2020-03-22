@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { searchUser } from "../../redux";
 import { Card, Image, Divider, Header } from "semantic-ui-react";
+import NavLink from 'react-router-dom'
 // import users from '../users.json'
 
 
@@ -19,8 +20,19 @@ const randomAvatar = () => {
 }
 
 class UserList extends Component {
+  state = {
+    searchTerm:"",
+    selected:""
+  }
   componentDidMount() {
     this.props.searchUser();
+  }
+
+  searchUser() {
+    this.props.searchUser()
+  }
+  handleSelect(event) {
+    this.setState({selected:event.target.id})
   }
 
 
@@ -36,8 +48,8 @@ class UserList extends Component {
       <Card style={{ width: "100%" }}>
         <Card.Content>
           {this.props.result.map(each => (
-            <React.Fragment>
-                <Image key={each.id}
+            <React.Fragment key={each.id}>
+                <Image
                 src={each.pictureLocation || randomAvatar()
                   } avatar/>
                 <span>{each.username}</span>

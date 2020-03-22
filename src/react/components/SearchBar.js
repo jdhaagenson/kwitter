@@ -26,7 +26,16 @@ class SearchBar extends Component {
   state = {
     isLoading: false,
     result: [],
-    value: ""
+    value: "",
+    user: {
+      pictureLocation: "",
+      username:"",
+      displayName:"",
+      about: "",
+      googleId:"",
+      createdAt:"",
+      updatedAt:""
+    }
   };
 
   handleResultSelect = (e, { result }) =>
