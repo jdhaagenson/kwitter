@@ -1,7 +1,7 @@
 import React from "react";
 import { Menu } from "./components";
 import { userIsAuthenticated } from "./HOCs";
-import { UserInfo, MessageFeed, UpdateUser, DeleteUser } from "../react/components";
+import { UserInfo, MessageFeed, UpdateUserInfo, DeleteUser } from "../react/components";
 import "./Profile.css";
 import UserList from './components/UserList'
 import { Divider, Icon, Button } from 'semantic-ui-react'
@@ -27,7 +27,7 @@ class Profile extends React.Component {
             description={this.props.match.params.about}
             extra=""
              />
-             <UpdateUser/>
+             <UpdateUserInfo/>
              <DeleteUser/>
              <Divider/>
              <Button fluid size='massive' className="get-messages-button">

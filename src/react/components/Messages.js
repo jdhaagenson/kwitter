@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { getMessage, getPhoto, deleteMessage, likeMessage } from "../../redux";
 import { NavLink } from 'react-router-dom'
 import { Feed, Divider, Container, Header, Card, Icon, Button, Modal } from "semantic-ui-react";
-import Likes from "./Likes";
+// import Likes from "./Likes";
 
 import moment from "moment";
 import "./MessageFeed.css";
@@ -45,7 +45,8 @@ const randomAvatar = () => {
 class Messages extends Component {
   state = {
     modalOpen:false,
-    confirmed:false
+    confirmed:false,
+    id:""
   }
 
   componentDidMount() {
@@ -57,16 +58,19 @@ class Messages extends Component {
     this.props.deleteMessage(id)
     this.handleClose()
   }
-  handleConfirmation = (event) => {
+  handleConfirmation = () => {
     this.setState({confirmed:true, modalOpen:true})
   }
   handleClose = () => {
     this.setState({confirmed:false, modalOpen:false})
   }
+  handleCaptureId = (key) => {
+    this.setState({id:key})
+    return key
+  }
 
-  handleLike = (id) => {
-    console.log(id);
-    this.props.likeMessage(id);
+  handleLike = (e) => {
+    this.props.likeMessage(this.state.id);
   };
 
   render() {
@@ -93,7 +97,7 @@ class Messages extends Component {
                 <Divider hidden/>
                 <Button.Group widths={5}>
                   <Button basic  onClick={this.handleClose}><Icon name="ban"/>Cancel</Button>
-                  <Button  color="red" onClick={this.handleDelete(each.id)}><Icon name="trash alternate"/>Delete</Button>
+                  <Button  color="red" onClick={this.handleDelete}><Icon name="trash alternate"/>Delete</Button>
                 </Button.Group>
 
               </Modal>
@@ -101,8 +105,12 @@ class Messages extends Component {
                 <Feed.Event>
                   <Feed.Label image={ randomAvatar()}  />
                   <Feed.Content>
+
                     <Feed.Summary>
-                      {each.username} posted on their page
+                      <NavLink to={`/profiles/${this.props.username}`} >
+                      {each.username}
+                      </NavLink>
+                       posted on their page
                       <Feed.Date>
                         <Icon name="clock outline" />
                         {moment(each.createdAt).fromNow()}
@@ -114,7 +122,8 @@ class Messages extends Component {
                         {/* <Likes /> */}
                         <Icon
                           name="like"
-                          onClick={ this.handleLike(each.id) }
+                          id={each.id}
+                          onClick={ this.handleLike }
                         />
                         {each.likes.length}
                       </Feed.Like>
