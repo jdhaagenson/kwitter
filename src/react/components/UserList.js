@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { searchUser } from "../../redux";
-import { Card, Image, Divider, Header } from "semantic-ui-react";
-import NavLink from 'react-router-dom'
+import { Card, Icon, Image, Divider, Header } from "semantic-ui-react";
 // import users from '../users.json'
 
 
@@ -44,7 +43,7 @@ class UserList extends Component {
 
     return (
       <>
-      <Header>Users</Header>
+      <Header><Icon name="address book outline"/>Users</Header>
       <Card style={{ width: "100%" }}>
         <Card.Content>
           {this.props.result.map(each => (

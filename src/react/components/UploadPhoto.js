@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Modal, Button, Image, Form } from "semantic-ui-react";
+import { Modal, Button, Icon, Image, Form } from "semantic-ui-react";
 import { connect } from "react-redux";
 import { setPhoto, getUser } from "../../redux";
 
@@ -41,7 +41,7 @@ class UploadPhoto extends Component {
 
         return (
             <React.Fragment>
-                <Modal trigger={<Button fluid>Upload Profile Picture</Button>}>
+                <Modal trigger={<Button fluid><Icon name="upload"/>Upload Photo</Button>}>
                     <Modal.Content image>
                         <Image
                             wrapped

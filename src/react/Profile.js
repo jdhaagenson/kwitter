@@ -1,7 +1,7 @@
 import React from "react";
 import { Menu } from "./components";
 import { userIsAuthenticated } from "./HOCs";
-import { UserInfo, MessageFeed, UpdateUserInfo, DeleteUser } from "../react/components";
+import { UserInfo, Avatar, MessageFeed, UpdateUserInfo, DeleteUser } from "../react/components";
 import "./Profile.css";
 import UserList from './components/UserList'
 import { Divider, Icon, Button } from 'semantic-ui-react'
@@ -27,9 +27,14 @@ class Profile extends React.Component {
             description={this.props.match.params.about}
             extra="22 friends"
              />
+             <Avatar/>
              <UpdateUserInfo/>
              <DeleteUser/>
              <Divider/>
+            <Button fluid size="massive" toggle className="get-messages-button">
+              <Icon name="comment alternate outline" />
+                Just My Kweets
+            </Button>
 
           </div>
           <div className="message-feed-card">

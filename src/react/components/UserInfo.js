@@ -1,18 +1,15 @@
 import React, { Component } from "react";
 import {
   Card,
-  Modal,
-  Button,
   Image,
   Header,
-  Form,
-  Icon
+  Icon,
+  Divider
 } from "semantic-ui-react";
 import {NavLink} from 'react-router-dom'
 import Avatar from "./Avatar";
 import { connect } from "react-redux";
 import { updateUser, getUser, setPhoto } from "../../redux";
-import { UpdateUserInfo } from ".";
 
 
 const defaultImages = [
@@ -56,8 +53,6 @@ class UserInfo extends Component {
     image: randomAvatar()
   };
 
-  handleModal = () => {};
-
   handleUserUpdate = e => {
     e.preventDefault();
     this.props.updateUser(this.state);
@@ -94,14 +89,16 @@ class UserInfo extends Component {
             // description={user.about}
           >
             <Image src={this.state.image} />
-            <Header>{this.props.displayName}</Header>
-            <Card.Meta>{"@" + this.props.username}</Card.Meta>
+            <Card.Header size="large">{this.props.displayName}</Card.Header>
             <Card.Meta>
               <span className="date" icon="calendar alternate outline">
                 <Icon name="calendar alternate outline" />
                 Joined in 2020
               </span>
             </Card.Meta>
+            <Divider/>
+            <Card.Meta>{"@" + this.props.username}</Card.Meta>
+            <Divider/>
             <Card.Description>{user.about}</Card.Description>
           </Card>
 
@@ -123,7 +120,7 @@ class UserInfo extends Component {
           >
             <NavLink to={`/profiles/${this.props.username}`} >
             <Image src={this.state.image} />
-            <Card.Header>{this.props.createResult.user.displayName}</Card.Header></NavLink>
+            <Card.Header size="large">{this.props.createResult.user.displayName}</Card.Header></NavLink>
             <Card.Meta>{"@" + this.props.username}</Card.Meta>
             <Card.Meta>
               <span className="date" icon="calendar alternate outline">
@@ -137,12 +134,8 @@ class UserInfo extends Component {
                 "Tell us something about yourself"}
             </Card.Description>
           </Card>
-          <Avatar />
-          <UpdateUserInfo />
-          <Button className="get-messages-button">
-            <Icon name="comment alternate outline" />
-            My Kweets
-          </Button>
+
+
           {error && <p style={{ color: "red" }}>{error.message}</p>}
         </React.Fragment>
       );

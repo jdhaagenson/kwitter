@@ -26,7 +26,7 @@ class DeleteUser extends Component{
       <div>
         <Modal
           floated='right'
-          trigger={<Button fluid icon="user delete" color='red' onClick={this.handleOpen}>Delete User</Button>}
+          trigger={<Button fluid icon="user delete" color='red' onClick={this.handleOpen}><Icon name="trash alternate"/>Delete User</Button>}
           open={this.state.modalOpen}
           onClose={this.handleClose}
           centered={true}>
