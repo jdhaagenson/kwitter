@@ -5,6 +5,7 @@ import Profile from "./Profile";
 import NotFound from "./NotFound";
 import Registration from "./components/Registration";
 import MessageFeed from "./components/Messages";
+// import SearchResult from './SearchResult';
 
 class App extends React.Component {
   render() {

@@ -46,20 +46,23 @@ class Messages extends Component {
   state = {
     modalOpen:false,
     confirmed:false,
-    id:""
+    id:"",
+    username:""
   }
 
   componentDidMount() {
     this.props.getMessage();
   }
 
-  handleDelete = (id) => {
-    console.log(id)
-    this.props.deleteMessage(id)
+  handleDelete = (e) => {
+    console.log(e)
+    this.props.deleteMessage(e.children.id)
     this.handleClose()
   }
-  handleConfirmation = () => {
+  handleConfirmation = (e) => {
     this.setState({confirmed:true, modalOpen:true})
+    this.handleCaptureId(this.e.);
+    this.handleDelete(this.propsid)
   }
   handleClose = () => {
     this.setState({confirmed:false, modalOpen:false})
@@ -72,6 +75,9 @@ class Messages extends Component {
   handleLike = (e) => {
     this.props.likeMessage(this.state.id);
   };
+  componentDidUpdate(){
+    this.props.getUser(this.state.username)
+  }
 
   render() {
     if (this.props.result === null) {
@@ -84,7 +90,7 @@ class Messages extends Component {
           {this.props.result.map(each => (
             <React.Fragment key={each.id}>
               <Modal
-              trigger={<Button floated='right' size='mini' onClick={this.handleConfirmation}><Icon name="delete"/></Button>}
+              trigger={<Button floated='right' id={each.id} size='mini' onClick={this.handleConfirmation}><Icon name="delete"/></Button>}
               on={this.state.modalOpen}
               open={this.state.modalOpen}
               id={each.id}
@@ -96,8 +102,8 @@ class Messages extends Component {
                 <Container textAlign="center" >It cannot be undone.</Container>
                 <Divider hidden/>
                 <Button.Group widths={5}>
-                  <Button basic  onClick={this.handleClose}><Icon name="ban"/>Cancel</Button>
-                  <Button  color="red" onClick={this.handleDelete}><Icon name="trash alternate"/>Delete</Button>
+                  <Button basic onClick={this.handleClose}><Icon name="ban"/>Cancel</Button>
+                  <Button  color="red" id={each.id} onClick={this.handleDelete}><Icon name="trash alternate"/>Delete</Button>
                 </Button.Group>
 
               </Modal>
@@ -107,7 +113,7 @@ class Messages extends Component {
                   <Feed.Content>
 
                     <Feed.Summary>
-                      <NavLink to={`/profiles/${this.props.username}`} >
+                      <NavLink to={`/profiles/${this.props.children}`} >
                       {each.username }
                       </NavLink> posted on their page
                       <Feed.Date>
@@ -149,7 +155,12 @@ export default connect(
     result: state.messages.getMessage.result,
     loading: state.messages.getMessage.loading,
     error: state.messages.getMessage.error,
-    image: state.users.getPhoto.result
+    userCardv   : state.users.getPhoto.result,
+    deleteResult: state.messages.deleteMessage.result,
+    deleteLoading: state.messages.deleteMessage.loading,
+    deleteError: state.messages.deleteMessage.error,
+    like: state.likes.likeMessage.result,
+    unlike: state.likes.unlikeMessage.result,
 
   }),
   { getMessage, getPhoto, deleteMessage, likeMessage }

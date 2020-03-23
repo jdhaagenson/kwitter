@@ -23,12 +23,15 @@ class Profile extends React.Component {
           <div className="user-info-card">
             <UserInfo
             username={this.props.match.params.username}
-            displayName={this.props.match.params.username}
+            displayName={this.props.match.params.displayName}
             description={this.props.match.params.about}
             extra="22 friends"
              />
              <Avatar/>
-             <UpdateUserInfo/>
+             <UpdateUserInfo
+              username={this.props.match.params.username}
+
+             />
              <DeleteUser/>
              <Divider/>
             <Button fluid size="massive" toggle className="get-messages-button">

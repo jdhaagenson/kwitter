@@ -26,16 +26,7 @@ class SearchBar extends Component {
   state = {
     isLoading: false,
     result: [],
-    value: "",
-    user: {
-      pictureLocation: "",
-      username:"",
-      displayName:"",
-      about: "",
-      googleId:"",
-      createdAt:"",
-      updatedAt:""
-    }
+    value: ""
   };
 
   handleResultSelect = (e, { result }) =>
@@ -64,10 +55,10 @@ class SearchBar extends Component {
   handleSearch = e => {
     e.preventDefault();
     this.props.searchUser(this.state.searchTerm);
-    this.setState({ searchTerm: "" });
+    this.setState({ value: "" });
   };
   componentDidMount() {
-    this.props.searchUser();
+    this.props.searchUser(this.state.value);
   }
 
   render() {
@@ -94,7 +85,9 @@ class SearchBar extends Component {
               results={result}
               value={this.state.value}
               resultRenderer={resultRenderer}
-            ></Search>
+            ><Loader/>
+            </Search>
+
           </Grid.Column>
         </Grid>
         {loading && <Loader />}

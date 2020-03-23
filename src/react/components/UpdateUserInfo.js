@@ -22,6 +22,7 @@ class UpdateUserInfo extends Component {
   handleUserUpdate = e => {
     e.preventDefault();
     this.props.updateUser(this.state);
+    this.handleClose()
   };
 
   handleOpen = e => {
