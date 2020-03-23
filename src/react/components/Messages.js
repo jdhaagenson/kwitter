@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { getMessage } from "../../redux";
 import { NavLink } from "react-router-dom";
 import { Feed, Card, Icon } from "semantic-ui-react";
-import { likeMessage } from "../../redux";
+import { likeMessage, unlikeMessage } from "../../redux";
 
 import moment from "moment";
 import "./MessageFeed.css";
@@ -47,9 +47,33 @@ class Messages extends Component {
     this.props.getMessage();
   }
 
+  componentDidUpdate(prevProps) {
+    if (this.props.result !== prevProps) {
+      // this.props.getMessage();
+    }
+  }
+
   handleLike = (e, id) => {
     console.log(id);
     this.props.likeMessage(id);
+  };
+
+  handleUnLike = (e, id) => {
+    e.preventDefault();
+    let newMessage = [];
+    if (this.props.result) {
+      newMessage = this.props.result.filter(message => {
+        return message.id === id;
+      });
+      let myLike = newMessage[0].likes.filter(like => {
+        return like.username === this.props.username;
+      });
+      this.props.unlikeMessage(myLike[0].id);
+
+      console.log(myLike[0].id);
+    }
+
+    console.log(newMessage);
   };
 
   render() {
@@ -78,10 +102,18 @@ class Messages extends Component {
                       <Feed.Like>
                         {/* <Likes /> */}
                         <Icon
-                          name="like"
+                          name="thumbs up outline"
                           onClick={e => this.props.likeMessage(e, each.id)}
                         />
                         {each.likes.length}
+                      </Feed.Like>
+                      <Feed.Like>
+                        <Icon
+                          name="thumbs down outline"
+                          onClick={e => {
+                            this.handleUnLike(e, each.id);
+                          }}
+                        />
                       </Feed.Like>
                     </Feed.Meta>
                   </Feed.Content>
@@ -101,7 +133,8 @@ export default connect(
   state => ({
     result: state.messages.getMessage.result,
     loading: state.messages.getMessage.loading,
-    error: state.messages.getMessage.error
+    error: state.messages.getMessage.error,
+    username: state.auth.login.result.username
   }),
-  { getMessage, likeMessage }
+  { getMessage, likeMessage, unlikeMessage }
 )(Messages);

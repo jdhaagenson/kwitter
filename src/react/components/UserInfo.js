@@ -54,18 +54,15 @@ class UserInfo extends Component {
     image: randomAvatar()
   };
 
-  handleModal = () => {};
-
   handleUserUpdate = e => {
     e.preventDefault();
     this.props.updateUser(this.state);
+    this.setState({ open: false });
   };
 
   handleChange = e => {
     this.setState({ [e.target.name]: e.target.value });
   };
-
-  handleGoToMessages = e => {};
 
   componentDidMount() {
     this.props.getUser(this.props.username);
@@ -136,7 +133,7 @@ class UserInfo extends Component {
             </Card.Description>
           </Card>
           <Avatar />
-          <UpdateUser />
+          <UpdateUser open={this.props.handelModal} />
           <Button className="get-messages-button">
             <Icon name="comment alternate outline" />
             My Kweets

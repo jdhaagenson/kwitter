@@ -3,6 +3,8 @@ import {connect} from "react-redux"
 import{NavLink} from "react-router-dom"
 import { Menu, Segment } from 'semantic-ui-react'
 import { logout } from "../../redux";
+import MessageFeed from "./MessageFeed"
+import SearchBar from "./SearchBar"
 // import Profile from "../Profile"
 
  class UserMenu extends Component {
@@ -11,8 +13,11 @@ import { logout } from "../../redux";
   
    }
 
-  handleItemClick = (e, { name }) => this.setState({ activeItem: name })
+  handleItemClick = (e, { name }) => {
+    this.setState({ activeItem: name })
+  }
 
+  
   handleLogout = event => {
     this.props.logout();
   
@@ -22,13 +27,13 @@ import { logout } from "../../redux";
     const { activeItem } = this.state
 
     return (
-      <div id= "user-menu">
-        <Menu pointing secondary>
+      <div id= "user-menu" >
+        <Menu pointing secondary >
           <Menu.Item
             name='Home'
             active={activeItem === 'home'}
             onClick={this.handleItemClick}
-            link="/registraion"
+         
           
            
           />
@@ -43,13 +48,17 @@ import { logout } from "../../redux";
             name='friends'
             active={activeItem === 'friends'}
             onClick={this.handleItemClick}
+           
           />
           <Menu.Menu position='right'>
+
+            <SearchBar/>
             <Menu.Item
               name='logout'
               active={activeItem === 'logout'}
               onClick={this.handleLogout}
             />
+          
           </Menu.Menu>
         </Menu>
 
