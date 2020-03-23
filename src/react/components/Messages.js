@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { getMessage, getPhoto, deleteMessage, likeMessage } from "../../redux";
+import { getUser, getMessage, getPhoto, deleteMessage, likeMessage } from "../../redux";
 import { NavLink } from 'react-router-dom'
 import { Feed, Divider, Container, Header, Card, Icon, Button, Modal } from "semantic-ui-react";
 // import Likes from "./Likes";
@@ -56,12 +56,12 @@ class Messages extends Component {
 
   handleDelete = (e) => {
     console.log(e)
-    this.props.deleteMessage(e.children.id)
+    this.props.deleteMessage(this.props.messageId)
     this.handleClose()
   }
   handleConfirmation = (e) => {
     this.setState({confirmed:true, modalOpen:true})
-    this.handleCaptureId(this.e.);
+    this.handleCaptureId(this.e.children.id);
     this.handleDelete(this.propsid)
   }
   handleClose = () => {
@@ -75,8 +75,13 @@ class Messages extends Component {
   handleLike = (e) => {
     this.props.likeMessage(this.state.id);
   };
-  componentDidUpdate(){
-    this.props.getUser(this.state.username)
+  componentDidUpdate(prevProps) {
+    if (
+      this.props.updateResult &&
+      this.props.updateResult !== prevProps.updateResult
+    ) {
+      this.props.getUser(this.props.username);
+    }
   }
 
   render() {
@@ -113,7 +118,7 @@ class Messages extends Component {
                   <Feed.Content>
 
                     <Feed.Summary>
-                      <NavLink to={`/profiles/${this.props.children}`} >
+                      <NavLink to={`/profiles/${each.username}`} >
                       {each.username }
                       </NavLink> posted on their page
                       <Feed.Date>
@@ -155,13 +160,13 @@ export default connect(
     result: state.messages.getMessage.result,
     loading: state.messages.getMessage.loading,
     error: state.messages.getMessage.error,
-    userCardv   : state.users.getPhoto.result,
     deleteResult: state.messages.deleteMessage.result,
     deleteLoading: state.messages.deleteMessage.loading,
     deleteError: state.messages.deleteMessage.error,
     like: state.likes.likeMessage.result,
     unlike: state.likes.unlikeMessage.result,
 
+
   }),
-  { getMessage, getPhoto, deleteMessage, likeMessage }
+  { getUser, getMessage, getPhoto, deleteMessage, likeMessage }
 )(Messages);

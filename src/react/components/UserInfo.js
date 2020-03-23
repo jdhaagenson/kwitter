@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import {
   Card,
   Image,
-  Header,
+  // Header,
   Icon,
   Divider
 } from "semantic-ui-react";
