@@ -19,7 +19,6 @@ export const likeMessage = (id) => (dispatch, getState) => {
   dispatch(LIKE_MESSAGE.START());
 
   const token = getState().auth.login.result.token;
-  console.log(token);
 
   return fetch(url + "/likes", {
     method: "POST",
@@ -29,8 +28,7 @@ export const likeMessage = (id) => (dispatch, getState) => {
     .then(handleJsonResponse)
     .then(result => {
       if (result.statusCode === 200) {
-        dispatch(getMessage(id));
-      } else {
+        dispatch(getMessage());
       }
       dispatch(LIKE_MESSAGE.SUCCESS(result));
     })
@@ -39,17 +37,29 @@ export const likeMessage = (id) => (dispatch, getState) => {
 };
 
 const UNLIKE_MESSAGE = createActions("unlikeMessage");
-export const unlikeMessage = (id) => (dispatch, getState) => {
+
+export const unlikeMessage = likeId => (dispatch, getState) => {
   dispatch(UNLIKE_MESSAGE.START());
+
   const token = getState().auth.login.result.token;
-  return fetch(url + "/likes", {
+
+  return fetch(url + "/likes/" + likeId, {
     method: "DELETE",
-    headers: { Authorization: "Bearer " + token, ...jsonHeaders },
-    body: JSON.stringify(id)
+    headers: { Authorization: "Bearer " + token, ...jsonHeaders }
+    // body: JSON.stringify({ id: likeId })
   })
     .then(handleJsonResponse)
-    .then(result => dispatch(UNLIKE_MESSAGE.SUCCESS(result)))
-    .ctach(err => Promise.reject(dispatch(UNLIKE_MESSAGE.FAIL(err))));
+    .then(result => {
+      if (result.statusCode === 200) {
+        dispatch(getMessage());
+      }
+      return dispatch({
+        type: UNLIKE_MESSAGE.SUCCESS,
+        payload: result
+      });
+    })
+
+    .catch(err => Promise.reject(dispatch(UNLIKE_MESSAGE.FAIL(err))));
 };
 
 export const reducers = {

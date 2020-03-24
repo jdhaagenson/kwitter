@@ -1,7 +1,17 @@
+#profile{
+  margin: 50px;
+
+
+}
+
 .heading {
   text-align: center;
   font-size: 50px;
+  color: white;
+  background-color: #f58220; 
+  margin: 0
 }
+
 .menu {
   /* background-color: aqua; */
   margin: 10px;
@@ -14,19 +24,39 @@
   flex-wrap: wrap;
   margin: auto;
   justify-content: center;
+    /* background-color: #008e97; */
+  
 }
 
 .user-info-card {
   width: auto;
   border: 1px dotted black;
   margin: 10px;
+    /* border: 2px solid #f58220 */
 }
 
 .message-feed-card {
   display: flex;
 
-  /* border: 1px solid green; */
+  
   margin: 50px;
   width: 50%;
   flex-direction: column;
+}
+
+
+.kweet-form-card {
+  padding-bottom: 100px;
+
+}
+
+.kweet-form {
+  padding: 25px;
+
+}
+
+
+.message-feed {
+  width: 100%;
+  background-color:  #f58220
 }

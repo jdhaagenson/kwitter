@@ -35,6 +35,24 @@ export const getMessage = messageData => dispatch => {
     })
     .catch(err => Promise.reject(dispatch(GET_MESSAGE.FAIL(err))));
 };
+
+const MY_MESSAGES = createActions("myMessages");
+export const myMessages = messageData => (dispatch, getState) => {
+  dispatch(MY_MESSAGES.START());
+  // const token = getState().auth.login.result.token;
+  const username = getState().auth.login.result.username;
+  return fetch(url + "?limit=100&offset=0&username=" + username)
+    .then(handleJsonResponse)
+    .then(result => {
+      result = Object.keys(result.messages).map(key => result.messages[key]);
+      dispatch({
+        type: MY_MESSAGES.SUCCESS,
+        payload: result
+      });
+    })
+    .catch(err => Promise.reject(dispatch(MY_MESSAGES.FAIL(err))));
+};
+
 export const createMessage = messageData => dispatch => {
   dispatch(_createMessage(messageData)).then(() => {
     dispatch(getMessage());
@@ -65,5 +83,8 @@ export const reducers = {
   }),
   deleteMessage: createReducer(asyncInitialState, {
     ...asyncCases(DELETE_MESSAGE)
+  }),
+  myMessages: createReducer(asyncInitialState, {
+    ...asyncCases(MY_MESSAGES)
   })
 };

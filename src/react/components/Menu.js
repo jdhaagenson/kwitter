@@ -5,8 +5,8 @@ import { connect } from "react-redux";
 import { logout } from "../../redux";
 import { Dropdown, Icon, Menu } from "semantic-ui-react";
 import SearchBar from "./SearchBar";
-import UpdateUserInfo from "./UpdateUserInfo";
-import users from '../users.json';
+import UpdateUser from "./UpdateUser";
+import users from "../users.json";
 
 class MainMenu extends React.Component {
   state = {};
@@ -23,7 +23,7 @@ class MainMenu extends React.Component {
     return (
       <React.Fragment>
         {this.props.isAuthenticated && (
-          <Menu fluid={true} vertical>
+          <Menu fluid={true} vertical style={{ backgroundColor: "#008e97" }}>
             <Menu.Item>
               <SearchBar
                 results={users}
@@ -33,18 +33,19 @@ class MainMenu extends React.Component {
               />
             </Menu.Item>
 
-            <Menu.Item>
+            <Menu.Item style={{ color: "white" }}>
               Home
               <Menu.Menu>
                 <Menu.Item
-                  name="Logout"
-                  active={activeItem === "logout"}
-                  onClick={this.handleLogout}
+                  name="home"
+                  active={activeItem === "home"}
+                  onClick={this.handleItemClick}
                 >
                   Search
                 </Menu.Item>
                 <Menu.Item
                   name="add"
+                  className="menu-link"
                   active={activeItem === "add"}
                   onClick={this.handleItemClick}
                 >
@@ -52,6 +53,7 @@ class MainMenu extends React.Component {
                 </Menu.Item>
                 <Menu.Item
                   name="about"
+                  className="menu-link"
                   active={activeItem === "about"}
                   onClick={this.handleItemClick}
                 >
@@ -70,6 +72,8 @@ class MainMenu extends React.Component {
             </Menu.Item>
             <Menu.Item
               name="messages"
+              className="menu-link"
+              style={{ color: "white" }}
               active={activeItem === "messages"}
               onClick={this.handleItemClick}
             >
@@ -78,11 +82,8 @@ class MainMenu extends React.Component {
 
             <Dropdown item text="More">
               <Dropdown.Menu>
-                <Dropdown.Item
-                    icon="edit"
-                    text="Edit Profile"
-                />
-                <UpdateUserInfo/>
+                <Dropdown.Item icon="edit" text="Edit Profile" />
+                <UpdateUser />
                 <Dropdown.Item icon="settings" text="Account Settings" />
                 <Dropdown.Item
                   icon="key"

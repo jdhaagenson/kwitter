@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { getUser, getMessage, getPhoto, deleteMessage, likeMessage } from "../../redux";
-import { NavLink } from 'react-router-dom'
-import { Feed, Divider, Container, Header, Card, Icon, Button, Modal } from "semantic-ui-react";
-// import Likes from "./Likes";
+import { getMessage } from "../../redux";
+import { NavLink } from "react-router-dom";
+import { Feed, Card, Icon, Modal, Header, Divider, Button, Container } from "semantic-ui-react";
+import { likeMessage, unlikeMessage, deleteMessage, getUser } from "../../redux";
 
 import moment from "moment";
 import "./MessageFeed.css";
@@ -72,17 +72,33 @@ class Messages extends Component {
     return key
   }
 
-  handleLike = (e) => {
-    this.props.likeMessage(this.state.id);
-  };
+  // handleLike = (id) => {
   componentDidUpdate(prevProps) {
-    if (
-      this.props.updateResult &&
-      this.props.updateResult !== prevProps.updateResult
-    ) {
-      this.props.getUser(this.props.username);
+    if (this.props.result !== prevProps) {
+      // this.props.getMessage();
     }
   }
+
+  handleLike = (e, id) => {
+    console.log(id);
+    this.props.likeMessage(id);
+  }
+
+  handleUnLike = (e, id) => {
+    e.preventDefault();
+    let newMessage = [];
+    if (this.props.result) {
+      newMessage = this.props.result.filter(message => {
+        return message.id === id;
+      });
+      let myLike = newMessage[0].likes.filter(like => {
+        return like.username === this.props.username;
+      });
+      this.props.unlikeMessage(myLike[0].id);
+
+      console.log(myLike[0].id);
+    }}
+
 
   render() {
     if (this.props.result === null) {
@@ -107,8 +123,8 @@ class Messages extends Component {
                 <Container textAlign="center" >It cannot be undone.</Container>
                 <Divider hidden/>
                 <Button.Group widths={5}>
-                  <Button basic onClick={this.handleClose}><Icon name="ban"/>Cancel</Button>
-                  <Button  color="red" id={each.id} onClick={this.handleDelete}><Icon name="trash alternate"/>Delete</Button>
+                  <Button basic  onClick={this.handleClose}><Icon name="ban"/>Cancel</Button>
+                  <Button  color="red" onClick={this.props.deleteMessage(each.id)}><Icon name="trash alternate"/>Delete</Button>
                 </Button.Group>
 
               </Modal>
@@ -118,9 +134,8 @@ class Messages extends Component {
                   <Feed.Content>
 
                     <Feed.Summary>
-                      <NavLink to={`/profiles/${each.username}`} >
-                      {each.username }
-                      </NavLink> posted on their page
+                      <NavLink to={`/profiles/${each.username}`}>
+                      {each.username}</NavLink> posted on their page.
                       <Feed.Date>
                         <Icon name="clock outline" />
                         {moment(each.createdAt).fromNow()}
@@ -131,11 +146,18 @@ class Messages extends Component {
                       <Feed.Like>
                         {/* <Likes /> */}
                         <Icon
-                          name="like"
-                          id={each.id}
-                          onClick={ this.handleLike }
+                          name="thumbs up outline"
+                          onClick={e => this.props.likeMessage(e, each.id)}
                         />
                         {each.likes.length}
+                      </Feed.Like>
+                      <Feed.Like>
+                        <Icon
+                          name="thumbs down outline"
+                          onClick={e => {
+                            this.handleUnLike(e, each.id);
+                          }}
+                        />
                       </Feed.Like>
                     </Feed.Meta>
                   </Feed.Content>
@@ -155,6 +177,7 @@ class Messages extends Component {
   }
 }
 
+
 export default connect(
   state => ({
     result: state.messages.getMessage.result,
@@ -165,8 +188,9 @@ export default connect(
     deleteError: state.messages.deleteMessage.error,
     like: state.likes.likeMessage.result,
     unlike: state.likes.unlikeMessage.result,
+    username: state.auth.login.result.username
 
 
   }),
-  { getUser, getMessage, getPhoto, deleteMessage, likeMessage }
+  { getUser, getMessage, deleteMessage, likeMessage, unlikeMessage }
 )(Messages);

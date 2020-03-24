@@ -50,7 +50,7 @@ class UploadPhoto extends Component {
                             size="medium"
                             src={this.state.picture}
                         />
-                        <Form>
+                        <Form action={setPhoto} type="POST">
                             <Form.Field>
                                 <input
                                     type="file"

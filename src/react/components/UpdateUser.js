@@ -5,7 +5,7 @@ import { updateUser, getUser } from "../../redux";
 
 // import UploadPhoto from "./UploadPhoto";
 
-class UpdateUserInfo extends Component {
+class UpdateUser extends Component {
   state = {
     password: "",
     displayName: "",
@@ -112,4 +112,4 @@ export default connect(
     createResult: state.users.getUser.result
   }),
   { updateUser, getUser }
-)(UpdateUserInfo);
+)(UpdateUser);

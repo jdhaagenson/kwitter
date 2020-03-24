@@ -3,11 +3,13 @@ import {
   Card,
   Image,
   // Header,
+  Button,
   Icon,
   Divider
 } from "semantic-ui-react";
 import {NavLink} from 'react-router-dom'
 import Avatar from "./Avatar";
+import UpdateUser from "./UpdateUser";
 import { connect } from "react-redux";
 import { updateUser, getUser, setPhoto } from "../../redux";
 
@@ -56,13 +58,12 @@ class UserInfo extends Component {
   handleUserUpdate = e => {
     e.preventDefault();
     this.props.updateUser(this.state);
+    this.setState({ open: false });
   };
 
   handleChange = e => {
     this.setState({ [e.target.name]: e.target.value });
   };
-
-  handleGoToMessages = e => {};
 
   componentDidMount() {
     this.props.getUser(this.props.username);
@@ -134,8 +135,12 @@ class UserInfo extends Component {
                 "Tell us something about yourself"}
             </Card.Description>
           </Card>
-
-
+          <Avatar />
+          <UpdateUser open={this.props.handelModal} />
+          <Button className="get-messages-button">
+            <Icon name="comment alternate outline" />
+            My Kweets
+          </Button>
           {error && <p style={{ color: "red" }}>{error.message}</p>}
         </React.Fragment>
       );
