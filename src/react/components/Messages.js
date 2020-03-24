@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { getMessage } from "../../redux";
 import { NavLink } from "react-router-dom";
-import { Feed, Card, Icon, Modal, Header, Divider, Button, Container } from "semantic-ui-react";
-import { likeMessage, unlikeMessage, deleteMessage } from "../../redux";
+import { Feed, Card, Icon, Loader, Dimmer } from "semantic-ui-react";
+import { likeMessage, unlikeMessage } from "../../redux";
 
 import moment from "moment";
 import "./MessageFeed.css";
@@ -37,34 +37,16 @@ const defaultImages = [
 const imageURL = "https://react.semantic-ui.com/images/avatar/large/";
 const randomAvatar = () => {
   let min = 0;
-  let max = 23;
-  let r = Math.floor(Math.random()*(max-min+1))+min
-  return imageURL+defaultImages[r]
-}
+  let max = 24;
+  let r = Math.floor(Math.random() * (max - min + 1)) + min;
+  return imageURL + defaultImages[r];
+};
 
 class Messages extends Component {
-  state = {
-    modalOpen:false,
-    confirmed:false
-  }
-
   componentDidMount() {
-    this.props.getMessage()
+    this.props.getMessage();
   }
 
-  handleDelete = (id) => {
-    console.log(id)
-    this.props.deleteMessage(id)
-    this.handleClose()
-  }
-  handleConfirmation = (event) => {
-    this.setState({confirmed:true, modalOpen:true})
-  }
-  handleClose = () => {
-    this.setState({confirmed:false, modalOpen:false})
-  }
-
-  // handleLike = (id) => {
   componentDidUpdate(prevProps) {
     if (this.props.result !== prevProps) {
       // this.props.getMessage();
@@ -74,7 +56,7 @@ class Messages extends Component {
   handleLike = (e, id) => {
     console.log(id);
     this.props.likeMessage(id);
-  }
+  };
 
   handleUnLike = (e, id) => {
     e.preventDefault();
@@ -89,46 +71,35 @@ class Messages extends Component {
       this.props.unlikeMessage(myLike[0].id);
 
       console.log(myLike[0].id);
-    }}
+    }
 
+    console.log(newMessage);
+  };
 
   render() {
     if (this.props.result === null) {
       return (
-          <div>empty</div>
-          );
-    } else {
+        <div>
+          <Card style={{ width: "100%" }}>
+            <Dimmer active inverted>
+              <Loader inverted>Loading Feed</Loader>
+            </Dimmer>
+          </Card>{" "}
+        </div>
+      );
+    }
 
     return (
       <Card style={{ width: "100%" }}>
         <Card.Content>
           {this.props.result.map(each => (
             <React.Fragment key={each.id}>
-              <Modal
-              trigger={<Button floated='right' size='mini' onClick={this.handleConfirmation}><Icon name="delete"/></Button>}
-              on={this.state.modalOpen}
-              open={this.state.modalOpen}
-              id={each.id}
-              >
-                <Header size='huge' textAlign='center'><Icon name="exclamation triangle"/></Header>
-                <Divider hidden/>
-                <Header size="medium" textAlign='center'>Are you sure you want to delete this message from the feed?</Header>
-                <Divider hidden/>
-                <Container textAlign="center" >It cannot be undone.</Container>
-                <Divider hidden/>
-                <Button.Group widths={5}>
-                  <Button basic  onClick={this.handleClose}><Icon name="ban"/>Cancel</Button>
-                  <Button  color="red" onClick={this.props.deleteMessage}><Icon name="trash alternate"/>Delete</Button>
-                </Button.Group>
-
-              </Modal>
               <Feed>
                 <Feed.Event>
-                  <Feed.Label image={ randomAvatar()}  />
+                  <Feed.Label image={randomAvatar()} />
                   <Feed.Content>
                     <Feed.Summary>
-                      <NavLink to={`./profiles/${each.username}`}>
-                      {each.username}</NavLink> posted on their page.
+                      {each.username} posted on their page
                       <Feed.Date>
                         <Icon name="clock outline" />
                         {moment(each.createdAt).fromNow()}
@@ -156,7 +127,6 @@ class Messages extends Component {
                   </Feed.Content>
                 </Feed.Event>
               </Feed>
-              <Divider/>
             </React.Fragment>
           ))}
 
@@ -165,9 +135,7 @@ class Messages extends Component {
       </Card>
     );
   }
-  }
 }
-
 
 export default connect(
   state => ({
@@ -176,5 +144,5 @@ export default connect(
     error: state.messages.getMessage.error,
     username: state.auth.login.result.username
   }),
-  { getMessage, likeMessage, unlikeMessage, deleteMessage }
-)(Messages)
+  { getMessage, likeMessage, unlikeMessage }
+)(Messages);

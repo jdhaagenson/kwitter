@@ -8,7 +8,6 @@ import {
   Form,
   Icon
 } from "semantic-ui-react";
-import {NavLink} from 'react-router-dom'
 import Avatar from "./Avatar";
 import { connect } from "react-redux";
 import { updateUser, getUser } from "../../redux";
@@ -100,11 +99,12 @@ class UserInfo extends Component {
             </Card.Meta>
             <Card.Description>{user.about}</Card.Description>
           </Card>
-
-          <Avatar/>
-
-
-
+          <Avatar />
+          <UpdateUser />
+          <Button className="get-messages-button">
+            <Icon name="comment alternate outline" />
+            My Kweets
+          </Button>
         </React.Fragment>
       );
     } else {
@@ -117,9 +117,8 @@ class UserInfo extends Component {
             }
             description={user.about}
           >
-            <NavLink to={`/profiles/${this.props.username}`} >
             <Image src={this.state.image} />
-            <Header>{this.props.createResult.user.displayName}</Header></NavLink>
+            <Header>{this.props.createResult.user.displayName}</Header>
             <Card.Meta>{"@" + this.props.username}</Card.Meta>
             <Card.Meta>
               <span className="date" icon="calendar alternate outline">

@@ -79,8 +79,8 @@ export const setPhoto = (username, picture) => (dispatch, getState) => {
 
   return fetch(url + "/" + username + "/picture", {
     method: "PUT",
-    headers: { Authorization: "Bearer " + token, "Content-Location":picture, Accept:"application/json" },
-    body: JSON.stringify({picture: picture})
+    headers: { Authorization: "Bearer " + token, ...jsonHeaders },
+    body: picture
   })
     .then(handleJsonResponse)
     .then(result => dispatch(SET_PHOTO.SUCCESS(result)))
@@ -93,28 +93,11 @@ export const getPhoto = username => dispatch => {
 
   return fetch(url + "/" + username + "/picture", {
     method: "GET",
-    headers: {
-      "Content-Disposition":"inline",
-      Accept: "image/png"
-    }
+    headers: jsonHeaders
   })
     .then(handleJsonResponse)
     .then(result=> dispatch(GET_PHOTO.SUCCESS(result)))
     .catch(err => Promise.reject(dispatch(GET_PHOTO.FAIL(err))))
-};
-
-const DELETE_USER = createActions('deleteUser');
-export const deleteUser = username => (dispatch, getState) => {
-  const token = getState().auth.login.result.token
-  dispatch(DELETE_USER.START());
-
-  return fetch(url + '/' + username, {
-    method: "DELETE",
-    headers: { Authorization: "Bearer " + token, ...jsonHeaders }
-  })
-    .then(handleJsonResponse)
-    .then(result => dispatch(DELETE_USER.SUCCESS(result)))
-    .catch(err => Promise.reject(dispatch(DELETE_USER.FAIL(err))))
 };
 
 
@@ -126,6 +109,7 @@ export const reducers = {
   createUser: createReducer(asyncInitialState, {
     ...asyncCases(CREATE_USER)
   }),
+
   getUser: createReducer(asyncInitialState, {
     ...asyncCases(GET_USER)
   }),
@@ -137,8 +121,5 @@ export const reducers = {
   }),
   getPhoto: createReducer(asyncInitialState, {
     ...asyncCases(GET_PHOTO)
-  }),
-  deleteUser: createReducer(asyncInitialState, {
-    ...asyncCases(DELETE_USER)
   })
 };
