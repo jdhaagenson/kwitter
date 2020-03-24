@@ -1,8 +1,9 @@
-import { store } from "../redux/index";
+// import { store } from "../redux/index";
 import {
   domain,
   jsonHeaders,
   handleJsonResponse,
+  getInitStateFromStorage,
   asyncInitialState,
   asyncCases,
   createActions,
@@ -14,7 +15,7 @@ const url = domain;
 
 const LIKE_MESSAGE = createActions("likeMessage");
 
-export const likeMessage = (e, id) => (dispatch, getState) => {
+export const likeMessage = (id) => (dispatch, getState) => {
   dispatch(LIKE_MESSAGE.START());
 
   const token = getState().auth.login.result.token;
@@ -22,7 +23,7 @@ export const likeMessage = (e, id) => (dispatch, getState) => {
   return fetch(url + "/likes", {
     method: "POST",
     headers: { Authorization: "Bearer " + token, ...jsonHeaders },
-    body: JSON.stringify({ messageId: id })
+    body: JSON.stringify(id)
   })
     .then(handleJsonResponse)
     .then(result => {
@@ -62,10 +63,11 @@ export const unlikeMessage = likeId => (dispatch, getState) => {
 };
 
 export const reducers = {
-  like: createReducer(asyncInitialState, {
-    ...asyncCases(LIKE_MESSAGE)
+  likeMessage: createReducer(getInitStateFromStorage('likeMessage', asyncInitialState), {
+    ...asyncCases(LIKE_MESSAGE),
+    [UNLIKE_MESSAGE.SUCCESS.toString()]: (state, action) => asyncInitialState
   }),
-  unlike: createReducer(asyncInitialState, {
+  unlikeMessage: createReducer(asyncInitialState, {
     ...asyncCases(UNLIKE_MESSAGE)
   })
 };

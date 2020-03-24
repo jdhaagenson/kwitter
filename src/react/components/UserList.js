@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { searchUser } from "../../redux";
 import { Card, Image, Divider, Header } from "semantic-ui-react";
-import users from "../users.json";
+// import users from "../users.json";
 
 const defaultImages = [
   "rachel.png",
