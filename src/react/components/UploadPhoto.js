@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Modal, Button, Image, Form } from "semantic-ui-react";
+import { Modal, Button, Icon, Image, Form } from "semantic-ui-react";
 import { connect } from "react-redux";
 import { setPhoto, getUser } from "../../redux";
 
@@ -16,9 +16,9 @@ import { setPhoto, getUser } from "../../redux";
 //     return imageURL+defaultImages[r]
 //   }
 
-class UpdateUser extends Component {
+class UploadPhoto extends Component {
     state = {
-        picture: ""
+        picture: this.props.getUser.pictureLocation
     };
 
 
@@ -38,26 +38,29 @@ class UpdateUser extends Component {
 
     render() {
         const error = this.props;
+        const loading = this.props;
+        const setPhoto = this.props;
 
         return (
             <React.Fragment>
-                <Modal trigger={<Button fluid>Update Profile</Button>}>
+                <Modal trigger={<Button fluid><Icon name="upload"/>Upload Photo</Button>}>
                     <Modal.Content image>
                         <Image
                             wrapped
                             size="medium"
-                            src={this.props.pictureLocation||this.state.picture}
+                            src={this.state.picture}
                         />
-                        <Form>
+                        <Form action={setPhoto} type="POST">
                             <Form.Field>
                                 <input
                                     type="file"
+                                    loading={loading}
                                     />
                             </Form.Field>
                         </Form>
                                 <Button
                                     type="submit"
-                                    onClick={this.handleUploadPicture}
+                                    onClick={setPhoto}
                                 > Upload Picture</Button>
 
                     </Modal.Content>
@@ -71,10 +74,10 @@ class UpdateUser extends Component {
 
 export default connect(
     (state) => ({
-        updateResult: state.users.setPhoto.result,
-        updateLoading: state.users.setPhoto.loading,
-        updateError: state.users.setPhoto.error,
+        result: state.users.setPhoto.result,
+        loading: state.users.setPhoto.loading,
+        error: state.users.setPhoto.error,
         createResult: state.users.getUser.result
     }),
     { setPhoto, getUser }
-)(UpdateUser);
+)(UploadPhoto);

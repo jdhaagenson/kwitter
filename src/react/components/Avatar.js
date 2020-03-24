@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {Button, Icon, Header, Divider, Image, Modal} from 'semantic-ui-react';
 import {setPhoto, getPhoto} from '../../redux';
 import { connect } from 'react-redux';
-import UploadPhoto from './UploadPhoto'
+// import UploadPhoto from './UploadPhoto'
 
 const imageURL = "https://react.semantic-ui.com/images/avatar/large/";
 
@@ -38,7 +38,7 @@ class Avatar extends Component {
             <div>
             <Modal
             wrapped
-            trigger={<Button fluid onClick={this.handleOpen}>Change Avatar</Button>}
+            trigger={<Button fluid onClick={this.handleOpen}><Icon name="user"/>Change Avatar</Button>}
             open={this.state.modalOpen}
             onClose={this.handleClose}
             centered={false}>

@@ -3,7 +3,7 @@ import { Modal, Button, Image, Header, Form, Icon } from "semantic-ui-react";
 import { connect } from "react-redux";
 import { updateUser, getUser } from "../../redux";
 
-import UploadPhoto from "./UploadPhoto";
+// import UploadPhoto from "./UploadPhoto";
 
 class UpdateUser extends Component {
   state = {
@@ -22,6 +22,7 @@ class UpdateUser extends Component {
   handleUserUpdate = e => {
     e.preventDefault();
     this.props.updateUser(this.state);
+    this.handleClose()
   };
 
   handleOpen = e => {
@@ -39,7 +40,7 @@ class UpdateUser extends Component {
         <React.Fragment>
           <div>
           <Modal
-          trigger={<Button fluid>Update Profile</Button>}
+          trigger={<Button fluid><Icon name="edit"/>Update Profile</Button>}
           open={this.state.modalOpen}
           onClose={this.handleClose}
           >

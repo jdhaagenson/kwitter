@@ -55,10 +55,10 @@ class SearchBar extends Component {
   handleSearch = e => {
     e.preventDefault();
     this.props.searchUser(this.state.searchTerm);
-    this.setState({ searchTerm: "" });
+    this.setState({ value: "" });
   };
   componentDidMount() {
-    this.props.searchUser();
+    this.props.searchUser(this.state.value);
   }
 
   render() {
@@ -85,7 +85,9 @@ class SearchBar extends Component {
               results={result}
               value={this.state.value}
               resultRenderer={resultRenderer}
-            ></Search>
+            ><Loader/>
+            </Search>
+
           </Grid.Column>
         </Grid>
         {loading && <Loader />}
