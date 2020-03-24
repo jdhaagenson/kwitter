@@ -116,7 +116,7 @@ class Messages extends Component {
                 <Divider hidden/>
                 <Button.Group widths={5}>
                   <Button basic  onClick={this.handleClose}><Icon name="ban"/>Cancel</Button>
-                  <Button  color="red" onClick={this.props.deleteMessage(each.id)}><Icon name="trash alternate"/>Delete</Button>
+                  <Button  color="red" onClick={this.props.deleteMessage}><Icon name="trash alternate"/>Delete</Button>
                 </Button.Group>
 
               </Modal>
