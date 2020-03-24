@@ -32,8 +32,8 @@ class Messages extends Component {
     }
 
     return (
-      <Card style={{ width: "100%" }}>
-        <Card.Content>
+      <Card style={{ width: "100%"}}>
+        <Card.Content style={{ height: "500px", overflow: "scroll", }} >
           {this.props.result.map(each => (
             <React.Fragment key={each.id}>
               <Feed>

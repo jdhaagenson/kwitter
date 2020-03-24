@@ -95,7 +95,7 @@ class UserInfo extends Component {
           </Card>
           <Avatar />
           <UpdateUser />
-          <Button className="get-messages-button">
+          <Button  style={{margin: 10}} className="get-messages-button">
             <Icon name="comment alternate outline" />
             My Kweets
           </Button>

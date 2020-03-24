@@ -33,8 +33,8 @@ class UserList extends Component {
     return (
       <>
       <Header>Users</Header>
-      <Card style={{ width: "100%" }}>
-        <Card.Content>
+      <Card style={{ width: "100%"}}>
+        <Card.Content >
           {this.props.result.map(each => (
             <React.Fragment key={each.id}>
                 <Image src={

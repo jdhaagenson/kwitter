@@ -51,7 +51,7 @@ class MessageFeed extends Component {
           </Button>
         </Card>
 
-        <Card style={{ width: "100%" }}>
+        <Card style={{ width: "100%"}}>
           <Card.Content>
             <Messages />
           </Card.Content>

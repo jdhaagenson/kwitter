@@ -2,6 +2,8 @@ import React from "react";
 import { Menu } from "./components";
 import { userIsAuthenticated } from "./HOCs";
 import { UserInfo, MessageFeed } from "../react/components";
+import  WhoToFollow   from "../react/components/WhoToFollow";
+
 import "./Profile.css";
 import UserList from "./components/UserList";
 
@@ -16,9 +18,9 @@ class Profile extends React.Component {
               isAuthenticated={this.props.isAuthenticated}
               className="menu"
             />
-            <UserList />
+            <UserList style={{height: "100px"}} />
           </div>
-          <div className="user-info-card">
+          <div style={{height: 600}} className="user-info-card">
             <UserInfo
               username={this.props.match.params.username}
               displayName={this.props.match.params.username}
@@ -28,6 +30,7 @@ class Profile extends React.Component {
           </div>
           <div className="message-feed-card">
             <MessageFeed />
+            <WhoToFollow />
           </div>
         </div>
       </>

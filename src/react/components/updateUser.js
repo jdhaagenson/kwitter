@@ -8,8 +8,18 @@ class UpdateUser extends Component {
   state = {
     password: "",
     displayName: "",
-    about: ""
+    about: "",
+    modalOpen: false
   };
+
+  handleOpen() {
+    this.setState({ modalOpen: true });
+  };
+
+  handleClose() {
+    this.setState({ modalOpen: false });
+  };
+
 
   handleChange = e => {
     // e.preventDefault()
@@ -28,8 +38,8 @@ class UpdateUser extends Component {
     return (
       <React.Fragment>
         <div>
-          <Modal trigger={<Button>Update Profile</Button>}>
-            <Modal.Header>Update Profile</Modal.Header>
+          <Modal trigger={<Button style={{margin: 10}}>Update Profile</Button>}>
+            <Modal.Header >Update Profile</Modal.Header>
             <Modal.Content image>
               <Image
                 wrapped
@@ -77,6 +87,8 @@ class UpdateUser extends Component {
                     {" "}
                     Update
                   </Button>
+                  <Button onClick={this.handleClose}>Cancel</Button>
+
                 </Form>
               </Modal.Description>
             </Modal.Content>
