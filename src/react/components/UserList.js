@@ -49,9 +49,9 @@ class UserList extends Component {
     }
 
     return (
-      <div >
+      <div>
         <Header>Users</Header>
-        <Card style={{ width: "100%" }} >
+        <Card style={{ width: "100%" }}>
           <Card.Content>
             {this.props.result.map(each => (
               <React.Fragment key={each.id}>

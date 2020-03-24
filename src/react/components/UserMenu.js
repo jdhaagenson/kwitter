@@ -24,22 +24,23 @@ class UserMenu extends Component {
     return (
       <div id="user-menu">
         <Menu pointing secondary style={{ backgroundColor: "#f58220" }}>
-          <Menu.Item
-            name="Home"
-            active={activeItem === "home"}
-            onClick={this.handleItemClick}
-          />
-          <Menu.Item
-            name="messages"
-            active={activeItem === "messages"}
-            onClick={this.handleItemClick}
-          />
+          <NavLink to="/">
+            {" "}
+            <Menu.Item
+              name="Home"
+              active={activeItem === "home"}
+              onClick={this.handleItemClick}
+            />
+          </NavLink>
 
-          <Menu.Item
-            name="friends"
-            active={activeItem === "friends"}
-            onClick={this.handleItemClick}
-          />
+          <Menu.Item />
+          <NavLink to="/users">
+            <Menu.Item
+              name="All Users"
+              active={activeItem === "all users"}
+              onClick={this.handleItemClick}
+            />
+          </NavLink>
           <Menu.Menu position="right">
             <SearchBar />
             <Menu.Item

@@ -1,8 +1,9 @@
 import React from "react";
 import Spinner from "react-spinkit";
 import { connect } from "react-redux";
-import { createUser } from "../../redux";
+import { createUser, login } from "../../redux";
 import "./LoginForm.css";
+import GoogleLogin from "react-google-login";
 
 import { Card, Image, Form, Checkbox, Button } from "semantic-ui-react";
 import { NavLink } from "react-router-dom";
@@ -21,6 +22,23 @@ class Registration extends React.Component {
 
   render() {
     const { loading, error } = this.props;
+    const responseGoogle = response => {
+      console.log(response);
+
+      const googleLoginInfo = {
+        username: response.profileObj.givenName,
+        displayName: response.profileObj.givenName,
+        password: response.profileObj.googleId.slice(8)
+      };
+
+      this.props.createUser(googleLoginInfo).then(() =>
+        this.props.login({
+          username: googleLoginInfo.username,
+          password: googleLoginInfo.password
+        })
+      );
+    };
+
     return (
       <React.Fragment>
         <Card>
@@ -72,6 +90,14 @@ class Registration extends React.Component {
               <Button type="submit" disabled={loading}>
                 <NavLink to="/"> Sign Up</NavLink>
               </Button>
+              <GoogleLogin
+                clientId="298197707803-tvpbkf3c6vci4hc1kcp7fotjtcm6dcav.apps.googleusercontent.com"
+                buttonText="Sign up with Google"
+                onSuccess={responseGoogle}
+                onFailure={responseGoogle}
+                cookiePolicy={"single_host_origin"}
+              />
+              <br />
 
               <NavLink to="/"> Already a Member</NavLink>
             </Form>
@@ -91,5 +117,5 @@ export default connect(
     loading: state.users.createUser.loading,
     error: state.users.createUser.error
   }),
-  { createUser }
+  { createUser, login }
 )(Registration);

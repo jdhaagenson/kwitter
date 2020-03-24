@@ -70,15 +70,15 @@ class MainMenu extends React.Component {
               <Icon name="grid layout" />
               Browse
             </Menu.Item>
-            <Menu.Item
-              name="messages"
-              className="menu-link"
-              style={{ color: "white" }}
-              active={activeItem === "messages"}
-              onClick={this.handleItemClick}
-            >
-              <NavLink to="/messagefeed">Messages </NavLink>
-            </Menu.Item>
+            <NavLink to="/messagefeed">
+              <Menu.Item
+                name="messages"
+                className="menu-link"
+                style={{ color: "white" }}
+                active={activeItem === "messages"}
+                onClick={this.handleItemClick}
+              ></Menu.Item>{" "}
+            </NavLink>
 
             <Dropdown item text="More">
               <Dropdown.Menu>

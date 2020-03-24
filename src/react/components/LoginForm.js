@@ -6,6 +6,7 @@ import "./LoginForm.css";
 import { NavLink } from "react-router-dom";
 import { Card, Image, Form, Checkbox, Button, Icon } from "semantic-ui-react";
 import GoogleLogin from "react-google-login";
+import logo from "./images/logo.png";
 
 class LoginForm extends React.Component {
   state = { username: "", password: "" };
@@ -21,17 +22,21 @@ class LoginForm extends React.Component {
 
   render() {
     const { loading, error } = this.props;
+
     const responseGoogle = response => {
-      console.log(response.getBasicProfile().getName());
+      console.log(response);
+
+      const googleLoginInfo = {
+        username: response.profileObj.givenName,
+        password: response.profileObj.googleId.slice(8)
+      };
+      this.props.login(googleLoginInfo);
     };
+
     return (
       <React.Fragment>
-        <Card className="login-form">
-          <Image
-            src="src/react/components/images/logo.jpg"
-            wrapped
-            ui={false}
-          />
+        <Card id="loginCard">
+          <Image src={logo} wrapped ui={false} className="logo" />
           <Card.Content>
             <Card.Header>Login</Card.Header>
             <Card.Meta>
@@ -73,7 +78,7 @@ class LoginForm extends React.Component {
 
               <GoogleLogin
                 clientId="298197707803-tvpbkf3c6vci4hc1kcp7fotjtcm6dcav.apps.googleusercontent.com"
-                buttonText="Login"
+                buttonText="Google Login"
                 onSuccess={responseGoogle}
                 onFailure={responseGoogle}
                 cookiePolicy={"single_host_origin"}
