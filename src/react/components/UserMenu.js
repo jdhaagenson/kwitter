@@ -1,70 +1,56 @@
-import React, { Component } from 'react'
-import {connect} from "react-redux"
-import{NavLink} from "react-router-dom"
-import { Menu, Segment } from 'semantic-ui-react'
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { NavLink } from "react-router-dom";
+import { Menu, Segment } from "semantic-ui-react";
 import { logout } from "../../redux";
-import MessageFeed from "./MessageFeed"
-import SearchBar from "./SearchBar"
+import MessageFeed from "./MessageFeed";
+import SearchBar from "./SearchBar";
 // import Profile from "../Profile"
 
- class UserMenu extends Component {
-  state = { activeItem: 'home'
-  
-  
-   }
+class UserMenu extends Component {
+  state = { activeItem: "home" };
 
   handleItemClick = (e, { name }) => {
-    this.setState({ activeItem: name })
-  }
+    this.setState({ activeItem: name });
+  };
 
-  
   handleLogout = event => {
     this.props.logout();
-  
   };
 
   render() {
-    const { activeItem } = this.state
+    const { activeItem } = this.state;
 
     return (
-      <div id= "user-menu" >
-        <Menu pointing secondary >
+      <div id="user-menu">
+        <Menu pointing secondary style={{ backgroundColor: "#f58220" }}>
           <Menu.Item
-            name='Home'
-            active={activeItem === 'home'}
+            name="Home"
+            active={activeItem === "home"}
             onClick={this.handleItemClick}
-         
-          
-           
           />
           <Menu.Item
-            name='messages'
-            active={activeItem === 'messages'}
+            name="messages"
+            active={activeItem === "messages"}
             onClick={this.handleItemClick}
-             
           />
-         
-          <Menu.Item
-            name='friends'
-            active={activeItem === 'friends'}
-            onClick={this.handleItemClick}
-           
-          />
-          <Menu.Menu position='right'>
 
-            <SearchBar/>
+          <Menu.Item
+            name="friends"
+            active={activeItem === "friends"}
+            onClick={this.handleItemClick}
+          />
+          <Menu.Menu position="right">
+            <SearchBar />
             <Menu.Item
-              name='logout'
-              active={activeItem === 'logout'}
+              name="logout"
+              active={activeItem === "logout"}
               onClick={this.handleLogout}
             />
-          
           </Menu.Menu>
         </Menu>
-
-  
       </div>
-    )
+    );
   }
 }
 

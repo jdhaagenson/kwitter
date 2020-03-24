@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { getMessage } from "../../redux";
 import { NavLink } from "react-router-dom";
-import { Feed, Card, Icon } from "semantic-ui-react";
+import { Feed, Card, Icon, Loader, Dimmer } from "semantic-ui-react";
 import { likeMessage, unlikeMessage } from "../../redux";
 
 import moment from "moment";
@@ -54,7 +54,6 @@ class Messages extends Component {
   }
 
   handleLike = (e, id) => {
-    console.log(id);
     this.props.likeMessage(id);
   };
 
@@ -78,7 +77,15 @@ class Messages extends Component {
 
   render() {
     if (this.props.result === null) {
-      return <div>empty</div>;
+      return (
+        <div>
+          <Card style={{ width: "100%" }}>
+            <Dimmer active inverted>
+              <Loader inverted>Loading Feed</Loader>
+            </Dimmer>
+          </Card>{" "}
+        </div>
+      );
     }
 
     return (

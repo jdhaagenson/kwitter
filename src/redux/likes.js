@@ -9,7 +9,6 @@ import {
   createReducer
 } from "./helpers";
 import { getMessage } from "./messages";
-import { lookupService } from "dns";
 
 const url = domain;
 
