@@ -1,18 +1,18 @@
 import React, { Component } from "react";
 import {
   Card,
-  Image,
-  // Header,
+  Modal,
   Button,
-  Icon,
-  Divider
+  Image,
+  Header,
+  Form,
+  Icon
 } from "semantic-ui-react";
 import {NavLink} from 'react-router-dom'
 import Avatar from "./Avatar";
-import UpdateUser from "./UpdateUser";
 import { connect } from "react-redux";
-import { updateUser, getUser, setPhoto } from "../../redux";
-
+import { updateUser, getUser } from "../../redux";
+import UpdateUser from "./UpdateUser";
 
 const defaultImages = [
   "rachel.png",
@@ -90,16 +90,14 @@ class UserInfo extends Component {
             // description={user.about}
           >
             <Image src={this.state.image} />
-            <Card.Header size="large">{this.props.displayName}</Card.Header>
+            <Header>{this.props.displayName}</Header>
+            <Card.Meta>{"@" + this.props.username}</Card.Meta>
             <Card.Meta>
               <span className="date" icon="calendar alternate outline">
                 <Icon name="calendar alternate outline" />
                 Joined in 2020
               </span>
             </Card.Meta>
-            <Divider/>
-            <Card.Meta>{"@" + this.props.username}</Card.Meta>
-            <Divider/>
             <Card.Description>{user.about}</Card.Description>
           </Card>
 
@@ -121,7 +119,7 @@ class UserInfo extends Component {
           >
             <NavLink to={`/profiles/${this.props.username}`} >
             <Image src={this.state.image} />
-            <Card.Header size="large">{this.props.createResult.user.displayName}</Card.Header></NavLink>
+            <Header>{this.props.createResult.user.displayName}</Header></NavLink>
             <Card.Meta>{"@" + this.props.username}</Card.Meta>
             <Card.Meta>
               <span className="date" icon="calendar alternate outline">
@@ -153,14 +151,8 @@ export default connect(
     updateResult: state.users.updateUser.result,
     updateLoading: state.users.updateUser.loading,
     updateError: state.users.updateUser.error,
-
     createResult: state.users.getUser.result,
-    createLoading:state.users.getUser.loading,
-    createError:state.users.getUser.error,
-
-    setPhoto_result:state.users.setPhoto.result,
-    setPhoto_loading:state.users.setPhoto.loading,
-    setPhoto_error:state.users.setPhoto.error
+    username: ownProps.username
   }),
-  { updateUser, getUser, setPhoto }
+  { updateUser, getUser }
 )(UserInfo);

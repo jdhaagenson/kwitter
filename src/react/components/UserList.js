@@ -1,9 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { searchUser } from "../../redux";
-import { Card, Icon, Image, Divider, Header } from "semantic-ui-react";
-// import users from '../users.json'
-
+import { Card, Image, Divider, Header } from "semantic-ui-react";
+// import users from "../users.json";
 
 const defaultImages = [
   "rachel.png",
@@ -40,22 +39,9 @@ const randomAvatar = () => {
 };
 
 class UserList extends Component {
-  state = {
-    searchTerm:"",
-    selected:""
-  }
   componentDidMount() {
     this.props.searchUser();
   }
-
-  searchUser() {
-    this.props.searchUser()
-  }
-  handleSelect(event) {
-    this.setState({selected:event.target.id})
-  }
-
-
 
   render() {
     if (this.props.result === null) {
@@ -64,7 +50,7 @@ class UserList extends Component {
 
     return (
       <div >
-        <Header><Icon name="address book outline"/>Users</Header>
+        <Header>Users</Header>
         <Card style={{ width: "100%" }} >
           <Card.Content>
             {this.props.result.map(each => (

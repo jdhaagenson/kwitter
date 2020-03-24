@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { getMessage } from "../../redux";
 import { NavLink } from "react-router-dom";
 import { Feed, Card, Icon, Modal, Header, Divider, Button, Container } from "semantic-ui-react";
-import { likeMessage, unlikeMessage, deleteMessage, getUser } from "../../redux";
+import { likeMessage, unlikeMessage } from "../../redux";
 
 import moment from "moment";
 import "./MessageFeed.css";
@@ -37,7 +37,7 @@ const defaultImages = [
 const imageURL = "https://react.semantic-ui.com/images/avatar/large/";
 const randomAvatar = () => {
   let min = 0;
-  let max = 24;
+  let max = 23;
   let r = Math.floor(Math.random()*(max-min+1))+min
   return imageURL+defaultImages[r]
 }
@@ -45,31 +45,23 @@ const randomAvatar = () => {
 class Messages extends Component {
   state = {
     modalOpen:false,
-    confirmed:false,
-    id:"",
-    username:""
+    confirmed:false
   }
 
   componentDidMount() {
     this.props.getMessage();
   }
 
-  handleDelete = (e) => {
-    console.log(e)
-    this.props.deleteMessage(this.props.messageId)
+  handleDelete = (id) => {
+    console.log(id)
+    this.props.deleteMessage(id)
     this.handleClose()
   }
-  handleConfirmation = (e) => {
+  handleConfirmation = (event) => {
     this.setState({confirmed:true, modalOpen:true})
-    this.handleCaptureId(this.e.children.id);
-    this.handleDelete(this.propsid)
   }
   handleClose = () => {
     this.setState({confirmed:false, modalOpen:false})
-  }
-  handleCaptureId = (key) => {
-    this.setState({id:key})
-    return key
   }
 
   // handleLike = (id) => {
@@ -111,12 +103,12 @@ class Messages extends Component {
           {this.props.result.map(each => (
             <React.Fragment key={each.id}>
               <Modal
-              trigger={<Button floated='right' id={each.id} size='mini' onClick={this.handleConfirmation}><Icon name="delete"/></Button>}
+              trigger={<Button floated='right' size='mini' onClick={this.handleConfirmation}><Icon name="delete"/></Button>}
               on={this.state.modalOpen}
               open={this.state.modalOpen}
               id={each.id}
               >
-                <Header size='huge' textAlign='center'><Icon size="massive" name="exclamation triangle"/></Header>
+                <Header size='huge' textAlign='center'><Icon name="exclamation triangle"/></Header>
                 <Divider hidden/>
                 <Header size="medium" textAlign='center'>Are you sure you want to delete this message from the feed?</Header>
                 <Divider hidden/>
@@ -132,9 +124,8 @@ class Messages extends Component {
                 <Feed.Event>
                   <Feed.Label image={ randomAvatar()}  />
                   <Feed.Content>
-
                     <Feed.Summary>
-                      <NavLink to={`/profiles/${each.username}`}>
+                      <NavLink to={`./profiles/${each.username}`}>
                       {each.username}</NavLink> posted on their page.
                       <Feed.Date>
                         <Icon name="clock outline" />
@@ -170,10 +161,7 @@ class Messages extends Component {
           {/* <Feed className="message-feed" events={handleMessages} /> */}
         </Card.Content>
       </Card>
-
-
-
-   );
+    );
   }
 }
 
@@ -183,14 +171,7 @@ export default connect(
     result: state.messages.getMessage.result,
     loading: state.messages.getMessage.loading,
     error: state.messages.getMessage.error,
-    deleteResult: state.messages.deleteMessage.result,
-    deleteLoading: state.messages.deleteMessage.loading,
-    deleteError: state.messages.deleteMessage.error,
-    like: state.likes.likeMessage.result,
-    unlike: state.likes.unlikeMessage.result,
     username: state.auth.login.result.username
-
-
   }),
-  { getUser, getMessage, deleteMessage, likeMessage, unlikeMessage }
-)(Messages);
+  { getMessage, likeMessage, unlikeMessage }
+)(Messages)

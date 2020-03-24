@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 import "./Menu.css";
 import { connect } from "react-redux";
 import { logout } from "../../redux";
-import { Dropdown, Icon, Menu } from "semantic-ui-react";
+import { Dropdown, Icon, Input, Menu } from "semantic-ui-react";
 import SearchBar from "./SearchBar";
 import UpdateUser from "./UpdateUser";
 import users from "../users.json";
