@@ -9,13 +9,11 @@ class UpdateUser extends Component {
   state = {
     password: "",
     displayName: "",
-    about:"",
-    modalOpen: false,
-    image: "",
+    about: ""
   };
 
   handleChange = e => {
-    e.preventDefault()
+    // e.preventDefault()
     this.setState({ [e.target.name]: e.target.value });
   };
 
@@ -24,24 +22,20 @@ class UpdateUser extends Component {
     this.props.updateUser(this.state);
   };
 
-  handleOpen = e => {
-    this.setState({modalOpen:true})
-  }
-  handleClose = e => {
-    this.setState({modalOpen:false})
-  }
-
   render() {
     const { error } = this.props;
     // const user = this.state;
 
-      return (
-        <React.Fragment>
-          <div>
+    return (
+      <React.Fragment>
+        <div>
           <Modal
-          trigger={<Button fluid>Update Profile</Button>}
-          open={this.state.modalOpen}
-          onClose={this.handleClose}
+            trigger={
+              <Button>
+                <Icon name="edit outline" />
+                Update Profile
+              </Button>
+            }
           >
             <Modal.Header>Update Profile</Modal.Header>
             <Modal.Content image>
