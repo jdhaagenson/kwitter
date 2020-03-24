@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Modal, Button, Icon, Image, Form } from "semantic-ui-react";
+import { Modal, Button, Image, Form } from "semantic-ui-react";
 import { connect } from "react-redux";
 import { setPhoto, getUser } from "../../redux";
 
@@ -16,9 +16,9 @@ import { setPhoto, getUser } from "../../redux";
 //     return imageURL+defaultImages[r]
 //   }
 
-class UploadPhoto extends Component {
+class UpdateUser extends Component {
     state = {
-        picture: this.props.getUser.pictureLocation
+        picture: ""
     };
 
 
@@ -38,29 +38,26 @@ class UploadPhoto extends Component {
 
     render() {
         const error = this.props;
-        const loading = this.props;
-        const setPhoto = this.props;
 
         return (
             <React.Fragment>
-                <Modal trigger={<Button fluid><Icon name="upload"/>Upload Photo</Button>}>
+                <Modal trigger={<Button fluid>Update Profile</Button>}>
                     <Modal.Content image>
                         <Image
                             wrapped
                             size="medium"
-                            src={this.state.picture}
+                            src={this.props.pictureLocation||this.state.picture}
                         />
-                        <Form action={setPhoto} type="POST">
+                        <Form>
                             <Form.Field>
                                 <input
                                     type="file"
-                                    loading={loading}
                                     />
                             </Form.Field>
                         </Form>
                                 <Button
                                     type="submit"
-                                    onClick={setPhoto}
+                                    onClick={this.handleUploadPicture}
                                 > Upload Picture</Button>
 
                     </Modal.Content>
@@ -74,10 +71,10 @@ class UploadPhoto extends Component {
 
 export default connect(
     (state) => ({
-        result: state.users.setPhoto.result,
-        loading: state.users.setPhoto.loading,
-        error: state.users.setPhoto.error,
+        updateResult: state.users.setPhoto.result,
+        updateLoading: state.users.setPhoto.loading,
+        updateError: state.users.setPhoto.error,
         createResult: state.users.getUser.result
     }),
     { setPhoto, getUser }
-)(UploadPhoto);
+)(UpdateUser);
