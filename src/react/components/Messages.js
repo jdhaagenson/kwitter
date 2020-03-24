@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { getMessage } from "../../redux";
 import { NavLink } from "react-router-dom";
 import { Feed, Card, Icon, Modal, Header, Divider, Button, Container } from "semantic-ui-react";
-import { likeMessage, unlikeMessage } from "../../redux";
+import { likeMessage, unlikeMessage, deleteMessage } from "../../redux";
 
 import moment from "moment";
 import "./MessageFeed.css";
@@ -49,7 +49,7 @@ class Messages extends Component {
   }
 
   componentDidMount() {
-    this.props.getMessage();
+    this.props.getMessage()
   }
 
   handleDelete = (id) => {
@@ -94,8 +94,10 @@ class Messages extends Component {
 
   render() {
     if (this.props.result === null) {
-      return <div>empty</div>;
-    }
+      return (
+          <div>empty</div>
+          );
+    } else {
 
     return (
       <Card style={{ width: "100%" }}>
@@ -163,6 +165,7 @@ class Messages extends Component {
       </Card>
     );
   }
+  }
 }
 
 
@@ -173,5 +176,5 @@ export default connect(
     error: state.messages.getMessage.error,
     username: state.auth.login.result.username
   }),
-  { getMessage, likeMessage, unlikeMessage }
+  { getMessage, likeMessage, unlikeMessage, deleteMessage }
 )(Messages)
