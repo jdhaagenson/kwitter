@@ -39,19 +39,12 @@ const defaultImages = [
   "veronika.jpg",
   "zoe.jpg"
 ];
-const imageURL = "https://react.semantic-ui.com/images/avatar/large/";
-const randomAvatar = () => {
-  let min = 0;
-  let max = 23;
-  let r = Math.floor(Math.random() * (max - min + 1)) + min;
-  return imageURL + defaultImages[r];
-};
+
 class UserInfo extends Component {
   state = {
     displayName: "",
     password: "",
     about: "Update profile to add something about yourself.",
-    image: randomAvatar()
   };
 
   handleModal = () => {};
