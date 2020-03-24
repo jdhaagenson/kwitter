@@ -10,7 +10,7 @@ import { Divider, Icon, Button } from 'semantic-ui-react'
 class Profile extends React.Component {
   render() {
     return (
-      <>
+      <div id="profile">
         <h2 className="heading">Profile</h2>
         <div id="profile-body">
           <div className="menu">
@@ -39,7 +39,8 @@ class Profile extends React.Component {
             <MessageFeed />
           </div>
         </div>
-      </>
+        </div>
+     
     );
   }
 }

@@ -12,11 +12,17 @@ class MessageFeed extends Component {
   };
 
   handleKweet = e => {
+     if (e.key === "Enter") {
+       e.preventDefault();
+    this.props.createMessage(this.state.text);
+    this.setState({ text: "" })
+  }
+
     e.preventDefault();
     this.props.createMessage(this.state.text);
     this.setState({ text: "" });
     // this.setState({ value: "" });
-  };
+  }
 
   handleChange = e => {
     e.preventDefault();
