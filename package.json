@@ -5,6 +5,7 @@
   "private": true,
   "dependencies": {
     "@reduxjs/toolkit": "^1.2.5",
+    "axios": "^0.19.2",
     "connected-react-router": "^6.5.2",
     "faker": "^4.1.0",
     "history": "^4.10.1",

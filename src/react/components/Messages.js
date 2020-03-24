@@ -5,7 +5,7 @@ import { NavLink } from 'react-router-dom'
 import { Feed, Card, Icon } from "semantic-ui-react";
 import Likes from "./Likes";
 
-import moment from "moment";
+// import moment from "moment";
 import "./MessageFeed.css";
 
 const defaultImages = [
@@ -44,7 +44,7 @@ class Messages extends Component {
                       {each.username} posted on their page
                       <Feed.Date>
                         <Icon name="clock outline" />
-                        {moment(each.createdAt).fromNow()}
+                        {/* {moment(each.createdAt).fromNow()} */}
                       </Feed.Date>
                     </Feed.Summary>
                     <Feed.Extra text>{each.text}</Feed.Extra>

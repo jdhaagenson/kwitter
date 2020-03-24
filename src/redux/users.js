@@ -7,6 +7,8 @@ import {
   createActions,
   createReducer
 } from "./helpers";
+import axios from "axios";
+
 
 const url = domain + "/users";
 
@@ -73,18 +75,18 @@ export const searchUser = () => dispatch => {
 };
 
 const SET_PHOTO = createActions('setPhoto');
-export const setPhoto = (username, picture) => (dispatch, getState) => {
+export const setPhoto = (event, picture) => (dispatch, getState) => {
   dispatch(SET_PHOTO.START());
   const token = getState().auth.login.result.token;
-
-  return fetch(url + "/" + username + "/picture", {
-    method: "PUT",
-    headers: { Authorization: "Bearer " + token, ...jsonHeaders },
-    body: picture
-  })
-    .then(handleJsonResponse)
-    .then(result => dispatch(SET_PHOTO.SUCCESS(result)))
-    .catch(err => Promise.reject(dispatch(SET_PHOTO.FAIL(err))))
+  const username = getState().auth.login.result.username;
+  console.log(picture)
+  const headers = {Authorization: "Bearer " + token}
+  return axios.put(url + "/" + username + "/picture", picture, {headers:headers})
+          .then(result=> dispatch(getUser()), dispatch(SET_PHOTO.SUCCESS()))
+          .catch(err => {
+            return Promise.reject(dispatch({ type:
+            SET_PHOTO.FAIL, payload: err}))
+        })
 };
 
 const GET_PHOTO = createActions('getPhoto');

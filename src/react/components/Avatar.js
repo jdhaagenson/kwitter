@@ -7,9 +7,10 @@ import {
   Image,
   Modal
 } from "semantic-ui-react";
-import  setPhoto  from "../../redux";
+import  { setPhoto }  from "../../redux";
 import { connect } from "react-redux";
 import UploadImage from "./UploadImage"
+import { domain } from "../../redux/helpers";
 
 const imageURL = "https://react.semantic-ui.com/images/avatar/large/";
 const randomAvatar = () => {
@@ -24,38 +25,46 @@ class Avatar extends Component {
 
         this.handleClose = this.handleClose.bind(this)
         this.handleOpen = this.handleOpen.bind(this)
-        // this.handleSelect = this.handleSelect.bind(this)
+        this.handleSelect = this.handleSelect.bind(this)
 
         this.state = {
             modalOpen: false,
-            // image: randomAvatar(),
+            image: " ",
             file: null
         }
     }
 
 //   const {open, modalOpen} = React.useState(false);
 
-  handleOpen() {
+  handleOpen = () => {
     this.setState({ modalOpen: true });
   };
 
-  handleClose() {
+  handleClose = () => {
     this.setState({ modalOpen: false });
   };
 
-  // handleSelect(e) {
-  //   this.setState({ image: e.src });
-  // };
-
-  handleSetAvatar(e) {
-    e.preventDefault();
-    this.props.setPhoto(e.target);
+  handleSelect = (e) => {
+    this.setState({ images: e.src });
   };
 
-  handleUploadImage(event) {
+  handleSetAvatar = (e) => {
+    e.preventDefault();
     this.setState({
-      file: URL.createObjectURL(event.target.files[0])
+      file: e.target.files[0]
     })
+    console.log(this.state)
+  };
+
+  handleUploadImage = (event) => {
+    // this.setState({
+    //   file: event.target.value
+    // })
+
+    const data = new FormData()
+      data.append("picture", this.state.file)
+      console.log(domain)
+      this.props.setPhoto(event, data);
   };
 
   renderImages() {
@@ -272,10 +281,10 @@ class Avatar extends Component {
             <Divider hidden />
             
             <Modal.Actions>
-              <form onSubmit={this.handleUploadImage}>
-                <input floated="right" type="file" icon="file" name="picture" />
-                <input type="submit" onClick="handleImageUpload "value="Upload Picture" />
-              </form>
+              {/* <form onSubmit={this.handleUploadImage}> */}
+                <input floated="right" onChange={this.handleSetAvatar} type="file" icon="file" name="picture" />
+                <Button type="submit" onClick={this.handleUploadImage} value="Upload Picture" />
+              {/* </form> */}
               <Divider hidden />
               <Button onClick={this.handleClose}>Done</Button>
             </Modal.Actions>
