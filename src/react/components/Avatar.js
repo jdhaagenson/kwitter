@@ -42,7 +42,7 @@ class Avatar extends Component {
             open={this.state.modalOpen}
             onClose={this.handleClose}
             centered={false}>
-            <Header>Select an Avatar</Header>
+            <Header><Icon name="user"/>Select an Avatar</Header>
             <Modal.Content image>
 
             <div>

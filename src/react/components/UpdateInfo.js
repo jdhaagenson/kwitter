@@ -3,9 +3,9 @@ import { Modal, Button, Image, Header, Form, Icon } from "semantic-ui-react";
 import { connect } from "react-redux";
 import { updateUser, getUser } from "../../redux";
 
-import UploadPhoto from "./UploadPhoto";
+// import UploadPhoto from "./UploadPhoto";
 
-class UpdateUser extends Component {
+class UpdateInfo extends Component {
   state = {
     password: "",
     displayName: "",
@@ -111,4 +111,4 @@ export default connect(
     createResult: state.users.getUser.result
   }),
   { updateUser, getUser }
-)(UpdateUser);
+)(UpdateInfo);

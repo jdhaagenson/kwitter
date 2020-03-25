@@ -1,22 +1,11 @@
 import React, { Component } from "react";
-import { Modal, Button, Image, Form } from "semantic-ui-react";
+import { Modal, Button, Image, Form, Input } from "semantic-ui-react";
 import { connect } from "react-redux";
-import { setPhoto, getUser } from "../../redux";
+import { setPhoto } from "../../redux";
 
-// const defaultImages = [
-//     'rachel.png', 'ade.jpg', 'chris.jpg', 'christian.jpg', 'daniel.jpg', 'elliot.jpg', 'elyse.png',
-//     'helen.jpg', 'jenny.jpg', 'joe.jpg', 'justen.jpg', 'kristy.png', 'laura.jpg', 'matt.jpg', 'matthew.png',
-//     'molly.png', 'nan.jpg', 'nom.jpg', 'patrick.png', 'steve.jpg', 'stevie.jpg', 'tom.jpg', 'veronika.jpg', 'zoe.jpg'
-//   ]
-//   const imageURL = 'https://react.semantic-ui.com/images/avatar/large/'
-//   const randomAvatar = () => {
-//     let min = 0;
-//     let max = 24;
-//     let r = Math.floor(Math.random()*(max-min+1))+min
-//     return imageURL+defaultImages[r]
-//   }
 
-class UpdateUser extends Component {
+
+class UploadPhoto extends Component {
     state = {
         picture: ""
     };
@@ -29,7 +18,7 @@ class UpdateUser extends Component {
 
     handleUserUpdate = e => {
         e.preventDefault()
-        this.props.uploadPhoto(this.props.username, ...this.state)
+        this.props.uploadPhoto(this.getState().username, this.state)
     };
 
     componentDidMount() {
@@ -41,24 +30,28 @@ class UpdateUser extends Component {
 
         return (
             <React.Fragment>
-                <Modal trigger={<Button fluid>Update Profile</Button>}>
+                <Modal trigger={<Button>Update Profile</Button>}>
                     <Modal.Content image>
                         <Image
                             wrapped
                             size="medium"
-                            src={this.props.pictureLocation||this.state.picture}
+                            src="https://react.semantic-ui.com/images/avatar/large/rachel.png"
                         />
                         <Form>
                             <Form.Field>
-                                <input
+                                <label for="avatar"></label>
+                                <Input
+                                    name="avatar"
+                                    id="avatar"
                                     type="file"
+                                    accepts= "image/jpg, image/png, image/gif"
                                     />
                             </Form.Field>
-                        </Form>
                                 <Button
                                     type="submit"
-                                    onClick={this.handleUploadPicture}
-                                > Upload Picture</Button>
+                                    onClick={this.props.setPhoto}
+                                    > Upload Picture</Button>
+                        </Form>
 
                     </Modal.Content>
                 </Modal>
@@ -71,10 +64,9 @@ class UpdateUser extends Component {
 
 export default connect(
     (state) => ({
-        updateResult: state.users.setPhoto.result,
-        updateLoading: state.users.setPhoto.loading,
-        updateError: state.users.setPhoto.error,
-        createResult: state.users.getUser.result
+        result: state.users.setPhoto.result,
+        loading: state.users.setPhoto.loading,
+        error: state.users.setPhoto.error,
     }),
-    { setPhoto, getUser }
-)(UpdateUser);
+    { setPhoto }
+)(UploadPhoto);

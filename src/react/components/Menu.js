@@ -5,14 +5,14 @@ import { connect } from "react-redux";
 import { logout } from "../../redux";
 import { Dropdown, Icon, Input, Menu } from "semantic-ui-react";
 import SearchBar from "./SearchBar";
-import UpdateUser from "./UpdateUser";
+import UpdateUser from "./UpdateInfo";
 import users from "../users.json";
 
 class MainMenu extends React.Component {
   state = {};
 
   handleLogout = event => {
-    // event.preventDefault();
+    event.preventDefault();
     this.props.logout();
   };
 
