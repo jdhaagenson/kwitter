@@ -33,14 +33,16 @@ class MessageFeed extends Component {
     return (
       <React.Fragment>
         <Card className="kweet-form-card" style={{ width: "100%" }}>
-          <Form className="kweet-form">
+          <Form
+          action={this.props.createMessage}
+          method="get"
+          className="kweet-form">
             <Form.Field>
               <label htmlFor="text"> </label>
 
               <input
                 type="text"
                 name="text"
-                value={this.state.text}
                 placeholder="What's on your mind..."
                 autoFocus
                 required
@@ -50,6 +52,7 @@ class MessageFeed extends Component {
           </Form>
           <Button
             className="kweet-button"
+            fluid
             type="submit"
             onClick={this.handleKweet}
           >

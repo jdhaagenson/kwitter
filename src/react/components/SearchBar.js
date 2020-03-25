@@ -4,6 +4,7 @@ import { searchUser } from "../../redux";
 import { Search, Grid, Label, Loader } from "semantic-ui-react";
 // import moment from "moment";
 import './SearchBar.css';
+import {NavLink} from 'react-router-dom'
 // import users from "../users.json";
 import faker from 'faker';
 import _ from 'lodash';
@@ -20,7 +21,7 @@ const source = _.times(20, () => ({
   updatedAt: faker.date.recent()
 }));
 
-const resultRenderer = ({ username }) => <Label content={username} />;
+const resultRenderer = ({ username }) => <React.Fragment><Label content={username}><NavLink to={`/profiles/:${username}`}/></Label></React.Fragment>
 
 class SearchBar extends Component {
   state = {
@@ -83,6 +84,7 @@ class SearchBar extends Component {
                 leading: true
               })}
               results={result}
+              autoComplete="on"
               value={this.state.value}
               resultRenderer={resultRenderer}
             ></Search>

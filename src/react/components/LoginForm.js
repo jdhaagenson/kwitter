@@ -16,6 +16,7 @@ class LoginForm extends React.Component {
   };
 
   handleChange = e => {
+    e.preventDefault()
     this.setState({ [e.target.name]: e.target.value });
   };
 
@@ -40,7 +41,8 @@ class LoginForm extends React.Component {
                   autoFocus
                   required
                   onChange={this.handleChange}
-                  placeholder="Choose a username"
+                  placeholder="Username"
+                  autoComplete="on"
                 />
               </Form.Field>
 
@@ -52,6 +54,8 @@ class LoginForm extends React.Component {
                   autoFocus
                   required
                   onChange={this.handleChange}
+                  placeholder="Password"
+                  autoComplete="on"
                 ></input>
               </Form.Field>
               <Form.Field>

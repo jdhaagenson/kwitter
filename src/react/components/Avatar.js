@@ -7,31 +7,27 @@ import UploadPhoto from './UploadPhoto'
 const imageURL = "https://react.semantic-ui.com/images/avatar/large/";
 
 class Avatar extends Component {
-    state={
-        image:"",
-        modalOpen:false
-    };
-
-    handleOpen = () => {this.setState({modalOpen:true})}
-
-    handleClose = () => {this.setState({modalOpen:false})}
-
-  handleOpen = e => {
-    this.setState({ modalOpen: true });
+  state={
+      selected:"",
+      modalOpen:false
   };
 
-    handleSetAvatar = () => {
-        this.props.setPhoto(this.props.username, this.state.image)
-        this.setState({modalOpen:false})
-    }
+  handleOpen = () => {this.setState({modalOpen:true})}
 
-  handleSelect = event => {
-    this.setState({ image: event.target.src });
+  handleClose = () => {this.setState({modalOpen:false})}
+
+
+  handleSetAvatar = (e) => {
+    e.preventDefault()
+    this.props.setPhoto(this.props.username, this.state.selected)
+    this.setState({modalOpen:false})
+  }
+
+  handleSelect = e => {
+    e.preventDefault()
+    this.setState({ image: e.target.src });
   };
 
-  handleSetAvatar = e => {
-    this.props.setPhoto(this.props.username, this.state.image);
-  };
 
     render() {
         return(
@@ -76,7 +72,9 @@ class Avatar extends Component {
               </div>
               <span>
                 <Modal.Actions>
-
+                  <UploadPhoto
+                    username={this.props.username}
+                    />
                     <Divider hidden/>
                     <Button
                         type='submit'

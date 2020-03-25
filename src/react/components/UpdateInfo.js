@@ -39,7 +39,7 @@ class UpdateInfo extends Component {
         <React.Fragment>
           <div>
           <Modal
-          trigger={<Button fluid>Update Profile</Button>}
+          trigger={<Button fluid><Icon name="edit"/>Update Profile</Button>}
           open={this.state.modalOpen}
           onClose={this.handleClose}
           >

@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { deleteMessage } from "../../redux";
-import { Button, Icon } from "semantic-ui-react";
-import { userIsNotAuthenticated } from "../HOCs"
+import { Button, Icon, Modal,  } from "semantic-ui-react";
+// import { userIsNotAuthenticated } from "../HOCs"
 
 class DeleteMessage extends Component{
   state = {

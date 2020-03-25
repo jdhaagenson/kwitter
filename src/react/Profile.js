@@ -5,6 +5,7 @@ import { UserInfo, MessageFeed, UpdateInfo, DeleteUser } from "../react/componen
 import "./Profile.css";
 import UserList from './components/UserList'
 import { Divider, Icon, Button } from 'semantic-ui-react'
+// import { userIsNotAuthenticated } from "./HOCs";
 
 
 class Profile extends React.Component {

@@ -1,26 +1,26 @@
 import React, { Component } from 'react'
 import {connect} from "react-redux"
-import{NavLink} from "react-router-dom"
-import { Menu, Segment } from 'semantic-ui-react'
+// import{NavLink} from "react-router-dom"
+import { Menu } from 'semantic-ui-react'
 import { logout } from "../../redux";
-import MessageFeed from "./MessageFeed"
+// import MessageFeed from "./MessageFeed"
 import SearchBar from "./SearchBar"
 // import Profile from "../Profile"
 
  class UserMenu extends Component {
   state = { activeItem: 'home'
-  
-  
+
+
    }
 
   handleItemClick = (e, { name }) => {
     this.setState({ activeItem: name })
   }
 
-  
+
   handleLogout = event => {
     this.props.logout();
-  
+
   };
 
   render() {
@@ -33,22 +33,22 @@ import SearchBar from "./SearchBar"
             name='Home'
             active={activeItem === 'home'}
             onClick={this.handleItemClick}
-         
-          
-           
+
+
+
           />
           <Menu.Item
             name='messages'
             active={activeItem === 'messages'}
             onClick={this.handleItemClick}
-             
+
           />
-         
+
           <Menu.Item
             name='friends'
             active={activeItem === 'friends'}
             onClick={this.handleItemClick}
-           
+
           />
           <Menu.Menu position='right'>
 
@@ -58,11 +58,11 @@ import SearchBar from "./SearchBar"
               active={activeItem === 'logout'}
               onClick={this.handleLogout}
             />
-          
+
           </Menu.Menu>
         </Menu>
 
-  
+
       </div>
     )
   }

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { searchUser } from "../../redux";
+import {NavLink} from 'react-router-dom'
 import { Card, Image, Divider, Header, Icon } from "semantic-ui-react";
 // import users from "../users.json";
 
@@ -56,7 +57,7 @@ class UserList extends Component {
             {this.props.result.map(each => (
               <React.Fragment key={each.id}>
                 <Image src={each.pictureLocation || randomAvatar()} avatar />
-                <span>{each.username}</span>
+                <span><NavLink to={"/profiles/:"+each.username}>{each.username}</NavLink></span>
                 <Divider />
               </React.Fragment>
             ))}

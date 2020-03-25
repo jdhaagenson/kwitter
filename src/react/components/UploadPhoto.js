@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Modal, Button, Image, Form, Input } from "semantic-ui-react";
 import { connect } from "react-redux";
-import { setPhoto } from "../../redux";
+import { setPhoto, getUser } from "../../redux";
 
 
 
@@ -30,7 +30,7 @@ class UploadPhoto extends Component {
 
         return (
             <React.Fragment>
-                <Modal trigger={<Button>Update Profile</Button>}>
+                <Modal trigger={<Button>Upload Photo</Button>}>
                     <Modal.Content image>
                         <Image
                             wrapped
@@ -39,7 +39,7 @@ class UploadPhoto extends Component {
                         />
                         <Form>
                             <Form.Field>
-                                <label for="avatar"></label>
+                                <label for="avatar">Upload Profile Picture</label>
                                 <Input
                                     name="avatar"
                                     id="avatar"
@@ -68,5 +68,5 @@ export default connect(
         loading: state.users.setPhoto.loading,
         error: state.users.setPhoto.error,
     }),
-    { setPhoto }
+    { setPhoto, getUser }
 )(UploadPhoto);

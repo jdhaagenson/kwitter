@@ -1,18 +1,18 @@
 import React, { Component } from "react";
 import {
   Card,
-  Modal,
-  Button,
+  // Modal,
+  // Button,
   Image,
   Header,
-  Form,
+  // Form,
   Icon
 } from "semantic-ui-react";
 import {NavLink} from 'react-router-dom'
 import Avatar from "./Avatar";
 import { connect } from "react-redux";
 import { updateUser, getUser } from "../../redux";
-import UpdateUser from "./UpdateInfo";
+import UpdateInfo from "./UpdateInfo";
 
 const defaultImages = [
   "rachel.png",
@@ -134,11 +134,8 @@ class UserInfo extends Component {
             </Card.Description>
           </Card>
           <Avatar />
-          <UpdateUser open={this.props.handelModal} />
-          <Button className="get-messages-button">
-            <Icon name="comment alternate outline" />
-            My Kweets
-          </Button>
+          <UpdateInfo open={this.props.handelModal} />
+
           {error && <p style={{ color: "red" }}>{error.message}</p>}
         </React.Fragment>
       );

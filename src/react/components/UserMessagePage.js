@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { myMessages, likeMessage } from "../../redux";
-import { Card, Form, Button, Icon, Feed } from "semantic-ui-react";
+import { Card, Icon, Feed } from "semantic-ui-react";
 import moment from "moment";
 import "./UserMessagePage.css";
 import UserList from "./UserList";
@@ -18,11 +18,11 @@ class UserMessagePage extends Component {
   };
   render() {
 
- 
-  
-    
+
+
+
     if (this.props.result === null) {
-    
+
       return <div>You have no Messages</div>;
     }
     return (
@@ -35,8 +35,8 @@ class UserMessagePage extends Component {
 
       <div id="user-message-page">
 
-     
-      
+
+
         <Card style={{ width: "50%" }} id="user-messages-card">
           <Card.Content>
             {this.props.result.map(each => (
@@ -74,7 +74,7 @@ class UserMessagePage extends Component {
         </Card>
         <div id="user-list">
         <UserList />
-          
+
       </div>
       </div>
      </React.Fragment>
