@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { createMessage } from "../../redux";
-import { Card, Form, Button } from "semantic-ui-react";
+import { Card, Form, Button, Icon } from "semantic-ui-react";
 // import moment from "moment";
 import "./MessageFeed.css";
 import Messages from "./Messages";
@@ -12,6 +12,12 @@ class MessageFeed extends Component {
   };
 
   handleKweet = e => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      this.props.createMessage(this.state.text);
+      this.setState({ text: "" });
+    }
+
     e.preventDefault();
     this.props.createMessage(this.state.text);
     this.setState({ text: "" });
@@ -26,7 +32,10 @@ class MessageFeed extends Component {
   render() {
     return (
       <React.Fragment>
-        <Card className="kweet-form-card" style={{ width: "100%" }}>
+        <Card
+          className="kweet-form-card"
+          style={{ width: "100%", border: "1px solid #008e97" }}
+        >
           <Form className="kweet-form">
             <Form.Field>
               <label htmlFor="text"> </label>
@@ -47,11 +56,11 @@ class MessageFeed extends Component {
             type="submit"
             onClick={this.handleKweet}
           >
-            Kweet
+            Kite <Icon name="paper plane outline" />
           </Button>
         </Card>
 
-        <Card style={{ width: "100%"}}>
+        <Card style={{ width: "100%", border: "1px solid #008e97" }}>
           <Card.Content>
             <Messages />
           </Card.Content>

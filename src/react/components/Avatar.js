@@ -9,16 +9,10 @@ import {
 } from "semantic-ui-react";
 import  { setPhoto }  from "../../redux";
 import { connect } from "react-redux";
-import UploadImage from "./UploadImage"
 import { domain } from "../../redux/helpers";
 
 const imageURL = "https://react.semantic-ui.com/images/avatar/large/";
-const randomAvatar = () => {
-  let min = 0;
-  let max = 23;
-  let r = Math.floor(Math.random() * (max - min + 1)) + min;
-  return imageURL;
-};
+
 class Avatar extends Component {
     constructor(props) {
         super(props)
@@ -26,6 +20,8 @@ class Avatar extends Component {
         this.handleClose = this.handleClose.bind(this)
         this.handleOpen = this.handleOpen.bind(this)
         this.handleSelect = this.handleSelect.bind(this)
+        this.handleSetAvatar= this.handleSetAvatar.bind(this)
+        this.handleUploadImage = this.handleUploadImage.bind(this)
 
         this.state = {
             modalOpen: false,
@@ -49,7 +45,8 @@ class Avatar extends Component {
   };
 
   handleSetAvatar = (e) => {
-    e.preventDefault();
+    console.log(e.target.files[0])
+    // e.preventDefault();
     this.setState({
       file: e.target.files[0]
     })
@@ -60,7 +57,7 @@ class Avatar extends Component {
     // this.setState({
     //   file: event.target.value
     // })
-
+    
     const data = new FormData()
       data.append("picture", this.state.file)
       console.log(domain)
@@ -281,10 +278,13 @@ class Avatar extends Component {
             <Divider hidden />
             
             <Modal.Actions>
-              {/* <form onSubmit={this.handleUploadImage}> */}
+              <form  style={{marginLeft: "1em"}}onSubmit={this.handleUploadImage}>
                 <input floated="right" onChange={this.handleSetAvatar} type="file" icon="file" name="picture" />
-                <Button type="submit" onClick={this.handleUploadImage} value="Upload Picture" />
-              {/* </form> */}
+                {/* <input type="submit" onClick={this.handleUploadImage} value="Upload Picture" /> */}
+              </form>
+
+              <input type="submit" onClick={this.handleUploadImage} value="Upload Picture" />
+
               <Divider hidden />
               <Button onClick={this.handleClose}>Done</Button>
             </Modal.Actions>

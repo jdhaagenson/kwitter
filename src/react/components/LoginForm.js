@@ -1,4 +1,3 @@
-
 import React from "react";
 import Spinner from "react-spinkit";
 import { connect } from "react-redux";
@@ -6,12 +5,14 @@ import { login } from "../../redux";
 import "./LoginForm.css";
 import { NavLink } from "react-router-dom";
 import { Card, Image, Form, Checkbox, Button, Icon } from "semantic-ui-react";
+import GoogleLogin from "react-google-login";
+import logo from "./images/logo.png";
 
 class LoginForm extends React.Component {
   state = { username: "", password: "" };
 
   handleLogin = e => {
-    // e.preventDefault();
+    e.preventDefault();
     this.props.login(this.state);
   };
 
@@ -21,10 +22,21 @@ class LoginForm extends React.Component {
 
   render() {
     const { loading, error } = this.props;
+
+    const responseGoogle = response => {
+      console.log(response);
+
+      const googleLoginInfo = {
+        username: response.profileObj.givenName,
+        password: response.profileObj.googleId.slice(8)
+      };
+      this.props.login(googleLoginInfo);
+    };
+
     return (
       <React.Fragment>
-        <Card>
-          <Image src="/images/avatar/large/rachel.png" wrapped ui={false} />
+        <Card id="loginCard">
+          <Image src={logo} wrapped ui={false} className="logo" />
           <Card.Content>
             <Card.Header>Login</Card.Header>
             <Card.Meta>
@@ -63,10 +75,14 @@ class LoginForm extends React.Component {
                 <Icon name="key" />
                 Login
               </Button>
-              <Button>
-                <Icon name="google plus" />
-                Google Sign in
-              </Button>
+
+              <GoogleLogin
+                clientId="298197707803-tvpbkf3c6vci4hc1kcp7fotjtcm6dcav.apps.googleusercontent.com"
+                buttonText="Google Login"
+                onSuccess={responseGoogle}
+                onFailure={responseGoogle}
+                cookiePolicy={"single_host_origin"}
+              />
             </Form>
           </Card.Content>
           <Card.Content>

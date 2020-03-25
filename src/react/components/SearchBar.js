@@ -73,7 +73,7 @@ class SearchBar extends Component {
     const { loading, error, result } = this.props;
     return (
       <React.Fragment>
-        <Grid>
+        <Grid style={{ border: "1px solid 008e97" }}>
           <Grid.Column width={6}>
             <Search
               placeholder="Search users"

@@ -1,0 +1,19 @@
+#user-message-page {
+  margin: auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+#user-messages-card {
+  border: 1px solid#F58220;
+  width: auto;
+
+  /* align-items: center; */
+}
+
+#user-list {
+  border: 2px solid #008e97;
+  width: auto;
+  margin-left: 10px;
+}

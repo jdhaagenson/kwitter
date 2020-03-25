@@ -11,7 +11,7 @@ import {
 import Avatar from "./Avatar";
 import { connect } from "react-redux";
 import { updateUser, getUser } from "../../redux";
-import UpdateUser from "./updateUser";
+import UpdateUser from "./UpdateUser";
 import {domain} from "../../redux/helpers"
 
 const defaultImages = [
@@ -76,8 +76,9 @@ class UserInfo extends Component {
             header={this.props.displayName}
             description={user.about}
           >
-            <img src={domain + this.props.pictureLocation} />
-            <Image src={domain + this.props.pictureLocation} />
+            {this.props.picture !== null &&
+            <Image src={domain + this.props.picture.user.pictureLocation} />
+    }
             <Header>{this.props.displayName}</Header>
             <Card.Meta>{"@" + this.props.username}</Card.Meta>
             <Card.Meta>
@@ -138,7 +139,8 @@ export default connect(
     updateLoading: state.users.updateUser.loading,
     updateError: state.users.updateUser.error,
     createResult: state.users.getUser.result,
-    username: ownProps.username
+    username: ownProps.username,
+    picture: state.users.getUser.result
   }),
   { updateUser, getUser }
 )(UserInfo);

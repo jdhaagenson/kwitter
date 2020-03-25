@@ -82,7 +82,7 @@ export const setPhoto = (event, picture) => (dispatch, getState) => {
   console.log(picture)
   const headers = {Authorization: "Bearer " + token}
   return axios.put(url + "/" + username + "/picture", picture, {headers:headers})
-          .then(result=> dispatch(getUser()), dispatch(SET_PHOTO.SUCCESS()))
+          .then(result=> dispatch(getUser(username)), dispatch(SET_PHOTO.SUCCESS()))
           .catch(err => {
             return Promise.reject(dispatch({ type:
             SET_PHOTO.FAIL, payload: err}))

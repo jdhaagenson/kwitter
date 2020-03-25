@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import { Modal, Button, Image, Header, Form } from "semantic-ui-react";
+import { Modal, Button, Image, Header, Form, Icon } from "semantic-ui-react";
 import { connect } from "react-redux";
 import { updateUser, getUser } from "../../redux";
+
 import UploadPhoto from "./UploadPhoto";
 
 class UpdateUser extends Component {
@@ -12,14 +13,13 @@ class UpdateUser extends Component {
     modalOpen: false
   };
 
-  handleOpen() {
+  handleOpen = () => {
     this.setState({ modalOpen: true });
   };
 
-  handleClose() {
+  handleClose = () => {
     this.setState({ modalOpen: false });
   };
-
 
   handleChange = e => {
     // e.preventDefault()
@@ -27,7 +27,7 @@ class UpdateUser extends Component {
   };
 
   handleUserUpdate = e => {
-    // e.preventDefault()
+    e.preventDefault();
     this.props.updateUser(this.state);
   };
 
@@ -38,8 +38,15 @@ class UpdateUser extends Component {
     return (
       <React.Fragment>
         <div>
-          <Modal trigger={<Button style={{margin: 10}}>Update Profile</Button>}>
-            <Modal.Header >Update Profile</Modal.Header>
+          <Modal
+            trigger={
+              <Button style={{margin: 10}}>
+                <Icon name="edit outline" />
+                Update Profile
+              </Button>
+            }
+          >
+            <Modal.Header>Update Profile</Modal.Header>
             <Modal.Content image>
               <Image
                 wrapped
@@ -88,7 +95,6 @@ class UpdateUser extends Component {
                     Update
                   </Button>
                   <Button onClick={this.handleClose}>Cancel</Button>
-
                 </Form>
               </Modal.Description>
             </Modal.Content>
