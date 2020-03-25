@@ -52,7 +52,7 @@ class Registration extends React.Component {
             <Card.Content>
               <Card.Header>Sign Up</Card.Header>
               <Card.Meta>
-                <span>Please </span>
+                <span>Please fill out the form to join! </span>
               </Card.Meta>
 
               <Form onSubmit={this.handleRegistration}>
@@ -96,6 +96,7 @@ class Registration extends React.Component {
                 <Button type="submit" disabled={loading}>
                   Sign Up
                 </Button>
+
                 <GoogleLogin
                   clientId="298197707803-tvpbkf3c6vci4hc1kcp7fotjtcm6dcav.apps.googleusercontent.com"
                   buttonText="Sign up with Google"
@@ -104,10 +105,10 @@ class Registration extends React.Component {
                   cookiePolicy={"single_host_origin"}
                 />
                 <br />
-
                 <NavLink to="/"> Already a Member</NavLink>
               </Form>
             </Card.Content>
+
             {loading && <Spinner name="circle" color="blue" />}
             {error && <p style={{ color: "red" }}>{error.message}</p>}
           </Card>

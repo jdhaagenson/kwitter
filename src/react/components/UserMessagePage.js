@@ -42,7 +42,7 @@ class UserMessagePage extends Component {
         </Sticky>
         <div id="user-message-page">
           <Card style={{ width: "50%" }} id="user-messages-card">
-            <h1> Your Kites</h1>
+            <h1> Your Darts</h1>
             <Card.Content>
               {this.props.result.map(each => (
                 <React.Fragment key={each.id}>

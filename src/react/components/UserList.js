@@ -1,7 +1,14 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { searchUser } from "../../redux";
-import { Card, Image, Divider, Header } from "semantic-ui-react";
+import {
+  Card,
+  Image,
+  Divider,
+  Header,
+  Dimmer,
+  Loader
+} from "semantic-ui-react";
 
 const defaultImages = [
   "rachel.png",
@@ -44,7 +51,15 @@ class UserList extends Component {
 
   render() {
     if (this.props.result === null) {
-      return <div>empty</div>;
+      return (
+        <div>
+          <Card style={{ width: "100%" }}>
+            <Dimmer active inverted>
+              <Loader inverted>Getting Users</Loader>
+            </Dimmer>
+          </Card>
+        </div>
+      );
     }
 
     return (

@@ -95,7 +95,7 @@ class UserInfo extends Component {
           <UpdateUser />
           <Button className="get-messages-button" fluid>
             <Icon name="comment alternate outline" />
-            My Kites
+            My Darts
           </Button>
         </React.Fragment>
       );
@@ -128,7 +128,7 @@ class UserInfo extends Component {
           <UpdateUser open={this.props.handelModal} />
           <Button className="get-messages-button" fluid>
             <Icon name="comment alternate outline" />
-            My Kites
+            My Darts
           </Button>
           {error && <p style={{ color: "red" }}>{error.message}</p>}
         </React.Fragment>

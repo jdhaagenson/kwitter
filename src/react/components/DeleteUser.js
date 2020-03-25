@@ -33,7 +33,7 @@ class DeleteUser extends Component {
         <Header icon="trash" content="Delete Profile" />
         <Modal.Content>
           <h2>Are you sure you want to delete your proile?</h2>
-          <p>This action can't be undone, you will lose all of your kites.</p>
+          <p>This action can't be undone, you will lose all of your darts.</p>
         </Modal.Content>
         <Modal.Actions>
           <Button color="green" onClick={this.handleClose} inverted>
