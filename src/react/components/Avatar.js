@@ -53,13 +53,14 @@ class Avatar extends Component {
         >
           <Header>Select an Avatar</Header>
           <Modal.Content image>
-            <Form>
+            <Form action={this.props.setPhoto} method="PUT">
               <div>
                 <Image.Group>
                   <Image
                     onClick={this.handleSelect}
                     centered
                     bordered
+                    as="Button"
                     size="tiny"
                     src={imageURL + "ade.jpg"}
                   />
@@ -67,12 +68,14 @@ class Avatar extends Component {
                     onClick={this.handleSelect}
                     centered
                     bordered
+                    as="Button"
                     size="tiny"
                     src={imageURL + "rachel.png"}
                   />
                   <Image
                     onClick={this.handleSelect}
                     centered
+                    as="Button"
                     bordered
                     size="tiny"
                     src={imageURL + "chris.jpg"}
@@ -80,6 +83,7 @@ class Avatar extends Component {
                   <Image
                     onClick={this.handleSelect}
                     centered
+                    as="Button"
                     bordered
                     size="tiny"
                     src={imageURL + "christian.jpg"}
@@ -87,6 +91,7 @@ class Avatar extends Component {
                   <Image
                     onClick={this.handleSelect}
                     centered
+                    as="Button"
                     bordered
                     size="tiny"
                     src={imageURL + "daniel.jpg"}
@@ -94,6 +99,7 @@ class Avatar extends Component {
                   <Image
                     onClick={this.handleSelect}
                     centered
+                    as="Button"
                     bordered
                     size="tiny"
                     src={imageURL + "elliot.jpg"}
@@ -101,6 +107,7 @@ class Avatar extends Component {
                   <Image
                     onClick={this.handleSelect}
                     centered
+                    as="Button"
                     bordered
                     size="tiny"
                     src={imageURL + "elyse.png"}
@@ -108,6 +115,7 @@ class Avatar extends Component {
                   <Image
                     onClick={this.handleSelect}
                     centered
+                    as="Button"
                     bordered
                     size="tiny"
                     src={imageURL + "helen.jpg"}
@@ -117,6 +125,7 @@ class Avatar extends Component {
                   <Image
                     onClick={this.handleSelect}
                     centered
+                    as="Button"
                     bordered
                     size="tiny"
                     src={imageURL + "jenny.jpg"}
@@ -124,6 +133,7 @@ class Avatar extends Component {
                   <Image
                     onClick={this.handleSelect}
                     centered
+                    as="Button"
                     bordered
                     size="tiny"
                     src={imageURL + "joe.jpg"}
@@ -131,6 +141,7 @@ class Avatar extends Component {
                   <Image
                     onClick={this.handleSelect}
                     centered
+                    as="Button"
                     bordered
                     size="tiny"
                     src={imageURL + "justen.jpg"}
@@ -138,6 +149,7 @@ class Avatar extends Component {
                   <Image
                     onClick={this.handleSelect}
                     centered
+                    as="Button"
                     bordered
                     size="tiny"
                     src={imageURL + "kristy.png"}
@@ -145,6 +157,7 @@ class Avatar extends Component {
                   <Image
                     onClick={this.handleSelect}
                     centered
+                    as="Button"
                     bordered
                     size="tiny"
                     src={imageURL + "laura.jpg"}
@@ -152,6 +165,7 @@ class Avatar extends Component {
                   <Image
                     onClick={this.handleSelect}
                     centered
+                    as="Button"
                     bordered
                     size="tiny"
                     src={imageURL + "matt.jpg"}
@@ -159,6 +173,7 @@ class Avatar extends Component {
                   <Image
                     onClick={this.handleSelect}
                     centered
+                    as="Button"
                     bordered
                     size="tiny"
                     src={imageURL + "matthew.png"}
@@ -166,6 +181,7 @@ class Avatar extends Component {
                   <Image
                     onClick={this.handleSelect}
                     centered
+                    as="Button"
                     bordered
                     size="tiny"
                     src={imageURL + "molly.png"}
@@ -176,12 +192,14 @@ class Avatar extends Component {
                     onClick={this.handleSelect}
                     centered
                     bordered
+                    as="Button"
                     size="tiny"
                     src={imageURL + "nan.jpg"}
                   />
                   <Image
                     onClick={this.handleSelect}
                     centered
+                    as="Button"
                     bordered
                     size="tiny"
                     src={imageURL + "nom.jpg"}
@@ -189,6 +207,7 @@ class Avatar extends Component {
                   <Image
                     onClick={this.handleSelect}
                     centered
+                    as="Button"
                     bordered
                     size="tiny"
                     src={imageURL + "patrick.png"}
@@ -196,6 +215,7 @@ class Avatar extends Component {
                   <Image
                     onClick={this.handleSelect}
                     centered
+                    as="Button"
                     bordered
                     size="tiny"
                     src={imageURL + "steve.jpg"}
@@ -203,6 +223,7 @@ class Avatar extends Component {
                   <Image
                     onClick={this.handleSelect}
                     centered
+                    as="Button"
                     bordered
                     size="tiny"
                     src={imageURL + "stevie.jpg"}
@@ -210,6 +231,7 @@ class Avatar extends Component {
                   <Image
                     onClick={this.handleSelect}
                     centered
+                    as="Button"
                     bordered
                     size="tiny"
                     src={imageURL + "tom.jpg"}
@@ -217,12 +239,14 @@ class Avatar extends Component {
                   <Image
                     onClick={this.handleSelect}
                     centered
+                    as="Button"
                     bordered
                     size="tiny"
                     src={imageURL + "veronika.jpg"}
                   />
                   <Image
                     onClick={this.handleSelect}
+                    as="Button"
                     centered
                     bordered
                     size="tiny"
@@ -233,8 +257,8 @@ class Avatar extends Component {
               </div>
               <span>
                 <Modal.Actions>
-                  <Button type="image">Upload Image</Button>
-                  <Input type="image" />
+                  <Button type="file">Upload Image</Button>
+                  <Input type="file" />
                   <Divider hidden />
                   <Button
                     onClick={this.handleSetAvatar}
