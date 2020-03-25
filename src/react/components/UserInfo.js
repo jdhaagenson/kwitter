@@ -101,7 +101,7 @@ class UserInfo extends Component {
           </Card>
           <Avatar />
           <UpdateUser />
-          <Button className="get-messages-button">
+          <Button className="get-messages-button" fluid>
             <Icon name="comment alternate outline" />
             My Kites
           </Button>
@@ -134,7 +134,7 @@ class UserInfo extends Component {
           </Card>
           <Avatar />
           <UpdateUser open={this.props.handelModal} />
-          <Button className="get-messages-button">
+          <Button className="get-messages-button" fluid>
             <Icon name="comment alternate outline" />
             My Kites
           </Button>

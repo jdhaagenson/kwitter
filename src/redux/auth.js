@@ -45,7 +45,6 @@ export const reducers = {
     ...asyncCases(LOGIN),
     [LOGOUT.SUCCESS.toString()]: (state, action) => asyncInitialState
   }),
-
   logout: createReducer(asyncInitialState, {
     ...asyncCases(LOGOUT)
   })

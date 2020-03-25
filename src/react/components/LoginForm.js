@@ -93,10 +93,10 @@ class LoginForm extends React.Component {
               Not a member? Sign up <NavLink to="/registration">Here </NavLink>
             </Card.Description>
           </Card.Content>
-        </Card>
 
-        {loading && <Spinner name="circle" color="blue" />}
-        {error && <p style={{ color: "red" }}>{error.message}</p>}
+          {loading && <Spinner name="circle" color="blue" />}
+          {error && <p style={{ color: "red" }}>{error.message}</p>}
+        </Card>
       </React.Fragment>
     );
   }

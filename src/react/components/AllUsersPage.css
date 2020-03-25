@@ -1,0 +1,8 @@
+.all-users-page {
+  justify-items: center;
+  margin-left: 400px;
+  margin-right: 400px;
+  border-left: 3px solid #008e97;
+  border-right: 3px solid #008e97;
+  border-top: 50px solid white;
+}

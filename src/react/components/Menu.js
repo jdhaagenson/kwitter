@@ -2,18 +2,31 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import "./Menu.css";
 import { connect } from "react-redux";
-import { logout } from "../../redux";
-import { Dropdown, Icon, Input, Menu } from "semantic-ui-react";
+import { logout, deleteUser } from "../../redux";
+import {
+  Dropdown,
+  Icon,
+  Button,
+  Dimmer,
+  Header,
+  Menu
+} from "semantic-ui-react";
 import SearchBar from "./SearchBar";
 import UpdateUser from "./UpdateUser";
 import users from "../users.json";
 
 class MainMenu extends React.Component {
-  state = {};
+  state = { active: "" };
 
-  handleLogout = event => {
+  handleLogout = () => {
     // event.preventDefault();
     this.props.logout();
+  };
+
+  handleOpen = () => this.setState({ active: true });
+  handleClose = () => this.setState({ active: false });
+  handleDeleteUser = () => {
+    // this.props.deleteUser();
   };
 
   handleItemClick = (e, { name }) => this.setState({ activeItem: name });
@@ -90,6 +103,11 @@ class MainMenu extends React.Component {
                   text="logout"
                   onClick={this.handleLogout}
                 />
+                <Dropdown.Item
+                  icon="trash alternate"
+                  text="Delete Profile"
+                  onClick={(this.handleOpen, this.handleDeleteUser)}
+                />
               </Dropdown.Menu>
             </Dropdown>
           </Menu>
@@ -105,5 +123,5 @@ export default connect(
     loading: state.auth.logout.loading,
     error: state.auth.logout.error
   }),
-  { logout }
+  { logout, deleteUser }
 )(MainMenu);

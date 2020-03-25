@@ -31,7 +31,7 @@ class UpdateUser extends Component {
         <div>
           <Modal
             trigger={
-              <Button>
+              <Button fluid>
                 <Icon name="edit outline" />
                 Update Profile
               </Button>

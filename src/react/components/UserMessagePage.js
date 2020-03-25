@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { myMessages, likeMessage } from "../../redux";
+import userisAuthenticated from "../HOCs/userIsAuthenticated";
+
 import {
   Card,
   Form,
@@ -49,6 +51,7 @@ class UserMessagePage extends Component {
         </Sticky>
         <div id="user-message-page">
           <Card style={{ width: "50%" }} id="user-messages-card">
+            <h1> Your Kites</h1>
             <Card.Content>
               {this.props.result.map(each => (
                 <React.Fragment key={each.id}>
@@ -99,4 +102,4 @@ export default connect(
     error: state.messages.myMessages.error
   }),
   { myMessages, likeMessage }
-)(UserMessagePage);
+)(userisAuthenticated(UserMessagePage));

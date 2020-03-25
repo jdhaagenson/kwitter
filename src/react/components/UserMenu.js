@@ -1,14 +1,14 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { NavLink } from "react-router-dom";
-import { Menu, Segment } from "semantic-ui-react";
+import { Menu, Sticky } from "semantic-ui-react";
 import { logout } from "../../redux";
-import MessageFeed from "./MessageFeed";
+import logo from "./images/logo.png";
 import SearchBar from "./SearchBar";
 // import Profile from "../Profile"
 
 class UserMenu extends Component {
-  state = { activeItem: "home" };
+  state = { activeItem: "my messages" };
 
   handleItemClick = (e, { name }) => {
     this.setState({ activeItem: name });
@@ -23,33 +23,42 @@ class UserMenu extends Component {
 
     return (
       <div id="user-menu">
-        <Menu pointing secondary style={{ backgroundColor: "#f58220" }}>
-          <NavLink to="/">
-            {" "}
-            <Menu.Item
-              name="Home"
-              active={activeItem === "home"}
-              onClick={this.handleItemClick}
-            />
-          </NavLink>
-
-          <Menu.Item />
-          <NavLink to="/users">
-            <Menu.Item
-              name="All Users"
-              active={activeItem === "all users"}
-              onClick={this.handleItemClick}
-            />
-          </NavLink>
-          <Menu.Menu position="right">
-            <SearchBar />
-            <Menu.Item
-              name="logout"
-              active={activeItem === "logout"}
-              onClick={this.handleLogout}
-            />
-          </Menu.Menu>
-        </Menu>
+        <Sticky>
+          <Menu pointing secondary style={{ backgroundColor: "#f58220" }}>
+            <NavLink to="/">
+              {" "}
+              <Menu.Item
+                name="home"
+                active={activeItem === "home"}
+                onClick={this.handleItemClick}
+              />
+            </NavLink>
+            <NavLink to="/messagefeed">
+              {" "}
+              <Menu.Item
+                name="my messages"
+                active={activeItem === "my messages"}
+                onClick={this.handleItemClick}
+              />
+            </NavLink>
+            <Menu.Item />
+            <NavLink to="/users">
+              <Menu.Item
+                name="all Users"
+                active={activeItem === "all users"}
+                onClick={this.handleItemClick}
+              />
+            </NavLink>
+            <Menu.Menu position="right">
+              <SearchBar />
+              <Menu.Item
+                name="logout"
+                active={activeItem === "logout"}
+                onClick={this.handleLogout}
+              />
+            </Menu.Menu>
+          </Menu>
+        </Sticky>
       </div>
     );
   }

@@ -5,14 +5,16 @@ import { UserInfo, MessageFeed } from "../react/components";
 import "./Profile.css";
 import UserList from "./components/UserList";
 import logo from "./components/images/logo.png";
-import { Image } from "semantic-ui-react";
+import { Image, Icon } from "semantic-ui-react";
 
 class Profile extends React.Component {
   render() {
     return (
       <div id="profile">
         <Image src={logo} alt="logo" size="small" centered />
+
         <h2 className="heading">PROFILE</h2>
+        <Icon name="key" corner={"true" | "top right"} />
         <div id="profile-body">
           <div className="menu">
             <Menu

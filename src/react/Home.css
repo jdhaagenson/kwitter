@@ -7,12 +7,28 @@
   height: 100vh;
 }
 
+#registration-page {
+  display: flex;
+  background-color: #008e97;
+  justify-content: center;
+  text-align: center;
+  width: 100vw;
+  height: 100vh;
+}
+
 a:hover {
   color: #f58220;
   text-decoration: none;
 }
 
 #loginCard {
+  border: 10px solid #f58220;
+  width: auto;
+  height: auto;
+  -webkit-box-shadow: 8px 0px 53px 20px rgba(205, 255, 244, 0.72);
+  box-shadow: 8px 0px 53px 20px rgba(205, 255, 244, 0.72);
+}
+#registration-card {
   border: 10px solid #f58220;
   width: auto;
   height: auto;

@@ -27,8 +27,8 @@ export const createUser = userData => dispatch => {
 const UPDATE_USER = createActions("updateUser");
 export const updateUser = userData => (dispatch, getState) => {
   dispatch(UPDATE_USER.START());
-  const token=getState().auth.login.result.token
-  const username=getState().auth.login.result.username
+  const token = getState().auth.login.result.token;
+  const username = getState().auth.login.result.username;
 
   return fetch(url + "/" + username, {
     method: "PATCH",
@@ -53,7 +53,7 @@ export const getUser = username => dispatch => {
     .catch(err => Promise.reject(dispatch(GET_USER.FAIL(err))));
 };
 
-const SEARCH_USER = createActions('searchUser');
+const SEARCH_USER = createActions("searchUser");
 export const searchUser = () => dispatch => {
   dispatch(SEARCH_USER.START());
 
@@ -72,7 +72,24 @@ export const searchUser = () => dispatch => {
     .catch(err => Promise.reject(dispatch(SEARCH_USER.FAIL(err))));
 };
 
-const SET_PHOTO = createActions('setPhoto');
+const DELETE_USER = createActions("deleteUser");
+export const deleteUser = userData => (dispatch, getState) => {
+  const token = getState().auth.login.result.token;
+  const username = getState().auth.login.result.username;
+  dispatch(DELETE_USER.START());
+
+  return fetch(url + "/" + username, {
+    method: "DELETE",
+    headers: { Authorization: "Bearer " + token, ...jsonHeaders },
+    body: JSON.stringify(userData)
+  })
+    .then(handleJsonResponse)
+    .then(result => dispatch(DELETE_USER.SUCCESS(result)))
+
+    .catch(err => Promise.reject(dispatch(DELETE_USER.FAIL(err))));
+};
+
+const SET_PHOTO = createActions("setPhoto");
 export const setPhoto = (username, picture) => (dispatch, getState) => {
   dispatch(SET_PHOTO.START());
   const token = getState().auth.login.result.token;
@@ -84,10 +101,10 @@ export const setPhoto = (username, picture) => (dispatch, getState) => {
   })
     .then(handleJsonResponse)
     .then(result => dispatch(SET_PHOTO.SUCCESS(result)))
-    .catch(err => Promise.reject(dispatch(SET_PHOTO.FAIL(err))))
+    .catch(err => Promise.reject(dispatch(SET_PHOTO.FAIL(err))));
 };
 
-const GET_PHOTO = createActions('getPhoto');
+const GET_PHOTO = createActions("getPhoto");
 export const getPhoto = username => dispatch => {
   dispatch(GET_PHOTO.START());
 
@@ -96,11 +113,9 @@ export const getPhoto = username => dispatch => {
     headers: jsonHeaders
   })
     .then(handleJsonResponse)
-    .then(result=> dispatch(GET_PHOTO.SUCCESS(result)))
-    .catch(err => Promise.reject(dispatch(GET_PHOTO.FAIL(err))))
+    .then(result => dispatch(GET_PHOTO.SUCCESS(result)))
+    .catch(err => Promise.reject(dispatch(GET_PHOTO.FAIL(err))));
 };
-
-
 
 export const reducers = {
   updateUser: createReducer(asyncInitialState, {
@@ -108,6 +123,9 @@ export const reducers = {
   }),
   createUser: createReducer(asyncInitialState, {
     ...asyncCases(CREATE_USER)
+  }),
+  deleteUser: createReducer(asyncInitialState, {
+    ...asyncCases(DELETE_USER)
   }),
 
   getUser: createReducer(asyncInitialState, {
