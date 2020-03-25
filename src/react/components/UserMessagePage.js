@@ -3,16 +3,7 @@ import { connect } from "react-redux";
 import { myMessages, likeMessage } from "../../redux";
 import userisAuthenticated from "../HOCs/userIsAuthenticated";
 
-import {
-  Card,
-  Form,
-  Button,
-  Icon,
-  Feed,
-  Dimmer,
-  Loader,
-  Sticky
-} from "semantic-ui-react";
+import { Card, Icon, Feed, Dimmer, Loader, Sticky } from "semantic-ui-react";
 import moment from "moment";
 import "./UserMessagePage.css";
 import UserList from "./UserList";

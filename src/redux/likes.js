@@ -1,4 +1,3 @@
-import { store } from "../redux/index";
 import {
   domain,
   jsonHeaders,

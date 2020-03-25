@@ -1,13 +1,5 @@
 import React, { Component } from "react";
-import {
-  Card,
-  Modal,
-  Button,
-  Image,
-  Header,
-  Form,
-  Icon
-} from "semantic-ui-react";
+import { Card, Button, Image, Header, Icon } from "semantic-ui-react";
 import Avatar from "./Avatar";
 import { connect } from "react-redux";
 import { updateUser, getUser } from "../../redux";

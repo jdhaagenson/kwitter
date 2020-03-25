@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { getMessage } from "../../redux";
-import { NavLink } from "react-router-dom";
+
 import { Feed, Card, Icon, Loader, Dimmer } from "semantic-ui-react";
 import { likeMessage, unlikeMessage } from "../../redux";
 

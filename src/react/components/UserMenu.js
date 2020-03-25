@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { Menu, Sticky } from "semantic-ui-react";
 import { logout } from "../../redux";
-import logo from "./images/logo.png";
+
 import SearchBar from "./SearchBar";
 // import Profile from "../Profile"
 

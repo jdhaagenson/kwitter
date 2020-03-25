@@ -24,7 +24,7 @@ const _createMessage = messageData => (dispatch, getState) => {
 const GET_MESSAGE = createActions("getMessage");
 export const getMessage = messageData => (dispatch, getState) => {
   dispatch(GET_MESSAGE.START());
-  const token = getState().auth.login.result.token;
+
   return fetch(url + "?limit=65&offset=0")
     .then(handleJsonResponse)
     .then(result => {
@@ -40,7 +40,7 @@ export const getMessage = messageData => (dispatch, getState) => {
 const MY_MESSAGES = createActions("myMessages");
 export const myMessages = messageData => (dispatch, getState) => {
   dispatch(MY_MESSAGES.START());
-  const token = getState().auth.login.result.token;
+
   const username = getState().auth.login.result.username;
   return fetch(url + "?limit=100&offset=0&username=" + username)
     .then(handleJsonResponse)
