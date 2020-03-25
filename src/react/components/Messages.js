@@ -54,7 +54,6 @@ class Messages extends Component {
   }
 
   handleLike = (e, id) => {
-    console.log(id);
     this.props.likeMessage(id);
   };
 

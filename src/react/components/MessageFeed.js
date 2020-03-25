@@ -12,17 +12,17 @@ class MessageFeed extends Component {
   };
 
   handleKweet = e => {
-     if (e.key === "Enter") {
-       e.preventDefault();
-    this.props.createMessage(this.state.text);
-    this.setState({ text: "" })
-  }
+    if (e.key === "Enter") {
+      e.preventDefault();
+      this.props.createMessage(this.state.text);
+      this.setState({ text: "" });
+    }
 
     e.preventDefault();
     this.props.createMessage(this.state.text);
     this.setState({ text: "" });
     // this.setState({ value: "" });
-  }
+  };
 
   handleChange = e => {
     e.preventDefault();
@@ -32,7 +32,10 @@ class MessageFeed extends Component {
   render() {
     return (
       <React.Fragment>
-        <Card className="kweet-form-card" style={{ width: "100%" }}>
+        <Card
+          className="kweet-form-card"
+          style={{ width: "100%", border: "1px solid #008e97" }}
+        >
           <Form className="kweet-form">
             <Form.Field>
               <label htmlFor="text"> </label>
@@ -57,7 +60,7 @@ class MessageFeed extends Component {
           </Button>
         </Card>
 
-        <Card style={{ width: "100%" }}>
+        <Card style={{ width: "100%", border: "1px solid #008e97" }}>
           <Card.Content>
             <Messages />
           </Card.Content>

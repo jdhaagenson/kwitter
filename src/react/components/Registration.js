@@ -65,12 +65,15 @@ class Registration extends React.Component {
                   onChange={this.handleChange}
                 ></input>
               </Form.Field>
+
               <Form.Field>
                 <Checkbox label="I agree to the Terms and Conditions" />
               </Form.Field>
               <Button type="submit" disabled={loading}>
                 <NavLink to="/"> Sign Up</NavLink>
               </Button>
+
+              <NavLink to="/"> Already a Member</NavLink>
             </Form>
           </Card.Content>
         </Card>
