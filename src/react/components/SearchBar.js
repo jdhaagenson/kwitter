@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { searchUser } from "../../redux";
+import { getUser, searchUser } from "../../redux";
 import { Grid, Icon, Label, Loader, Search } from "semantic-ui-react";
 // import moment from "moment";
 import "./SearchBar.css";
@@ -31,8 +31,6 @@ class SearchBar extends Component {
     value: ""
   };
 
-  handleResultSelect = (e, { result }) =>
-    this.setState({ value: result.username });
 
   handleSearchChange = (e, { value }) => {
     this.setState({ isLoading: true, value });
@@ -51,14 +49,13 @@ class SearchBar extends Component {
   };
   handleChange = e => {
     e.preventDefault();
-    this.setState({ text: e.target.value });
+    this.setState({text: e.target.value});
   };
 
-  handleSearch = e => {
-    e.preventDefault();
-    this.props.getUser(this.state.value);
-    this.setState({value: ""});
-  };
+  handleResultSelect = (e, result) =>
+    this.setState({value: result.username});
+
+
   componentDidMount() {
     this.props.searchUser();
   }
@@ -105,5 +102,5 @@ export default connect(
     loading: state.users.searchUser.loading,
     error: state.users.searchUser.error
   }),
-  { searchUser }
+  {searchUser, getUser}
 )(SearchBar);

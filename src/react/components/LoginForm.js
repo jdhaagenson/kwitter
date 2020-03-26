@@ -4,8 +4,9 @@ import { connect } from "react-redux";
 import { login } from "../../redux";
 import "./LoginForm.css";
 import { NavLink } from "react-router-dom";
-import { Card, Image, Form, Checkbox, Button, Icon } from "semantic-ui-react";
+import { Button, Card, Checkbox, Form, Icon, Image } from "semantic-ui-react";
 import GoogleLogin from "react-google-login";
+import logo from "./images/logo.jpg"
 
 class LoginForm extends React.Component {
   state = { username: "", password: "" };
@@ -28,7 +29,7 @@ class LoginForm extends React.Component {
       <React.Fragment>
         <Card className="login-form">
           <Image
-            src="src/react/components/images/logo.jpg"
+            src={logo}
             wrapped
             ui={false}
           />

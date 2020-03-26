@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import { Button, Form, Image, Input, Modal } from "semantic-ui-react";
+import { Button, Form, Icon, Image, Input, Modal } from "semantic-ui-react";
 import { connect } from "react-redux";
 import { getUser, setPhoto } from "../../redux";
+import defaultAvatar from "./images/default_avatar.png"
 
 // const defaultImages = [
 //   'rachel.png', 'ade.jpg', 'chris.jpg', 'christian.jpg', 'daniel.jpg', 'elliot.jpg', 'elyse.png',
@@ -18,14 +19,19 @@ import { getUser, setPhoto } from "../../redux";
 
 class UploadPhoto extends Component {
   state = {
-    open: false
+    open: false,
   };
 
+  handleOpen = event => {
+    event.preventDefault();
+    this.setState({open: true})
+  };
 
   handleUploadPicture = event => {
     event.preventDefault();
     const picture = new FormData(event.target);
-    this.props.setPhoto(this.props.username, picture)
+    this.props.setPhoto(this.props.username, picture);
+    this.setState({open: false})
   };
 
   componentDidMount() {
@@ -34,16 +40,18 @@ class UploadPhoto extends Component {
 
   render() {
     const error = this.props;
-    if (this.props.username != this.props.loggedInUsername)
+    // if (this.props.username === this.props.loggedInUsername)
       return (
 
         <React.Fragment>
-          <Modal open={this.state.open} trigger={<Button>Upload Profile Picture</Button>}>
+          <Modal open={this.state.open}
+                 trigger={<Button fluid color={"teal"} onClick={this.handleOpen}
+                 ><Icon name={'upload'}/>Upload Profile Picture</Button>}>
             <Modal.Content image>
               <Image
                 wrapped
                 size="medium"
-                src="https://react.semantic-ui.com/images/avatar/large/rachel.png"
+                src={defaultAvatar}
               />
               <Form>
                 <Input
@@ -61,7 +69,6 @@ class UploadPhoto extends Component {
 
             </Modal.Content>
           </Modal>
-          <Button className="get-messages-button">My Darts</Button>
 
                 {error && <p style={{ color: "red" }}>{error.message}</p>}
             </React.Fragment>
@@ -75,7 +82,7 @@ export default connect(
     updateLoading: state.users.setPhoto.loading,
     updateError: state.users.setPhoto.error,
     createResult: state.users.getUser.result,
-    loggedInUsername: state.auth.login.result.username
+    // loggedInUsername: state.auth.login.result.username
   }),
   {setPhoto, getUser}
 )(UploadPhoto);

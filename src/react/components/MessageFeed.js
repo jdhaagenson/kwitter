@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { createMessage } from "../../redux";
-import { Card, Form, Button, Icon } from "semantic-ui-react";
+import { Button, Card, Form, Icon } from "semantic-ui-react";
 // import moment from "moment";
 import "./MessageFeed.css";
 import Messages from "./Messages";
@@ -11,16 +11,16 @@ class MessageFeed extends Component {
     text: ""
   };
 
-  handleKweet = e => {
+  handleCreate = e => {
     if (e.key === "Enter") {
       e.preventDefault();
       this.props.createMessage(this.state.text);
-      this.setState({ text: "" });
+      this.setState({text: ""});
     }
 
     e.preventDefault();
     this.props.createMessage(this.state.text);
-    this.setState({ text: "" });
+    this.setState({text: ""});
     // this.setState({ value: "" });
   };
 
@@ -48,7 +48,7 @@ class MessageFeed extends Component {
                 autoFocus
                 required
                 onChange={this.handleChange}
-              ></input>
+              />
             </Form.Field>
           </Form>
           <Button
@@ -56,7 +56,7 @@ class MessageFeed extends Component {
             type="submit"
             onClick={this.handleKweet}
           >
-            Kweet <Icon name="paper plane outline" />
+            Throw Dart <Icon name="paper plane outline"/>
           </Button>
         </Card>
 

@@ -1,20 +1,22 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { NavLink } from "react-router-dom";
-import { Menu, Segment } from "semantic-ui-react";
+import { Menu } from "semantic-ui-react";
 import { logout } from "../../redux";
-import MessageFeed from "./MessageFeed";
+// import MessageFeed from "./MessageFeed";
 import SearchBar from "./SearchBar";
+
 // import Profile from "../Profile"
 
 class UserMenu extends Component {
   state = { activeItem: "home" };
 
   handleItemClick = (e, { name }) => {
-    this.setState({ activeItem: name });
+    e.preventDefault();
+    this.setState({activeItem: name});
   };
 
   handleLogout = event => {
+    event.preventDefault();
     this.props.logout();
   };
 
@@ -28,6 +30,8 @@ class UserMenu extends Component {
             name="Home"
             active={activeItem === "home"}
             onClick={this.handleItemClick}
+            content={"Home"}
+
           />
           <Menu.Item
             name="messages"

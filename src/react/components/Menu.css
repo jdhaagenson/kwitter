@@ -1,3 +1,18 @@
-.ui.menu.item {
+Menu {
+    background-color: lightseagreen;
     color: white;
+}
+
+div.text {
+    color: white;
+}
+
+a.item.menu-link {
+    color: white;
+    link: white;
+}
+
+NavLink {
+    color: white;
+    link: white;
 }

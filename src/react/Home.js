@@ -1,5 +1,5 @@
 import React from "react";
-import { LoginForm, Menu } from "./components";
+import { LoginForm, MainMenu } from "./components";
 import { userIsNotAuthenticated } from "./HOCs";
 import "./Home.css";
 
@@ -7,7 +7,7 @@ class Home extends React.Component {
   render() {
     return (
       <div id="home-page">
-        <Menu />
+        <MainMenu/>
 
         <LoginForm />
       </div>

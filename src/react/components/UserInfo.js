@@ -1,58 +1,63 @@
 import React, { Component } from "react";
-import { Button, Card, Header, Icon, Image } from "semantic-ui-react";
-import Avatar from "./Avatar";
+import { Button, Card, Divider, Header, Icon, Image } from "semantic-ui-react";
+import UploadPhoto from "./UploadPhoto";
 import { connect } from "react-redux";
 import { getUser, updateUser } from "../../redux";
 import UpdateInfo from "./UpdateInfo";
 import { NavLink } from "react-router-dom";
+import default_avatar from "./images/default_avatar.png"
 
-const defaultImages = [
-  "rachel.png",
-  "ade.jpg",
-  "chris.jpg",
-  "christian.jpg",
-  "daniel.jpg",
-  "elliot.jpg",
-  "elyse.png",
-  "helen.jpg",
-  "jenny.jpg",
-  "joe.jpg",
-  "justen.jpg",
-  "kristy.png",
-  "laura.jpg",
-  "matt.jpg",
-  "matthew.png",
-  "molly.png",
-  "nan.jpg",
-  "nom.jpg",
-  "patrick.png",
-  "steve.jpg",
-  "stevie.jpg",
-  "tom.jpg",
-  "veronika.jpg",
-  "zoe.jpg"
-];
-const imageURL = "https://react.semantic-ui.com/images/avatar/large/";
-const randomAvatar = () => {
-  let min = 0;
-  let max = 23;
-  let r = Math.floor(Math.random() * (max - min + 1)) + min;
-  return imageURL + defaultImages[r];
-};
+// const defaultImages = [
+//   "rachel.png",
+//   "ade.jpg",
+//   "chris.jpg",
+//   "christian.jpg",
+//   "daniel.jpg",
+//   "elliot.jpg",
+//   "elyse.png",
+//   "helen.jpg",
+//   "jenny.jpg",
+//   "joe.jpg",
+//   "justen.jpg",
+//   "kristy.png",
+//   "laura.jpg",
+//   "matt.jpg",
+//   "matthew.png",
+//   "molly.png",
+//   "nan.jpg",
+//   "nom.jpg",
+//   "patrick.png",
+//   "steve.jpg",
+//   "stevie.jpg",
+//   "tom.jpg",
+//   "veronika.jpg",
+//   "zoe.jpg"
+// ];
+// const imageURL = "https://react.semantic-ui.com/images/avatar/large/";
+// const randomAvatar = () => {
+//   let min = 0;
+//   let max = 23;
+//   let r = Math.floor(Math.random() * (max - min + 1)) + min;
+//   return imageURL + defaultImages[r];
+// };
 
 class UserInfo extends Component {
   state = {
     displayName: "",
     password: "",
     about: "Update profile to add something about yourself.",
-    image: randomAvatar(),
+    image: default_avatar,
     open: false
   };
 
   handleUserUpdate = e => {
     e.preventDefault();
-    this.props.updateUser(this.state);
-    this.setState({ open: false });
+    this.props.updateUser({
+      password: this.state.password,
+      about: this.state.about,
+      displayName: this.state.displayName
+    });
+    this.setState({open: false});
   };
 
   handleChange = e => {
@@ -88,15 +93,18 @@ class UserInfo extends Component {
             <Image src={this.state.image} />
             <Header>{this.props.displayName}</Header>
             <Card.Meta>{"@" + this.props.username}</Card.Meta>
+            <Divider hidden/>
             <Card.Meta>
-              <span className="date" icon="calendar alternate outline">
+              <span className="date">
                 <Icon name="calendar alternate outline"/>
                 Joined in 2020
               </span>
             </Card.Meta>
+            <Divider/>
             <Card.Description>{user.about}</Card.Description>
           </Card>
-          <Avatar/>
+          <Divider/>
+          <UploadPhoto/>
           <UpdateInfo username={this.props.username} displayName={this.props.displayName}/>
           <Button className="get-messages-button">
             <Icon name="comment alternate outline"/>
@@ -117,25 +125,27 @@ class UserInfo extends Component {
             <Image src={this.state.image}/>
             <Header><NavLink
               to={`/profiles/:${user.username}`}>{this.props.createResult.user.displayName}</NavLink></Header>
+            <Divider hidden/>
             <Card.Meta>{"@" + this.props.username}</Card.Meta>
+            <Divider/>
             <Card.Meta>
-              <span className="date" icon="calendar alternate outline">
+              <span className="date">
                 <Icon name="calendar alternate outline"/>
                 Joined in 2020
               </span>
             </Card.Meta>
+            <Divider hidden/>
             <Card.Description>
               {" "}
               {this.props.createResult.user.about ||
               "Tell us something about yourself"}
             </Card.Description>
           </Card>
-          <Avatar/>
+          <Divider hidden/>
+          <UploadPhoto username={this.props.username}/>
+          <Divider hidden/>
           <UpdateInfo/>
-          <Button className="get-messages-button">
-            <Icon name="comment alternate outline"/>
-            My Darts
-          </Button>
+
           {error && <p style={{color: "red"}}>{error.message}</p>}
         </React.Fragment>
       );

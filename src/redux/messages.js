@@ -1,12 +1,13 @@
 import {
-  domain,
-  jsonHeaders,
-  handleJsonResponse,
-  asyncInitialState,
   asyncCases,
+  asyncInitialState,
   createActions,
-  createReducer
+  createReducer,
+  domain,
+  handleJsonResponse,
+  jsonHeaders
 } from "./helpers";
+
 const url = domain + "/messages";
 const CREATE_MESSAGE = createActions("createMessage");
 const _createMessage = messageData => (dispatch, getState) => {
@@ -59,6 +60,21 @@ export const createMessage = messageData => dispatch => {
     dispatch(getMessage());
   });
 };
+
+const DELETE_MESSAGE = createActions('deleteMessage');
+export const deleteMessage = messageId => (dispatch, getState) => {
+  const token = getState().auth.login.result.token;
+  dispatch(DELETE_MESSAGE.START());
+
+  return fetch(url + "/" + messageId, {
+    method: "DELETE",
+    headers: {Authorization: "Bearer " + token, ...jsonHeaders}
+  })
+    .then(handleJsonResponse)
+    .then(result => dispatch(DELETE_MESSAGE.SUCCESS(result)))
+    .catch(err => Promise.reject(dispatch(DELETE_MESSAGE.FAIL(err))))
+};
+
 export const reducers = {
   createMessage: createReducer(asyncInitialState, {
     ...asyncCases(CREATE_MESSAGE)
@@ -68,5 +84,8 @@ export const reducers = {
   }),
   myMessages: createReducer(asyncInitialState, {
     ...asyncCases(MY_MESSAGES)
+  }),
+  deleteMessage: createReducer(asyncInitialState, {
+    ...asyncCases(DELETE_MESSAGE)
   })
 };

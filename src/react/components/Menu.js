@@ -22,7 +22,7 @@ class MainMenu extends React.Component {
     return (
       <React.Fragment>
         {this.props.isAuthenticated && (
-          <Menu fluid vertical style={{backgroundColor: "#008e97"}}>
+          <Menu fluid vertical style={{backgroundColor: "#88dd43"}}>
             <Menu.Item>
               <SearchBar
                 loading={this.props.isLoading}
@@ -65,7 +65,7 @@ class MainMenu extends React.Component {
               active={activeItem === "profile"}
               onClick={this.handleItemClick}
             >
-              <Icon name="grid layout"/>
+              <Icon name="user"/>
               <NavLink to={`/profiles/${this.props.username}`}>My Profile</NavLink>
             </Menu.Item>
             <Menu.Item
@@ -102,7 +102,7 @@ export default connect(
     result: state.auth.logout.result,
     loading: state.auth.logout.loading,
     error: state.auth.logout.error,
-    username: state.auth.login.result.username
+    // username: state.auth.login.result.username
   }),
   { logout }
 )(MainMenu);

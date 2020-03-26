@@ -1,42 +1,36 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { searchUser } from "../../redux";
-import { Card, Divider, Header, Image } from "semantic-ui-react";
+import { getPhoto, searchUser } from "../../redux";
+import { Card, Divider, Header, Icon, Image } from "semantic-ui-react";
 import { NavLink } from 'react-router-dom'
+import defaultAvatar from "./images/default_avatar.png"
 
-const defaultImages = [
-  "rachel.png",
-  "ade.jpg",
-  "chris.jpg",
-  "christian.jpg",
-  "daniel.jpg",
-  "elliot.jpg",
-  "elyse.png",
-  "helen.jpg",
-  "jenny.jpg",
-  "joe.jpg",
-  "justen.jpg",
-  "kristy.png",
-  "laura.jpg",
-  "matt.jpg",
-  "matthew.png",
-  "molly.png",
-  "nan.jpg",
-  "nom.jpg",
-  "patrick.png",
-  "steve.jpg",
-  "stevie.jpg",
-  "tom.jpg",
-  "veronika.jpg",
-  "zoe.jpg"
-];
-const imageURL = "https://react.semantic-ui.com/images/avatar/large/";
-const randomAvatar = () => {
-  let min = 0;
-  let max = 24;
-  let r = Math.floor(Math.random() * (max - min + 1)) + min;
-  return imageURL + defaultImages[r];
-};
+// const defaultImages = [
+//   "rachel.png",
+//   "ade.jpg",
+//   "chris.jpg",
+//   "christian.jpg",
+//   "daniel.jpg",
+//   "elliot.jpg",
+//   "elyse.png",
+//   "helen.jpg",
+//   "jenny.jpg",
+//   "joe.jpg",
+//   "justen.jpg",
+//   "kristy.png",
+//   "laura.jpg",
+//   "matt.jpg",
+//   "matthew.png",
+//   "molly.png",
+//   "nan.jpg",
+//   "nom.jpg",
+//   "patrick.png",
+//   "steve.jpg",
+//   "stevie.jpg",
+//   "tom.jpg",
+//   "veronika.jpg",
+//   "zoe.jpg"
+// ];
 
 class UserList extends Component {
   componentDidMount() {
@@ -50,12 +44,12 @@ class UserList extends Component {
 
     return (
       <div >
-        <Header>Users</Header>
-        <Card style={{ width: "100%" }} >
+        <Header><Icon name={"users"}/>Users</Header>
+        <Card style={{width: "100%"}}>
           <Card.Content>
             {this.props.result.map(each => (
               <React.Fragment key={each.id}>
-                <Image src={each.pictureLocation || randomAvatar()} avatar/>
+                <Image src={each.pictureLocation || defaultAvatar} avatar/>
                 <span><NavLink to={`/profiles/${each.username}`}>{each.username}</NavLink></span>
                 <Divider/>
               </React.Fragment>
@@ -75,5 +69,5 @@ export default connect(
     loading: state.users.searchUser.loading,
     error: state.users.searchUser.error
   }),
-  { searchUser }
+  {searchUser, getPhoto}
 )(UserList);

@@ -1,20 +1,12 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { myMessages, likeMessage } from "../../redux";
-import {
-  Card,
-  Form,
-  Button,
-  Icon,
-  Feed,
-  Dimmer,
-  Loader,
-  Sticky
-} from "semantic-ui-react";
+import { deleteMessage, likeMessage, myMessages } from "../../redux";
+import { Card, Dimmer, Feed, Icon, Loader, Sticky } from "semantic-ui-react";
 import moment from "moment";
 import "./UserMessagePage.css";
 import UserList from "./UserList";
 import UserMenu from "./UserMenu";
+import defaultAvatar from "./images/default_avatar.png"
 
 class UserMessagePage extends Component {
   componentDidMount() {
@@ -54,12 +46,17 @@ class UserMessagePage extends Component {
                 <React.Fragment key={each.id}>
                   <Feed>
                     <Feed.Event>
-                      <Feed.Label image="https://react.semantic-ui.com/images/avatar/large/rachel.png" />
+                      <Icon
+                        name="x"
+                        corner={"top left"}
+                        color={"grey"}
+                        onClick={e => this.props.deleteMessage(e, each.id)}/>
+                      <Feed.Label image={defaultAvatar}/>
                       <Feed.Content>
                         <Feed.Summary>
                           You posted
                           <Feed.Date>
-                            <Icon name="clock outline" />
+                            <Icon name="clock outline"/>
                             {moment(each.createdAt).fromNow()}
                           </Feed.Date>
                         </Feed.Summary>
@@ -98,5 +95,5 @@ export default connect(
     loading: state.messages.myMessages.loading,
     error: state.messages.myMessages.error
   }),
-  { myMessages, likeMessage }
+  {myMessages, likeMessage, deleteMessage}
 )(UserMessagePage);

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Button, Form, Header, Icon, Image, Modal } from "semantic-ui-react";
 import { connect } from "react-redux";
 import { getUser, updateUser } from "../../redux";
+import defaultAvatar from "./images/default_avatar.png"
 
 
 class UpdateInfo extends Component {
@@ -53,7 +54,7 @@ class UpdateInfo extends Component {
               <Image
                 wrapped
                 size="medium"
-                src="https://react.semantic-ui.com/images/avatar/large/rachel.png"
+                src={defaultAvatar}
               />
               <Modal.Description>
                 <Header>User info</Header>
