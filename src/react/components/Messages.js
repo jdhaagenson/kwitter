@@ -5,9 +5,7 @@ import { getMessage } from "../../redux";
 import { Feed, Card, Icon, Loader, Dimmer } from "semantic-ui-react";
 import { likeMessage, unlikeMessage } from "../../redux";
 
-import moment from "moment";
 import "./MessageFeed.css";
-
 const defaultImages = [
   "rachel.png",
   "ade.jpg",
@@ -41,22 +39,17 @@ const randomAvatar = () => {
   let r = Math.floor(Math.random() * (max - min + 1)) + min;
   return imageURL + defaultImages[r];
 };
-
 class Messages extends Component {
   componentDidMount() {
     this.props.getMessage();
   }
-
   componentDidUpdate(prevProps) {
     if (this.props.result !== prevProps) {
-      // this.props.getMessage();
     }
   }
-
   handleLike = (e, id) => {
     this.props.likeMessage(id);
   };
-
   handleUnLike = (e, id) => {
     e.preventDefault();
     let newMessage = [];
@@ -68,13 +61,10 @@ class Messages extends Component {
         return like.username === this.props.username;
       });
       this.props.unlikeMessage(myLike[0].id);
-
       console.log(myLike[0].id);
     }
-
     console.log(newMessage);
   };
-
   render() {
     if (this.props.result === null) {
       return (
@@ -87,10 +77,9 @@ class Messages extends Component {
         </div>
       );
     }
-
     return (
       <Card style={{ width: "100%" }}>
-        <Card.Content>
+        <Card.Content style={{ height: "750px", overflow: "scroll" }}>
           {this.props.result.map(each => (
             <React.Fragment key={each.id}>
               <Feed>
@@ -101,7 +90,7 @@ class Messages extends Component {
                       {each.username} posted on their page
                       <Feed.Date>
                         <Icon name="clock outline" />
-                        {moment(each.createdAt).fromNow()}
+                        {/* {moment(each.createdAt).fromNow()} */}
                       </Feed.Date>
                     </Feed.Summary>
                     <Feed.Extra text>{each.text}</Feed.Extra>
@@ -128,14 +117,12 @@ class Messages extends Component {
               </Feed>
             </React.Fragment>
           ))}
-
           {/* <Feed className="message-feed" events={handleMessages} /> */}
         </Card.Content>
       </Card>
     );
   }
 }
-
 export default connect(
   state => ({
     result: state.messages.getMessage.result,

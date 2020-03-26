@@ -1,15 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { searchUser } from "../../redux";
-import {
-  Card,
-  Image,
-  Divider,
-  Header,
-  Dimmer,
-  Loader
-} from "semantic-ui-react";
-
+import { Card, Image, Divider, Header } from "semantic-ui-react";
+import users from "../users.json";
 const defaultImages = [
   "rachel.png",
   "ade.jpg",
@@ -43,38 +36,28 @@ const randomAvatar = () => {
   let r = Math.floor(Math.random() * (max - min + 1)) + min;
   return imageURL + defaultImages[r];
 };
-
 class UserList extends Component {
   componentDidMount() {
     this.props.searchUser();
   }
-
   render() {
     if (this.props.result === null) {
-      return (
-        <div>
-          <Card style={{ width: "100%" }}>
-            <Dimmer active inverted>
-              <Loader inverted>Getting Users</Loader>
-            </Dimmer>
-          </Card>
-        </div>
-      );
+      return <div>empty</div>;
     }
-
     return (
       <div>
         <Header>Users</Header>
-        <Card style={{ width: "100%" }}>
+        <Card style={{ width: "100%", height: "45em", overflow: "scroll" }}>
           <Card.Content>
             {this.props.result.map(each => (
               <React.Fragment key={each.id}>
+                {/* <div style={{height: "50px", overflow: "scroll" }}> */}
                 <Image src={each.pictureLocation || randomAvatar()} avatar />
                 <span>{each.username}</span>
                 <Divider />
+                {/* </div> */}
               </React.Fragment>
             ))}
-
             {/* <Feed className="message-feed" events={handleMessages} /> */}
           </Card.Content>
         </Card>
@@ -82,7 +65,6 @@ class UserList extends Component {
     );
   }
 }
-
 export default connect(
   state => ({
     result: state.users.searchUser.result,
