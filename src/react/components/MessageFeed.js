@@ -56,7 +56,7 @@ class MessageFeed extends Component {
             type="submit"
             onClick={this.handleKweet}
           >
-            Dart <Icon name="paper plane outline" />
+            Dart <Icon name="target" />
           </Button>
         </Card>
 
