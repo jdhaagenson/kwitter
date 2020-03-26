@@ -43,8 +43,6 @@ starting scaffolding architecture can be found in [this dependency graph](https:
 ## Submission
 
 1. git repo url - this is the url that has your frontend kwitter project source code
-2. heroku frontend url - this is the url for your front-end deployment (in-class activity)
-3. heroku backend url - this is the url for your copy of the backend kwitter api deployment (in-class activity)
-4. Scrum board - this shows your scrum board which has tickets with descriptions and assignees. it could be a trello board or a gitlab/github project board or similar.
-5. Retrospective board or notes - show that your team discussed how to improve its process through notes about what went well/what went poorly/action items. 
+2. Scrum board - this shows your scrum board which has tickets with descriptions and assignees. it could be a trello board or a gitlab/github project board or similar.
+3. Retrospective board or notes - show that your team discussed how to improve its process through notes about what went well/what went poorly/action items. 
 It could be general notes or a funretro.io board.
