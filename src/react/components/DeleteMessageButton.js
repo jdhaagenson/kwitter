@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { deleteMessage, getMessage } from "../../redux";
-import { Icon, Menu, Message } from 'semantic-ui-react';
+import { Button, Icon, Menu, Message } from 'semantic-ui-react';
 
 
 class DeleteMessageButton extends Component {
@@ -26,6 +26,7 @@ class DeleteMessageButton extends Component {
           name="x"
           corner="top right"
           color="grey"
+          as={Button}
           onClick={this.handleDeleteMessage()}
         />
         {message && <Message content={message}/>}

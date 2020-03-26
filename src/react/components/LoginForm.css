@@ -1,7 +1,21 @@
-#login-form {
+div.page {
+  display: inline-flex;
+  justify-content: space-evenly;
+}
 
+Card.login-form {
+  justify-content: space-between;
   margin: auto;
   display: flex;
   flex-direction: column;
-  max-width: 20em;
+  max-width: 100em;
+}
+
+Image.gif {
+  margin: auto;
+  box-sizing: border-box;
+}
+
+Card.registration {
+  height:
 }

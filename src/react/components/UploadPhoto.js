@@ -48,7 +48,8 @@ class UploadPhoto extends Component {
                  trigger={<Button fluid color={"teal"} onClick={this.handleOpen}
                  ><Icon name={'upload'}/>Upload Profile Picture</Button>}>
             <Modal.Content image>
-              <Image
+
+            <Image
                 wrapped
                 size="medium"
                 src={defaultAvatar}

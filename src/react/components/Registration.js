@@ -4,8 +4,9 @@ import { connect } from "react-redux";
 import { createUser } from "../../redux";
 import "./LoginForm.css";
 
-import { Card, Image, Form, Checkbox, Button } from "semantic-ui-react";
+import { Button, Card, Form, Image } from "semantic-ui-react";
 import { NavLink } from "react-router-dom";
+import signup from "./images/Sign In.gif"
 
 class Registration extends React.Component {
   state = { username: "", password: "", displayName: "" };
@@ -22,19 +23,21 @@ class Registration extends React.Component {
   render() {
     const { loading, error } = this.props;
     return (
-      <React.Fragment>
-        <Card>
-          <Image src="/images/avatar/large/rachel.png" wrapped ui={false} />
-          <Card.Content>
-            <Card.Header>Sign Up</Card.Header>
-            <Card.Meta>
-              <span>Please </span>
-            </Card.Meta>
+      <div className={'page'}>
+        <Image src={signup} wrapped size={'massive'} className="gif" ui={false}/>
+        <div className={"container-card"}>
 
-            <Form onSubmit={this.handleRegistration}>
-              <Form.Field>
-                <label htmlFor="username">Username:</label>
-                <input
+          <Card className={'login-form'}>
+            <Card.Content>
+              <Card.Header>Sign Up</Card.Header>
+              <Card.Meta>
+                <span>Choose a username.</span>
+              </Card.Meta>
+
+              <Form onSubmit={this.handleRegistration}>
+                <Form.Field>
+                  <label htmlFor="username">Username:</label>
+                  <input
                   type="text"
                   name="username"
                   autoFocus
@@ -63,24 +66,26 @@ class Registration extends React.Component {
                   autoFocus
                   required
                   onChange={this.handleChange}
-                ></input>
+                />
               </Form.Field>
 
-              <Form.Field>
-                <Checkbox label="I agree to the Terms and Conditions" />
-              </Form.Field>
-              <Button type="submit" disabled={loading}>
-                <NavLink to="/"> Sign Up</NavLink>
-              </Button>
+                {/*<Form.Field>*/}
+                {/*  <Checkbox label="I agree to the Terms and Conditions" />*/}
+                {/*</Form.Field>*/}
+                <Button type="submit" disabled={loading}>
+                  <NavLink to="/"> Sign Up</NavLink>
+                </Button>
 
-              <NavLink to="/"> Already a Member</NavLink>
-            </Form>
-          </Card.Content>
-        </Card>
+                <NavLink to="/"> Already a Member</NavLink>
+              </Form>
+            </Card.Content>
+          </Card>
+        </div>
 
-        {loading && <Spinner name="circle" color="blue" />}
-        {error && <p style={{ color: "red" }}>{error.message}</p>}
-      </React.Fragment>
+
+        {loading && <Spinner name="circle" color="blue"/>}
+        {error && <p style={{color: "red"}}>{error.message}</p>}
+      </div>
     );
   }
 }
