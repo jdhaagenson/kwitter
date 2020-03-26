@@ -19,9 +19,9 @@ class WhoToFollow extends Component {
               <Image
                 size={"massive"}
                 avatar
-                src="https://react.semantic-ui.com/images/avatar/small/lena.png"
+                src="https://react.semantic-ui.com/images/avatar/small/veronika.jpg"
               />
-              <List.Content>Lena</List.Content>
+              <List.Content>Brengi</List.Content>
             </List.Item>
             <List.Item>
               <List.Content floated="right">
@@ -32,7 +32,7 @@ class WhoToFollow extends Component {
                 avatar
                 src="https://react.semantic-ui.com/images/avatar/small/lindsay.png"
               />
-              <List.Content>Lindsay</List.Content>
+              <List.Content>Jordan</List.Content>
             </List.Item>
             <List.Item>
               <List.Content floated="right">
@@ -43,7 +43,7 @@ class WhoToFollow extends Component {
                 avatar
                 src="https://react.semantic-ui.com/images/avatar/small/mark.png"
               />
-              <List.Content>Mark</List.Content>
+              <List.Content>Joe</List.Content>
             </List.Item>
             <List.Item>
               <List.Content floated="right">
@@ -52,9 +52,9 @@ class WhoToFollow extends Component {
               <Image
                 size={"massive"}
                 avatar
-                src="https://react.semantic-ui.com/images/avatar/small/molly.png"
+                src="https://react.semantic-ui.com/images/avatar/small/jenny.jpg"
               />
-              <List.Content>Molly</List.Content>
+              <List.Content>Frank</List.Content>
             </List.Item>
             <List.Item>
               <List.Content floated="right">
@@ -63,9 +63,9 @@ class WhoToFollow extends Component {
               <Image
                 size={"massive"}
                 avatar
-                src="https://react.semantic-ui.com/images/avatar/small/lena.png"
+                src="https://react.semantic-ui.com/images/avatar/small/joe.jpg"
               />
-              <List.Content>Lena</List.Content>
+              <List.Content>Darion</List.Content>
             </List.Item>
           </List>
         </Segment>

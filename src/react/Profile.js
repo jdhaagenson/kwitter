@@ -13,7 +13,7 @@ class Profile extends React.Component {
   render() {
     return (
       <div id="profile">
-        <Image src={logo} alt="logo" size="small" centered />
+        <Image  className="logo" src={logo} alt="logo" size="small" centered />
         <h2 className="heading">PROFILE</h2>
         <div id="profile-body">
           <div className="menu">

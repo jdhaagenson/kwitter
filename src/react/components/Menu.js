@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import { logout } from "../../redux";
 import { Dropdown, Icon, Input, Menu } from "semantic-ui-react";
 import SearchBar from "./SearchBar";
-import UpdateUser from "./updateUser";
+import UpdateUser from "./UpdateUser";
 import users from '../users.json';
 
 class MainMenu extends React.Component {

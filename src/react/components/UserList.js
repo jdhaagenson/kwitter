@@ -51,13 +51,15 @@ class UserList extends Component {
     return (
       <div>
         <Header>Users</Header>
-        <Card style={{ width: "100%" }}>
+        <Card style={{ width: "100%", height: "40em", overflow: "scroll" }}>
           <Card.Content>
             {this.props.result.map(each => (
               <React.Fragment key={each.id}>
+                {/* <div style={{height: "50px", overflow: "scroll" }}> */}
                 <Image src={each.pictureLocation || randomAvatar()} avatar />
                 <span>{each.username}</span>
                 <Divider />
+                {/* </div> */}
               </React.Fragment>
             ))}
 

@@ -12,7 +12,8 @@ import Avatar from "./Avatar";
 import { connect } from "react-redux";
 import { updateUser, getUser } from "../../redux";
 import UpdateUser from "./UpdateUser";
-import {domain} from "../../redux/helpers"
+import { domain } from "../../redux/helpers";
+import "./UserInfo.css";
 
 const defaultImages = [
   "rachel.png",
@@ -45,7 +46,7 @@ class UserInfo extends Component {
   state = {
     displayName: "",
     password: "",
-    about: "Update profile to add something about yourself.",
+    about: "Update profile to add something about yourself."
   };
 
   handleModal = () => {};
@@ -73,12 +74,13 @@ class UserInfo extends Component {
         <React.Fragment>
           <Card
             className="user-info-card"
+            style={{borderRadius: "10px"}}
             header={this.props.displayName}
             description={user.about}
           >
-            {this.props.picture !== null &&
-            <Image src={domain + this.props.picture.user.pictureLocation} />
-    }
+            {this.props.picture !== null && (
+              <Image src={domain + this.props.picture.user.pictureLocation} />
+            )}
             <Header>{this.props.displayName}</Header>
             <Card.Meta>{"@" + this.props.username}</Card.Meta>
             <Card.Meta>
@@ -91,7 +93,7 @@ class UserInfo extends Component {
           </Card>
           <Avatar />
           <UpdateUser />
-          <Button  style={{margin: 10}} className="get-messages-button">
+          <Button style={{ margin: 10 }} className="get-messages-button">
             <Icon name="comment alternate outline" />
             My Kweets
           </Button>
