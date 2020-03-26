@@ -236,15 +236,6 @@ class Avatar extends Component {
       <>
         {this.state.modalOpen && (
           <Modal
-            trigger={
-              <Button
-                className="ui button"
-                style={{ margin: 10 }}
-                onClick={this.handleOpen}
-              >
-                Change Avatar
-              </Button>
-            }
             wrapped
             open={this.handleOpen}
             onClose={this.handleClose}
@@ -286,6 +277,13 @@ class Avatar extends Component {
             </Modal.Content>
           </Modal>
         )}
+        <button
+          className="ui button"
+          style={{ margin: 10 }}
+          onClick={this.handleOpen}
+        >
+          Change Avatar
+        </button>
       </>
     );
   }
