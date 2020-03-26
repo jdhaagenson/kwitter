@@ -22,7 +22,11 @@ class UpdateInfo extends Component {
 
   handleUserUpdate = e => {
     e.preventDefault();
-    this.props.updateUser(this.state);
+    this.props.updateUser({
+      password: this.state.password,
+      about: this.state.about,
+      displayName: this.state.displayName
+    });
     this.setState({open: false})
   };
 

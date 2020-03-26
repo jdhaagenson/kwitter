@@ -1,11 +1,11 @@
 import {
-  domain,
-  jsonHeaders,
-  handleJsonResponse,
-  asyncInitialState,
   asyncCases,
+  asyncInitialState,
   createActions,
-  createReducer
+  createReducer,
+  domain,
+  handleJsonResponse,
+  jsonHeaders
 } from "./helpers";
 
 const url = domain + "/users";
@@ -27,12 +27,12 @@ export const createUser = userData => dispatch => {
 const UPDATE_USER = createActions("updateUser");
 export const updateUser = userData => (dispatch, getState) => {
   dispatch(UPDATE_USER.START());
-  const token=getState().auth.login.result.token
-  const username=getState().auth.login.result.username
+  const token = getState().auth.login.result.token;
+  const username = getState().auth.login.result.username;
 
   return fetch(url + "/" + username, {
     method: "PATCH",
-    headers: { Authorization: "Bearer " + token, ...jsonHeaders },
+    headers: {Authorization: "Bearer " + token, ...jsonHeaders},
     body: JSON.stringify(userData)
   })
     .then(handleJsonResponse)
@@ -79,7 +79,7 @@ export const setPhoto = (username, picture) => (dispatch, getState) => {
 
   return fetch(url + "/" + username + "/picture", {
     method: "PUT",
-    headers: { Authorization: "Bearer " + token, ...jsonHeaders },
+    headers: {Authorization: "Bearer " + token, Accept: "application/json"},
     body: picture
   })
     .then(handleJsonResponse)
@@ -96,10 +96,23 @@ export const getPhoto = username => dispatch => {
     headers: jsonHeaders
   })
     .then(handleJsonResponse)
-    .then(result=> dispatch(GET_PHOTO.SUCCESS(result)))
+    .then(result => dispatch(GET_PHOTO.SUCCESS(result)))
     .catch(err => Promise.reject(dispatch(GET_PHOTO.FAIL(err))))
 };
 
+const DELETE_USER = createActions('deleteUser');
+export const deleteUser = username => (dispatch, getState) => {
+  const token = getState().auth.login.result.token;
+  dispatch(DELETE_USER.START());
+
+  return fetch(url + '/' + username, {
+    method: "DELETE",
+    headers: {Authorization: "Bearer " + token, ...jsonHeaders}
+  })
+    .then(handleJsonResponse)
+    .then(result => dispatch(DELETE_USER.SUCCESS(result)))
+    .catch(err => Promise.reject(dispatch(DELETE_USER.FAIL(err))))
+};
 
 
 export const reducers = {
@@ -121,5 +134,8 @@ export const reducers = {
   }),
   getPhoto: createReducer(asyncInitialState, {
     ...asyncCases(GET_PHOTO)
+  }),
+  deleteUser: createReducer(asyncInitialState, {
+    ...asyncCases(DELETE_USER)
   })
 };

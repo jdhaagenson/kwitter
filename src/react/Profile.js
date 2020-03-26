@@ -1,7 +1,7 @@
 import React from "react";
 import { Menu } from "./components";
 import { userIsAuthenticated } from "./HOCs";
-import { UserInfo, MessageFeed } from "../react/components";
+import { MessageFeed, UserInfo } from "../react/components";
 import "./Profile.css";
 import UserList from "./components/UserList";
 
@@ -21,7 +21,7 @@ class Profile extends React.Component {
           <div className="user-info-card">
             <UserInfo
               username={this.props.match.params.username}
-              displayName={this.props.match.params.username}
+              displayName={this.props.match.params.displayName}
               description={this.props.match.params.about}
               extra=""
             />

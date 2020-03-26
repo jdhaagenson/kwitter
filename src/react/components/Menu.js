@@ -6,13 +6,12 @@ import { logout } from "../../redux";
 import { Dropdown, Icon, Menu } from "semantic-ui-react";
 import SearchBar from "./SearchBar";
 import UpdateUser from "./UpdateInfo";
-import users from "../users.json";
 
 class MainMenu extends React.Component {
   state = {};
 
   handleLogout = event => {
-    // event.preventDefault();
+    event.preventDefault();
     this.props.logout();
   };
 
@@ -23,17 +22,16 @@ class MainMenu extends React.Component {
     return (
       <React.Fragment>
         {this.props.isAuthenticated && (
-          <Menu fluid={true} vertical style={{ backgroundColor: "#008e97" }}>
+          <Menu fluid vertical style={{backgroundColor: "#008e97"}}>
             <Menu.Item>
               <SearchBar
-                results={users}
                 loading={this.props.isLoading}
                 value={this.props.value}
                 {...this.props}
               />
             </Menu.Item>
 
-            <Menu.Item style={{ color: "white" }}>
+            <Menu.Item style={{color: "white"}}>
               Home
               <Menu.Menu>
                 <Menu.Item
@@ -63,17 +61,17 @@ class MainMenu extends React.Component {
             </Menu.Item>
 
             <Menu.Item
-              name="browse"
-              active={activeItem === "browse"}
+              name="profile"
+              active={activeItem === "profile"}
               onClick={this.handleItemClick}
             >
-              <Icon name="grid layout" />
-              Browse
+              <Icon name="grid layout"/>
+              <NavLink to={`/profiles/${this.props.username}`}>My Profile</NavLink>
             </Menu.Item>
             <Menu.Item
               name="messages"
               className="menu-link"
-              style={{ color: "white" }}
+              style={{color: "white"}}
               active={activeItem === "messages"}
               onClick={this.handleItemClick}
             >
@@ -103,7 +101,8 @@ export default connect(
   state => ({
     result: state.auth.logout.result,
     loading: state.auth.logout.loading,
-    error: state.auth.logout.error
+    error: state.auth.logout.error,
+    username: state.auth.login.result.username
   }),
   { logout }
 )(MainMenu);

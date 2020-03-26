@@ -34,8 +34,8 @@ class Avatar extends Component {
         <Modal
           wrapped
           trigger={
-            <Button onClick={this.handleOpen}>
-              <Icon name="image outline" />
+            <Button fluid onClick={this.handleOpen}>
+              <Icon name="image outline"/>
               Change Avatar
             </Button>
           }

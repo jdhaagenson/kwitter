@@ -1,26 +1,28 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { searchUser } from "../../redux";
-import { Search, Grid, Label, Loader } from "semantic-ui-react";
+import { Grid, Icon, Label, Loader, Search } from "semantic-ui-react";
 // import moment from "moment";
 import "./SearchBar.css";
 import users from "../users.json";
-import faker from "faker";
+// import faker from "faker";
 import _ from "lodash";
+import { NavLink } from 'react-router-dom'
 
-const initialState = { isLoading: false, results: [], value: "" };
+const initialState = {isLoading: false, results: [], value: ""};
 
-const source = _.times(20, () => ({
-  pictureLocation: faker.internet.avatar(),
-  username: faker.internet.userName(),
-  displayName: faker.name.firstName(),
-  about: faker.name.jobTitle() + "in " + faker.name.jobArea(),
-  googleId: null,
-  createdAt: faker.date.past(),
-  updatedAt: faker.date.recent()
-}));
+// const source = _.times(20, () => ({
+//   pictureLocation: faker.internet.avatar(),
+//   username: faker.internet.userName(),
+//   displayName: faker.name.firstName(),
+//   about: faker.name.jobTitle() + "in " + faker.name.jobArea(),
+//   googleId: null,
+//   createdAt: faker.date.past(),
+//   updatedAt: faker.date.recent()
+// }));
 
-const resultRenderer = ({ username }) => <Label content={username} />;
+const resultRenderer = ({username}) => <Label content={username}><NavLink
+  to={`/profiles/${username}`}>username</NavLink></Label>;
 
 class SearchBar extends Component {
   state = {
@@ -43,7 +45,7 @@ class SearchBar extends Component {
 
       this.setState({
         isLoading: false,
-        results: _.filter(source, isMatch)
+        results: _.filter(users, isMatch)
       });
     }, 300);
   };
@@ -54,8 +56,8 @@ class SearchBar extends Component {
 
   handleSearch = e => {
     e.preventDefault();
-    this.props.searchUser(this.state.searchTerm);
-    this.setState({ searchTerm: "" });
+    this.props.getUser(this.state.value);
+    this.setState({value: ""});
   };
   componentDidMount() {
     this.props.searchUser();
@@ -85,7 +87,9 @@ class SearchBar extends Component {
               results={result}
               value={this.state.value}
               resultRenderer={resultRenderer}
-            ></Search>
+            >
+              <Icon name={"search"}/>
+            </Search>
           </Grid.Column>
         </Grid>
         {loading && <Loader />}

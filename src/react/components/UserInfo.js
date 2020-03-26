@@ -131,7 +131,7 @@ class UserInfo extends Component {
             </Card.Description>
           </Card>
           <Avatar/>
-          <UpdateInfo open={this.props.handleModal}/>
+          <UpdateInfo/>
           <Button className="get-messages-button">
             <Icon name="comment alternate outline"/>
             My Darts
