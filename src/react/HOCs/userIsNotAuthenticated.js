@@ -4,11 +4,12 @@ const userIsNotAuthenticated = connectedRouterRedirect({
   // This sends the user either to the query param route if we have one, or to the landing page if none is specified and the user is already logged in
   redirectPath: (state, ownProps) =>
     `/profiles/${state.auth &&
-      state.auth.login &&
-      state.auth.login.result &&
-      state.auth.login.result.username}`,
+    state.auth.login &&
+    state.auth.login.result &&
+    state.auth.login.result.username}`,
+
   // This prevents us from adding the query parameter when we send the user away from the login page
-  allowRedirectBack: false,
+  allowRedirectBack: true,
   // If selector is true, wrapper will not redirect
   // So if there is no user data, then we show the page
   authenticatedSelector: state =>

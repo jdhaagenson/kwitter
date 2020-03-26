@@ -1,17 +1,10 @@
 import React, { Component } from "react";
-import {
-  Card,
-  Modal,
-  Button,
-  Image,
-  Header,
-  Form,
-  Icon
-} from "semantic-ui-react";
+import { Button, Card, Header, Icon, Image } from "semantic-ui-react";
 import Avatar from "./Avatar";
 import { connect } from "react-redux";
-import { updateUser, getUser } from "../../redux";
-import UpdateUser from "./UpdateUser";
+import { getUser, updateUser } from "../../redux";
+import UpdateInfo from "./UpdateInfo";
+import { NavLink } from "react-router-dom";
 
 const defaultImages = [
   "rachel.png",
@@ -46,12 +39,14 @@ const randomAvatar = () => {
   let r = Math.floor(Math.random() * (max - min + 1)) + min;
   return imageURL + defaultImages[r];
 };
+
 class UserInfo extends Component {
   state = {
     displayName: "",
     password: "",
     about: "Update profile to add something about yourself.",
-    image: randomAvatar()
+    image: randomAvatar(),
+    open: false
   };
 
   handleUserUpdate = e => {
@@ -61,14 +56,15 @@ class UserInfo extends Component {
   };
 
   handleChange = e => {
-    this.setState({ [e.target.name]: e.target.value });
+    e.preventDefault();
+    this.setState({[e.target.name]: e.target.value});
   };
 
   componentDidMount() {
     this.props.getUser(this.props.username);
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps, prevState) {
     if (
       this.props.updateResult &&
       this.props.updateResult !== prevProps.updateResult
@@ -76,8 +72,9 @@ class UserInfo extends Component {
       this.props.getUser(this.props.username);
     }
   }
+
   render() {
-    const { error } = this.props;
+    const {error} = this.props;
     const user = this.state;
 
     if (!this.props.updateResult && !this.props.createResult) {
@@ -93,17 +90,17 @@ class UserInfo extends Component {
             <Card.Meta>{"@" + this.props.username}</Card.Meta>
             <Card.Meta>
               <span className="date" icon="calendar alternate outline">
-                <Icon name="calendar alternate outline" />
+                <Icon name="calendar alternate outline"/>
                 Joined in 2020
               </span>
             </Card.Meta>
             <Card.Description>{user.about}</Card.Description>
           </Card>
-          <Avatar />
-          <UpdateUser />
+          <Avatar/>
+          <UpdateInfo username={this.props.username} displayName={this.props.displayName}/>
           <Button className="get-messages-button">
-            <Icon name="comment alternate outline" />
-            My Kweets
+            <Icon name="comment alternate outline"/>
+            My Darts
           </Button>
         </React.Fragment>
       );
@@ -117,28 +114,29 @@ class UserInfo extends Component {
             }
             description={user.about}
           >
-            <Image src={this.state.image} />
-            <Header>{this.props.createResult.user.displayName}</Header>
+            <Image src={this.state.image}/>
+            <Header><NavLink
+              to={`/profiles/:${user.username}`}>{this.props.createResult.user.displayName}</NavLink></Header>
             <Card.Meta>{"@" + this.props.username}</Card.Meta>
             <Card.Meta>
               <span className="date" icon="calendar alternate outline">
-                <Icon name="calendar alternate outline" />
+                <Icon name="calendar alternate outline"/>
                 Joined in 2020
               </span>
             </Card.Meta>
             <Card.Description>
               {" "}
               {this.props.createResult.user.about ||
-                "Tell us something about yourself"}
+              "Tell us something about yourself"}
             </Card.Description>
           </Card>
-          <Avatar />
-          <UpdateUser open={this.props.handelModal} />
+          <Avatar/>
+          <UpdateInfo open={this.props.handleModal}/>
           <Button className="get-messages-button">
-            <Icon name="comment alternate outline" />
-            My Kweets
+            <Icon name="comment alternate outline"/>
+            My Darts
           </Button>
-          {error && <p style={{ color: "red" }}>{error.message}</p>}
+          {error && <p style={{color: "red"}}>{error.message}</p>}
         </React.Fragment>
       );
     }

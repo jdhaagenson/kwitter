@@ -1,14 +1,5 @@
 import React, { Component } from "react";
-import {
-  Button,
-  Header,
-  Form,
-  Input,
-  Divider,
-  Image,
-  Modal,
-  Icon
-} from "semantic-ui-react";
+import { Button, Divider, Form, Header, Icon, Image, Input, Modal } from "semantic-ui-react";
 import { setPhoto } from "../../redux";
 import { connect } from "react-redux";
 
@@ -16,24 +7,25 @@ const imageURL = "https://react.semantic-ui.com/images/avatar/large/";
 
 class Avatar extends Component {
   state = {
-    image: "https://techformist.com/uploads/quokka-js-playground-vscode.gif",
+    image: "",
     modalOpen: false
   };
 
   handleOpen = e => {
-    this.setState({ modalOpen: true });
+    e.preventDefault();
+    this.setState({modalOpen: true});
   };
 
-  handleClose = e => {
-    this.setState({ modalOpen: false });
-  };
 
-  handleSelect = event => {
-    this.setState({ image: event.target.src });
+  handleSelect = e => {
+    e.preventDefault();
+    this.setState({image: e.target.children.src});
   };
 
   handleSetAvatar = e => {
+    e.preventDefault();
     this.props.setPhoto(this.props.username, this.state.image);
+    this.setState({modalOpen: false})
   };
 
   render() {
@@ -48,7 +40,6 @@ class Avatar extends Component {
             </Button>
           }
           open={this.state.modalOpen}
-          onClose={this.handleClose}
           centered={false}
         >
           <Header>Select an Avatar</Header>

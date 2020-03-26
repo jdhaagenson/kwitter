@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { searchUser } from "../../redux";
-import { Card, Image, Divider, Header } from "semantic-ui-react";
-import users from "../users.json";
+import { Card, Divider, Header, Image } from "semantic-ui-react";
+import { NavLink } from 'react-router-dom'
 
 const defaultImages = [
   "rachel.png",
@@ -55,9 +55,9 @@ class UserList extends Component {
           <Card.Content>
             {this.props.result.map(each => (
               <React.Fragment key={each.id}>
-                <Image src={each.pictureLocation || randomAvatar()} avatar />
-                <span>{each.username}</span>
-                <Divider />
+                <Image src={each.pictureLocation || randomAvatar()} avatar/>
+                <span><NavLink to={`/profiles/${each.username}`}>{each.username}</NavLink></span>
+                <Divider/>
               </React.Fragment>
             ))}
 

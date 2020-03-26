@@ -1,25 +1,29 @@
 import React, { Component } from "react";
-import { Modal, Button, Image, Header, Form, Icon } from "semantic-ui-react";
+import { Button, Form, Header, Icon, Image, Modal } from "semantic-ui-react";
 import { connect } from "react-redux";
-import { updateUser, getUser } from "../../redux";
+import { getUser, updateUser } from "../../redux";
 
-import UploadPhoto from "./UploadPhoto";
 
-class UpdateUser extends Component {
+class UpdateInfo extends Component {
   state = {
     password: "",
     displayName: "",
-    about: ""
+    about: "",
+    open: false
   };
-
+  handleOpen = e => {
+    e.preventDefault();
+    this.setState({open: true})
+  };
   handleChange = e => {
-    // e.preventDefault()
-    this.setState({ [e.target.name]: e.target.value });
+    e.preventDefault();
+    this.setState({[e.target.name]: e.target.value});
   };
 
   handleUserUpdate = e => {
     e.preventDefault();
     this.props.updateUser(this.state);
+    this.setState({open: false})
   };
 
   render() {
@@ -31,11 +35,14 @@ class UpdateUser extends Component {
         <div>
           <Modal
             trigger={
-              <Button>
-                <Icon name="edit outline" />
+              <Button fluid
+                      onClick={this.handleOpen}>
+                <Icon name="edit outline"/>
                 Update Profile
               </Button>
             }
+            open={this.state.open}
+            onActionClick={this.handleUserUpdate}
           >
             <Modal.Header>Update Profile</Modal.Header>
             <Modal.Content image>
@@ -46,7 +53,7 @@ class UpdateUser extends Component {
               />
               <Modal.Description>
                 <Header>User info</Header>
-                <Form onSubmit={this.handleUserUpdate}>
+                <Form action={this.props.updateUser} method="patch" onSubmit={this.handleUserUpdate}>
                   <Form.Field>
                     <label htmlFor="displayName">Display Name:</label>
                     <input
@@ -104,5 +111,5 @@ export default connect(
     updateError: state.users.updateUser.error,
     createResult: state.users.getUser.result
   }),
-  { updateUser, getUser }
-)(UpdateUser);
+  {updateUser, getUser}
+)(UpdateInfo);
