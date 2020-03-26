@@ -6,7 +6,8 @@ import "./LoginForm.css";
 import { NavLink } from "react-router-dom";
 import { Button, Card, Checkbox, Form, Icon, Image } from "semantic-ui-react";
 import GoogleLogin from "react-google-login";
-import logo from "./images/logo.jpg"
+import logo from "./images/logo.png"
+
 
 class LoginForm extends React.Component {
   state = { username: "", password: "" };
