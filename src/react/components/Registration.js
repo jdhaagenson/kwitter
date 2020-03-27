@@ -90,9 +90,9 @@ class Registration extends React.Component {
                   ></input>
                 </Form.Field>
 
-                <Form.Field>
+                {/* <Form.Field>
                   <Checkbox label="I agree to the Terms and Conditions" />
-                </Form.Field>
+                </Form.Field> */}
                 <Button type="submit" disabled={loading}>
                   Sign Up
                 </Button>

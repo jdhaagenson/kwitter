@@ -66,9 +66,9 @@ class LoginForm extends React.Component {
                   onChange={this.handleChange}
                 ></input>
               </Form.Field>
-              <Form.Field>
+              {/* <Form.Field>
                 <Checkbox label="I agree to the Terms and Conditions" />
-              </Form.Field>
+              </Form.Field> */}
 
               <Button type="submit" disabled={loading}>
                 {" "}
@@ -86,9 +86,9 @@ class LoginForm extends React.Component {
             </Form>
           </Card.Content>
           <Card.Content>
-            <Card.Description>
+            {/* <Card.Description>
               <NavLink to="/forgotpassword"> Forgot Password?</NavLink>
-            </Card.Description>
+            </Card.Description> */}
             <Card.Description>
               Not a member? Sign up <NavLink to="/registration">Here </NavLink>
             </Card.Description>

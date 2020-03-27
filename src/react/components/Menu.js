@@ -37,43 +37,8 @@ class MainMenu extends React.Component {
               />
             </Menu.Item>
 
-            <Menu.Item style={{ color: "white" }}>
-              Home
-              <Menu.Menu>
-                <Menu.Item
-                  name="home"
-                  active={activeItem === "home"}
-                  onClick={this.handleItemClick}
-                >
-                  Search
-                </Menu.Item>
-                <Menu.Item
-                  name="add"
-                  className="menu-link"
-                  active={activeItem === "add"}
-                  onClick={this.handleItemClick}
-                >
-                  Add
-                </Menu.Item>
-                <Menu.Item
-                  name="about"
-                  className="menu-link"
-                  active={activeItem === "about"}
-                  onClick={this.handleItemClick}
-                >
-                  Remove
-                </Menu.Item>
-              </Menu.Menu>
-            </Menu.Item>
+            <Menu.Item style={{ color: "white" }}>Home</Menu.Item>
 
-            <Menu.Item
-              name="browse"
-              active={activeItem === "browse"}
-              onClick={this.handleItemClick}
-            >
-              <Icon name="grid layout" />
-              Browse
-            </Menu.Item>
             <NavLink to="/messagefeed">
               <Menu.Item
                 name="messages"
@@ -87,7 +52,7 @@ class MainMenu extends React.Component {
             <Dropdown item text="More">
               <Dropdown.Menu>
                 <UpdateUser />
-                <Dropdown.Item icon="settings" text="Account Settings" />
+
                 <Dropdown.Item
                   icon="key"
                   text="logout"
