@@ -12,3 +12,4 @@ export { default as SearchBar } from "./SearchBar";
 export { default as Avatar } from "./Avatar";
 export { default as UserList } from "./UserList";
 export { default as DeleteUser } from "./DeleteUser";
+export { default as FavQuote } from "./FavQuote";
