@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { searchUser } from "../../redux";
-import { Search, Grid, Label, Loader } from "semantic-ui-react";
+import { Grid, Label, Loader, Search } from "semantic-ui-react";
 // import moment from "moment";
+import { NavLink } from 'react-router-dom'
 import "./SearchBar.css";
 
 import faker from "faker";
@@ -20,7 +21,8 @@ const source = _.times(20, () => ({
   updatedAt: faker.date.recent()
 }));
 
-const resultRenderer = ({ username }) => <Label content={username} />;
+const resultRenderer = ({username}) => <React.Fragment><Label content={username}><NavLink
+  to={`/profiles/:${username}`}/></Label></React.Fragment>;
 
 class SearchBar extends Component {
   state = {
@@ -83,9 +85,10 @@ class SearchBar extends Component {
                 leading: true
               })}
               results={result}
+              autoComplete="on"
               value={this.state.value}
               resultRenderer={resultRenderer}
-            ></Search>
+            />
           </Grid.Column>
         </Grid>
         {loading && <Loader />}

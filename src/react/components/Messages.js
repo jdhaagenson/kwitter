@@ -1,11 +1,10 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { getMessage } from "../../redux";
-
-import { Feed, Card, Icon, Loader, Dimmer } from "semantic-ui-react";
-import { likeMessage, unlikeMessage } from "../../redux";
-
+import { getMessage, likeMessage, unlikeMessage } from "../../redux";
+import { NavLink } from "react-router-dom"
+import { Card, Dimmer, Feed, Icon, Loader } from "semantic-ui-react";
 import "./MessageFeed.css";
+
 const defaultImages = [
   "rachel.png",
   "ade.jpg",
@@ -87,9 +86,11 @@ class Messages extends Component {
                   <Feed.Label image={randomAvatar()} />
                   <Feed.Content>
                     <Feed.Summary>
-                      {each.username} posted on their page
+                      <NavLink to={`/profiles/${each.username}`}>
+                        {each.username}
+                      </NavLink> posted on their page
                       <Feed.Date>
-                        <Icon name="clock outline" />
+                        <Icon name="clock outline"/>
                         {/* {moment(each.createdAt).fromNow()} */}
                       </Feed.Date>
                     </Feed.Summary>
