@@ -6,6 +6,7 @@ import { updateUser, getUser } from "../../redux";
 import UpdateUser from "./UpdateUser";
 import FavQuote from "./FavQuote";
 import defaultPhoto from "./images/default_avatar.png";
+import { NavLink } from "react-router-dom";
 
 const defaultImages = defaultPhoto;
 
@@ -99,9 +100,9 @@ class UserInfo extends Component {
           <UpdateUser open={this.props.handelModal} />
           <Button className="get-messages-button" fluid>
             <Icon name="comment alternate outline" />
-            My Darts
+            <NavLink to="/messagefeed">My Darts</NavLink>
           </Button>
-          <FavQuote />
+          {/* <FavQuote /> */}
           {error && <p style={{ color: "red" }}>{error.message}</p>}
         </React.Fragment>
       );

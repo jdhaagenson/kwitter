@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Modal, Button, Image, Header, Form, Icon } from "semantic-ui-react";
 import { connect } from "react-redux";
 import { updateUser, getUser } from "../../redux";
+import defaultImage from "./images/default_avatar.png";
 
 import UploadPhoto from "./UploadPhoto";
 
@@ -39,11 +40,7 @@ class UpdateUser extends Component {
           >
             <Modal.Header>Update Profile</Modal.Header>
             <Modal.Content image>
-              <Image
-                wrapped
-                size="medium"
-                src="https://react.semantic-ui.com/images/avatar/large/rachel.png"
-              />
+              <Image wrapped size="medium" src={defaultImage} />
               <Modal.Description>
                 <Header>User info</Header>
                 <Form onSubmit={this.handleUserUpdate}>
