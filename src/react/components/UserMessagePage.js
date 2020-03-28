@@ -2,8 +2,17 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { myMessages, likeMessage } from "../../redux";
 import userisAuthenticated from "../HOCs/userIsAuthenticated";
+import dartIcon from "./images/dartFilled.png";
 
-import { Card, Icon, Feed, Dimmer, Loader, Sticky } from "semantic-ui-react";
+import {
+  Card,
+  Icon,
+  Feed,
+  Image,
+  Dimmer,
+  Loader,
+  Sticky
+} from "semantic-ui-react";
 import moment from "moment";
 import "./UserMessagePage.css";
 import UserList from "./UserList";
@@ -24,6 +33,7 @@ class UserMessagePage extends Component {
       return (
         <div>
           <UserMenu />
+          <Image src={dartIcon} size="small" centered />
 
           <Card style={{ width: "100%" }}>
             <Dimmer active inverted>
@@ -42,7 +52,8 @@ class UserMessagePage extends Component {
         </Sticky>
         <div id="user-message-page">
           <Card style={{ width: "50%" }} id="user-messages-card">
-            <h1> Your Darts</h1>
+            <Image src={dartIcon} size="small" centered />
+            <h1 className="dart-heading"> Your Darts</h1>
             <Card.Content>
               {this.props.result.map(each => (
                 <React.Fragment key={each.id}>

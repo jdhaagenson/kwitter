@@ -4,14 +4,18 @@ import UploadPhoto from "./UploadPhoto";
 import { connect } from "react-redux";
 import { updateUser, getUser } from "../../redux";
 import UpdateUser from "./UpdateUser";
+import FavQuote from "./FavQuote";
+import defaultPhoto from "./images/default_avatar.png";
+import { NavLink } from "react-router-dom";
 
+const defaultImages = defaultPhoto;
 
 class UserInfo extends Component {
   state = {
     displayName: "",
     password: "",
     about: "Update profile to add something about yourself.",
-    image:
+    image: defaultImages
   };
 
   handleUserUpdate = e => {
@@ -96,8 +100,9 @@ class UserInfo extends Component {
           <UpdateUser open={this.state.open} />
           <Button className="get-messages-button" fluid>
             <Icon name="comment alternate outline" />
-            My Darts
+            <NavLink to="/messagefeed">My Darts</NavLink>
           </Button>
+          {/* <FavQuote /> */}
           {error && <p style={{ color: "red" }}>{error.message}</p>}
         </React.Fragment>
       );

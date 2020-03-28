@@ -1,44 +1,13 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { getMessage, likeMessage, unlikeMessage } from "../../redux";
-import { NavLink } from "react-router-dom"
-import { Card, Dimmer, Feed, Icon, Loader } from "semantic-ui-react";
-import "./MessageFeed.css";
-import moment from 'moment';
+import { getMessage } from "../../redux";
+import defaultPhoto from "./images/default_avatar.png";
+import { Feed, Card, Icon, Loader, Dimmer } from "semantic-ui-react";
+import { likeMessage, unlikeMessage } from "../../redux";
+import moment from "moment";
 
-const defaultImages = [
-  "rachel.png",
-  "ade.jpg",
-  "chris.jpg",
-  "christian.jpg",
-  "daniel.jpg",
-  "elliot.jpg",
-  "elyse.png",
-  "helen.jpg",
-  "jenny.jpg",
-  "joe.jpg",
-  "justen.jpg",
-  "kristy.png",
-  "laura.jpg",
-  "matt.jpg",
-  "matthew.png",
-  "molly.png",
-  "nan.jpg",
-  "nom.jpg",
-  "patrick.png",
-  "steve.jpg",
-  "stevie.jpg",
-  "tom.jpg",
-  "veronika.jpg",
-  "zoe.jpg"
-];
-const imageURL = "https://react.semantic-ui.com/images/avatar/large/";
-const randomAvatar = () => {
-  let min = 0;
-  let max = 24;
-  let r = Math.floor(Math.random() * (max - min + 1)) + min;
-  return imageURL + defaultImages[r];
-};
+import "./MessageFeed.css";
+
 class Messages extends Component {
   componentDidMount() {
     this.props.getMessage();
@@ -87,15 +56,15 @@ class Messages extends Component {
             <React.Fragment key={each.id}>
               <Feed>
                 <Feed.Event>
-                  <Feed.Label image={randomAvatar()} />
+                  <Feed.Label image={defaultPhoto || each.picutureLocation} />
                   <Feed.Content>
                     <Feed.Summary>
                       <NavLink to={`/profiles/${each.username}`}  >
                         {each.username}
                       </NavLink> posted on their page
                       <Feed.Date>
-                        <Icon name="clock outline"/>
-                         {moment(each.createdAt).fromNow()}
+                        <Icon name="clock outline" />
+                        {moment(each.createdAt).fromNow()}
                       </Feed.Date>
                     </Feed.Summary>
                     <Feed.Extra text>{each.text}</Feed.Extra>
