@@ -1,49 +1,17 @@
 import React, { Component } from "react";
 import { Card, Button, Image, Header, Icon } from "semantic-ui-react";
-import Avatar from "./Avatar";
+import UploadPhoto from "./UploadPhoto";
 import { connect } from "react-redux";
 import { updateUser, getUser } from "../../redux";
 import UpdateUser from "./UpdateUser";
 
-const defaultImages = [
-  "rachel.png",
-  "ade.jpg",
-  "chris.jpg",
-  "christian.jpg",
-  "daniel.jpg",
-  "elliot.jpg",
-  "elyse.png",
-  "helen.jpg",
-  "jenny.jpg",
-  "joe.jpg",
-  "justen.jpg",
-  "kristy.png",
-  "laura.jpg",
-  "matt.jpg",
-  "matthew.png",
-  "molly.png",
-  "nan.jpg",
-  "nom.jpg",
-  "patrick.png",
-  "steve.jpg",
-  "stevie.jpg",
-  "tom.jpg",
-  "veronika.jpg",
-  "zoe.jpg"
-];
-const imageURL = "https://react.semantic-ui.com/images/avatar/large/";
-const randomAvatar = () => {
-  let min = 0;
-  let max = 23;
-  let r = Math.floor(Math.random() * (max - min + 1)) + min;
-  return imageURL + defaultImages[r];
-};
+
 class UserInfo extends Component {
   state = {
     displayName: "",
     password: "",
     about: "Update profile to add something about yourself.",
-    image: randomAvatar()
+    image:
   };
 
   handleUserUpdate = e => {
@@ -91,7 +59,7 @@ class UserInfo extends Component {
             </Card.Meta>
             <Card.Description>{user.about}</Card.Description>
           </Card>
-          <Avatar />
+          <UploadPhoto/>
           <UpdateUser />
           <Button className="get-messages-button" fluid>
             <Icon name="comment alternate outline" />
@@ -124,8 +92,8 @@ class UserInfo extends Component {
                 "Tell us something about yourself"}
             </Card.Description>
           </Card>
-          <Avatar />
-          <UpdateUser open={this.props.handelModal} />
+          <UploadPhoto />
+          <UpdateUser open={this.state.open} />
           <Button className="get-messages-button" fluid>
             <Icon name="comment alternate outline" />
             My Darts
@@ -143,6 +111,7 @@ export default connect(
     updateLoading: state.users.updateUser.loading,
     updateError: state.users.updateUser.error,
     createResult: state.users.getUser.result,
+    getImageResult: state.users.getPhoto.result,
     username: ownProps.username
   }),
   { updateUser, getUser }

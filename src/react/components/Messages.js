@@ -4,6 +4,7 @@ import { getMessage, likeMessage, unlikeMessage } from "../../redux";
 import { NavLink } from "react-router-dom"
 import { Card, Dimmer, Feed, Icon, Loader } from "semantic-ui-react";
 import "./MessageFeed.css";
+import moment from 'moment';
 
 const defaultImages = [
   "rachel.png",
@@ -64,6 +65,9 @@ class Messages extends Component {
     }
     console.log(newMessage);
   };
+
+
+
   render() {
     if (this.props.result === null) {
       return (
@@ -86,12 +90,12 @@ class Messages extends Component {
                   <Feed.Label image={randomAvatar()} />
                   <Feed.Content>
                     <Feed.Summary>
-                      <NavLink to={`/profiles/${each.username}`}>
+                      <NavLink to={`/profiles/${each.username}`}  >
                         {each.username}
                       </NavLink> posted on their page
                       <Feed.Date>
                         <Icon name="clock outline"/>
-                        {/* {moment(each.createdAt).fromNow()} */}
+                         {moment(each.createdAt).fromNow()}
                       </Feed.Date>
                     </Feed.Summary>
                     <Feed.Extra text>{each.text}</Feed.Extra>
