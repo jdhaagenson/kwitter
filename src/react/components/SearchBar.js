@@ -21,8 +21,8 @@ const source = _.times(20, () => ({
   updatedAt: faker.date.recent()
 }));
 
-const resultRenderer = ({username}) => <React.Fragment><Label content={username}><NavLink
-  to={`/profiles/:${username}`}/></Label></React.Fragment>;
+const resultRenderer = ({username}) => <><Label content={username}><NavLink
+  to={`/profiles/:${username}`}>{username}</NavLink> </Label></>;
 
 class SearchBar extends Component {
   state = {
@@ -51,13 +51,13 @@ class SearchBar extends Component {
   };
   handleChange = e => {
     e.preventDefault();
-    this.setState({ text: e.target.value });
+    this.setState({value: e.target.value});
   };
 
   handleSearch = e => {
     e.preventDefault();
-    this.props.searchUser(this.state.searchTerm);
-    this.setState({ searchTerm: "" });
+    this.props.searchUser(this.state.value);
+    this.setState({value: ""});
   };
   componentDidMount() {
     this.props.searchUser();
@@ -80,6 +80,10 @@ class SearchBar extends Component {
             <Search
               placeholder="Search users"
               loading={loading}
+              onChange={this.handleChange}
+              onSelectionChange={_.debounce(this.handleSearchChange, 500, {
+                leading: true
+              })}
               onResultSelect={this.handleResultSelect}
               onSearchChange={_.debounce(this.handleSearchChange, 500, {
                 leading: true
