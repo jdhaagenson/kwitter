@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
-import { Modal, Icon, Header, Button } from "semantic-ui-react";
+import { Button, Header, Icon, Modal } from "semantic-ui-react";
 import { deleteUser, logout } from "../../redux";
 
 class DeleteUser extends Component {
@@ -42,7 +42,7 @@ class DeleteUser extends Component {
         </Modal.Actions>
         <Modal.Actions>
           <Button color="red" onClick={this.handleDeleteUser} inverted>
-            <Icon name="trash alternative" /> Delete my profile
+            <Icon name="trash alternate"/> Delete my profile
           </Button>
         </Modal.Actions>
       </Modal>

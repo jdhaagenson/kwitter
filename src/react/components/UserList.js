@@ -1,9 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { searchUser } from "../../redux";
-import { Card, Image, Divider, Header } from "semantic-ui-react";
+import { Card, Divider, Header, Image } from "semantic-ui-react";
 import defaultPhoto from "./images/default_avatar.png";
-import users from "../users.json";
 
 const defaultImages = defaultPhoto;
 
@@ -24,6 +23,7 @@ class UserList extends Component {
               <React.Fragment key={each.id}>
                 {/* <div style={{height: "50px", overflow: "scroll" }}> */}
                 <Image
+                  key={each.id}
                   src={each.pictureLocation || defaultImages}
                   size="mini"
                   circular

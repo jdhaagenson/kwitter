@@ -20,6 +20,7 @@ import defaultAvatar from "./images/default_avatar.png"
 class UploadPhoto extends Component {
   state = {
     open: false,
+    fileInput: React.createRef()
   };
 
   handleOpen = event => {
@@ -27,10 +28,13 @@ class UploadPhoto extends Component {
     this.setState({open: true})
   };
 
-  handleUploadPicture = event => {
+  handleSubmit = event => {
     event.preventDefault();
-    const picture = new FormData(event.target);
-    this.props.setPhoto(this.props.username, picture);
+    console.log(this.state.fileInput.current.files[0]);
+    this.setState({picture: this.state.fileInput.current.files[0]});
+    const data = new FormData();
+    data.append("picture", this.state.picture);
+    this.props.setPhoto(event, data);
     this.setState({open: false})
   };
 
@@ -58,12 +62,12 @@ class UploadPhoto extends Component {
                 type="file"
                 name="picture"
               />
-              <Input
+              <Button
                 type="submit"
                 name="picture"
                 onClick={this.handleUploadPicture}
               >Upload Picture
-              </Input>
+              </Button>
             </Form>
 
 

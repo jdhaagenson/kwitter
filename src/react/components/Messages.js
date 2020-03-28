@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { getMessage } from "../../redux";
+import { getMessage, likeMessage, unlikeMessage } from "../../redux";
 import defaultPhoto from "./images/default_avatar.png";
-import { Feed, Card, Icon, Loader, Dimmer } from "semantic-ui-react";
-import { likeMessage, unlikeMessage } from "../../redux";
+import { Card, Dimmer, Feed, Icon, Loader } from "semantic-ui-react";
 import moment from "moment";
+import { NavLink } from 'react-router-dom';
 
 import "./MessageFeed.css";
 
