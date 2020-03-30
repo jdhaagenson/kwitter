@@ -21,8 +21,8 @@ const source = _.times(20, () => ({
   updatedAt: faker.date.recent()
 }));
 
-const resultRenderer = ({username}) => <><Label content={username}><NavLink
-  to={`/profiles/:${username}`}>{username}</NavLink> </Label></>;
+const resultRenderer = ({username}) => <><Label><NavLink
+  to={`/profiles/${username}`}>{username}</NavLink> </Label></>;
 
 class SearchBar extends Component {
   state = {

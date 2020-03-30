@@ -1,22 +1,15 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { myMessages, likeMessage } from "../../redux";
+import { likeMessage, myMessages } from "../../redux";
 import userisAuthenticated from "../HOCs/userIsAuthenticated";
 import dartIcon from "./images/dartFilled.png";
 
-import {
-  Card,
-  Icon,
-  Feed,
-  Image,
-  Dimmer,
-  Loader,
-  Sticky
-} from "semantic-ui-react";
+import { Card, Dimmer, Feed, Icon, Image, Loader, Sticky } from "semantic-ui-react";
 import moment from "moment";
 import "./UserMessagePage.css";
 import UserList from "./UserList";
 import UserMenu from "./UserMenu";
+import defaultPhoto from "./images/default_avatar.png"
 
 class UserMessagePage extends Component {
   componentDidMount() {
@@ -59,12 +52,12 @@ class UserMessagePage extends Component {
                 <React.Fragment key={each.id}>
                   <Feed>
                     <Feed.Event>
-                      <Feed.Label image="https://react.semantic-ui.com/images/avatar/large/rachel.png" />
+                      <Feed.Label image={defaultPhoto}/>
                       <Feed.Content>
                         <Feed.Summary>
                           You posted
                           <Feed.Date>
-                            <Icon name="clock outline" />
+                            <Icon name="clock outline"/>
                             {moment(each.createdAt).fromNow()}
                           </Feed.Date>
                         </Feed.Summary>
