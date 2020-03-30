@@ -29,14 +29,14 @@ class Profile extends React.Component {
           color="orange"
           inverted
           onClick={this.handleLogout}
-        />
+        >Logout</Icon>
         <div id="profile-body">
           <div className="menu">
             <Menu
               isAuthenticated={this.props.isAuthenticated}
               className="menu"
             />
-            <UserList />
+            <UserList/>
           </div>
           <div className="user-info-card">
             <UserInfo
