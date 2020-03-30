@@ -1,21 +1,22 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { getMessage } from "../../redux";
+import { getMessage, getPhoto, getUser, likeMessage, unlikeMessage } from "../../redux";
 import defaultPhoto from "./images/default_avatar.png";
-import { Feed, Card, Icon, Loader, Dimmer } from "semantic-ui-react";
-import { likeMessage, unlikeMessage } from "../../redux";
+import { Card, Dimmer, Feed, Icon, Loader } from "semantic-ui-react";
 import moment from "moment";
+import { NavLink } from 'react-router-dom';
 
 import "./MessageFeed.css";
 
 class Messages extends Component {
   componentDidMount() {
     this.props.getMessage();
-  }
+  };
+
   componentDidUpdate(prevProps) {
     if (this.props.result !== prevProps) {
     }
-  }
+  };
   handleLike = (e, id) => {
     this.props.likeMessage(id);
   };
@@ -34,11 +35,13 @@ class Messages extends Component {
     }
     console.log(newMessage);
   };
+
+
   render() {
     if (this.props.result === null) {
       return (
         <div>
-          <Card style={{ width: "100%" }}>
+          <Card style={{width: "100%"}}>
             <Dimmer active inverted>
               <Loader inverted>Loading Feed</Loader>
             </Dimmer>
@@ -53,12 +56,14 @@ class Messages extends Component {
             <React.Fragment key={each.id}>
               <Feed>
                 <Feed.Event>
-                  <Feed.Label image={defaultPhoto || each.picutureLocation} />
+                  <Feed.Label image={defaultPhoto || this.props.getPhoto(each.username)}/>
                   <Feed.Content>
                     <Feed.Summary>
-                      {each.username} posted on their page
+                      <NavLink to={`/profiles/${each.username}`}>
+                        {each.username}
+                      </NavLink> posted on their page
                       <Feed.Date>
-                        <Icon name="clock outline" />
+                        <Icon name="clock outline"/>
                         {moment(each.createdAt).fromNow()}
                       </Feed.Date>
                     </Feed.Summary>
@@ -99,5 +104,5 @@ export default connect(
     error: state.messages.getMessage.error,
     username: state.auth.login.result.username
   }),
-  { getMessage, likeMessage, unlikeMessage }
+  {getMessage, likeMessage, unlikeMessage, getPhoto, getUser}
 )(Messages);

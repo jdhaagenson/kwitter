@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { createMessage } from "../../redux";
-import { Card, Form, Button, Icon } from "semantic-ui-react";
-import InfiniteScroll from "react-infinite-scroller";
+import { Button, Card, Form, Icon } from "semantic-ui-react";
 
 import "./MessageFeed.css";
 import Messages from "./Messages";
@@ -48,13 +47,17 @@ class MessageFeed extends Component {
             type="submit"
             onClick={this.handleKweet}
           >
-            Dart <Icon name="target" />
+            Throw Dart <Icon name="target"/>
           </Button>
         </Card>
 
         <Card style={{ width: "100%" }}>
           <Card.Content>
-            <Messages />
+            <Card.Header>
+              <Icon size={"large"} color={'teal'} name={"target"}/>
+              Dartboard
+            </Card.Header>
+            <Messages/>
           </Card.Content>
         </Card>
       </React.Fragment>

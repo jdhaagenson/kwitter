@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { searchUser } from "../../redux";
-import { Search, Grid, Label, Loader } from "semantic-ui-react";
+import { Grid, Label, Loader, Search } from "semantic-ui-react";
 // import moment from "moment";
+import { NavLink } from 'react-router-dom'
 import "./SearchBar.css";
 
 import faker from "faker";
@@ -20,7 +21,8 @@ const source = _.times(20, () => ({
   updatedAt: faker.date.recent()
 }));
 
-const resultRenderer = ({ username }) => <Label content={username} />;
+const resultRenderer = ({username}) => <><Label content={username}><NavLink
+  to={`/profiles/:${username}`}>{username}</NavLink> </Label></>;
 
 class SearchBar extends Component {
   state = {
@@ -39,23 +41,33 @@ class SearchBar extends Component {
       if (this.state.value.length < 1) return this.setState(initialState);
 
       const re = new RegExp(_.escapeRegExp(this.state.value), "i");
-      const isMatch = result => re.test(result.username);
+      const isMatch = result => re.test(result.title);
+      const filteredResults = _.reduce(
+        source,
+        (memo, data, name) => {
+          const results = _.filter(data.results, isMatch);
+          if (results.length) memo[name] = {name, results};
+          return memo
+        },
+        {},
+      );
 
       this.setState({
         isLoading: false,
-        results: _.filter(source, isMatch)
-      });
-    }, 300);
+        results: filteredResults,
+      })
+    }, 300)
   };
+
   handleChange = e => {
     e.preventDefault();
-    this.setState({ text: e.target.value });
+    this.setState({value: e.target.value});
   };
 
   handleSearch = e => {
     e.preventDefault();
-    this.props.searchUser(this.state.searchTerm);
-    this.setState({ searchTerm: "" });
+    this.props.searchUser(this.state.value);
+    this.setState({value: ""});
   };
   componentDidMount() {
     this.props.searchUser();
@@ -78,14 +90,19 @@ class SearchBar extends Component {
             <Search
               placeholder="Search users"
               loading={loading}
+              onChange={this.handleChange}
+              onSelectionChange={_.debounce(this.handleSearchChange, 500, {
+                leading: true
+              })}
               onResultSelect={this.handleResultSelect}
               onSearchChange={_.debounce(this.handleSearchChange, 500, {
                 leading: true
               })}
               results={result}
+              autoComplete="on"
               value={this.state.value}
               resultRenderer={resultRenderer}
-            ></Search>
+            />
           </Grid.Column>
         </Grid>
         {loading && <Loader />}

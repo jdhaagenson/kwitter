@@ -2,21 +2,25 @@ import React from "react";
 import { connect } from "react-redux";
 import { Menu } from "./components";
 import { userIsAuthenticated } from "./HOCs";
-import { UserInfo, MessageFeed } from "../react/components";
+import { MessageFeed, UserInfo } from "../react/components";
 import "./Profile.css";
 import UserList from "./components/UserList";
 import logo from "./components/images/logo.png";
-import { Image, Icon } from "semantic-ui-react";
-import { logout } from "../redux";
+import { Icon, Image } from "semantic-ui-react";
+import { getUser, logout } from "../redux";
 
 class Profile extends React.Component {
   handleLogout = () => {
     this.props.logout();
   };
+  componentDidMount = () => {
+    this.props.getUser(this.props.username)
+  };
+
   render() {
     return (
       <div id="profile">
-        <Image src={logo} alt="logo" size="small" centered />
+        <Image src={logo} alt="logo" size="small" centered/>
 
         <h2 className="heading">PROFILE</h2>
         <Icon
@@ -25,14 +29,14 @@ class Profile extends React.Component {
           color="orange"
           inverted
           onClick={this.handleLogout}
-        />
+        >Logout</Icon>
         <div id="profile-body">
           <div className="menu">
             <Menu
               isAuthenticated={this.props.isAuthenticated}
               className="menu"
             />
-            <UserList />
+            <UserList/>
           </div>
           <div className="user-info-card">
             <UserInfo
@@ -57,5 +61,5 @@ export default connect(
     loading: state.auth.logout.loading,
     error: state.auth.logout.error
   }),
-  { logout }
+  {logout, getUser}
 )(userIsAuthenticated(Profile));

@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { searchUser } from "../../redux";
-import { Card, Image, Divider, Header } from "semantic-ui-react";
+import { getPhoto, searchUser } from "../../redux";
+import { Card, Divider, Header, Image } from "semantic-ui-react";
 import defaultPhoto from "./images/default_avatar.png";
-import users from "../users.json";
+import { NavLink } from 'react-router-dom'
 
 const defaultImages = defaultPhoto;
 
@@ -24,12 +24,13 @@ class UserList extends Component {
               <React.Fragment key={each.id}>
                 {/* <div style={{height: "50px", overflow: "scroll" }}> */}
                 <Image
-                  src={each.pictureLocation || defaultImages}
+                  key={each.id}
+                  src={defaultImages}
                   size="mini"
                   circular
                 />
-                <span>{each.username}</span>
-                <Divider />
+                <span><NavLink to={`/profiles/${each.username}`}>{each.username}</NavLink></span>
+                <Divider/>
                 {/* </div> */}
               </React.Fragment>
             ))}
@@ -46,5 +47,5 @@ export default connect(
     loading: state.users.searchUser.loading,
     error: state.users.searchUser.error
   }),
-  { searchUser }
+  {searchUser, getPhoto}
 )(UserList);
