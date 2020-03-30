@@ -5,6 +5,7 @@ import defaultPhoto from "./images/default_avatar.png";
 import { Card, Dimmer, Feed, Icon, Loader } from "semantic-ui-react";
 import moment from "moment";
 import { NavLink } from 'react-router-dom';
+import { domain } from "../../redux/helpers";
 
 import "./MessageFeed.css";
 
@@ -56,7 +57,7 @@ class Messages extends Component {
             <React.Fragment key={each.id}>
               <Feed>
                 <Feed.Event>
-                  <Feed.Label image={defaultPhoto || this.props.getPhoto(each.username)}/>
+                  <Feed.Label image={each.pictureLocation ? domain + each.pictureLocation : defaultPhoto}/>
                   <Feed.Content>
                     <Feed.Summary>
                       <NavLink to={`/profiles/${each.username}`}>

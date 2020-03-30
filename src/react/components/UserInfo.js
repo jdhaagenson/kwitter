@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import { Button, Card, Header, Icon, Image } from "semantic-ui-react";
-import UploadPhoto from "./UploadPhoto";
 import { connect } from "react-redux";
 import { getUser, updateUser } from "../../redux";
 import UpdateUser from "./UpdateUser";
 import defaultPhoto from "./images/default_avatar.png";
 import { NavLink } from "react-router-dom";
+import { domain } from "../../redux/helpers";
 
 const defaultImages = defaultPhoto;
 
@@ -48,11 +48,11 @@ class UserInfo extends Component {
             // header={this.props.displayName}
             // description={user.about}
           >
-            <Image src={this.state.image}/>
+            <Image src={this.props.pictureLocation ? domain + this.props.pictureLocation : this.state.image}/>
             <Header>{this.props.displayName}</Header>
             <Card.Meta>{"@" + this.props.username}</Card.Meta>
             <Card.Meta>
-              <span className="date" icon="calendar alternate outline">
+              <span className="date">
                 <Icon name="calendar alternate outline"/>
                 Joined in 2020
               </span>
@@ -72,18 +72,18 @@ class UserInfo extends Component {
               // header={this.props.displayName}
               // description={user.about}
             >
-              <Image src={this.state.image}/>
+              <Image src={this.props.pictureLocation ? domain + this.props.pictureLocation : this.state.image}/>
               <Header>{this.props.displayName}</Header>
               <Card.Meta>{"@" + this.props.username}</Card.Meta>
               <Card.Meta>
-              <span className="date" icon="calendar alternate outline">
+              <span className="date">
                 <Icon name="calendar alternate outline"/>
                 Joined in 2020
               </span>
               </Card.Meta>
               <Card.Description>{user.about}</Card.Description>
             </Card>
-            <UploadPhoto/>
+            {/*<UploadPhoto/>*/}
             <UpdateUser open={this.state.open}/>
             <Button className="get-messages-button" fluid>
               <Icon name="comment alternate outline"/>
@@ -103,7 +103,7 @@ class UserInfo extends Component {
               }
               description={user.about}
             >
-              <Image src={this.state.image}/>
+              <Image src={this.props.pictureLocation ? domain + this.props.pictureLocation : this.state.image}/>
               <Header>{this.props.createResult.user.displayName}</Header>
               <Card.Meta>{"@" + this.props.username}</Card.Meta>
               <Card.Meta>
@@ -118,7 +118,7 @@ class UserInfo extends Component {
                 "Tell us something about yourself"}
               </Card.Description>
             </Card>
-            <UploadPhoto/>
+            {/*<UploadPhoto/>*/}
             <UpdateUser open={this.state.open}/>
             <Button className="get-messages-button" fluid>
               <Icon name="comment alternate outline"/>

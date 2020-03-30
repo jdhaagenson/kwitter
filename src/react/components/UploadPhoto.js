@@ -3,7 +3,6 @@ import { Button, Form, Icon, Image, Input, Modal } from "semantic-ui-react";
 import { connect } from "react-redux";
 import { getUser, setPhoto } from "../../redux";
 import defaultAvatar from "./images/default_avatar.png"
-
 // const defaultImages = [
 //   'rachel.png', 'ade.jpg', 'chris.jpg', 'christian.jpg', 'daniel.jpg', 'elliot.jpg', 'elyse.png',
 //   'helen.jpg', 'jenny.jpg', 'joe.jpg', 'justen.jpg', 'kristy.png', 'laura.jpg', 'matt.jpg', 'matthew.png',
@@ -16,18 +15,15 @@ import defaultAvatar from "./images/default_avatar.png"
 //   let r = Math.floor(Math.random() * (max - min + 1)) + min;
 //   return imageURL + defaultImages[r]
 // };
-
 class UploadPhoto extends Component {
   state = {
     open: false,
     fileInput: React.createRef()
   };
-
   handleOpen = event => {
     event.preventDefault();
     this.setState({open: true})
   };
-
   handleSubmit = event => {
     event.preventDefault();
     console.log(this.state.fileInput.current.files[0]);
@@ -37,16 +33,13 @@ class UploadPhoto extends Component {
     this.props.setPhoto(event, data);
     this.setState({open: false})
   };
-
   componentDidMount() {
     this.props.getUser(this.props.username);
   }
-
   render() {
     const error = this.props;
     // if (this.props.username === this.props.loggedInUsername)
     return (
-
       <React.Fragment>
         <Modal open={this.state.open}
                trigger={<Button fluid color={"teal"} onClick={this.handleOpen}
@@ -69,17 +62,13 @@ class UploadPhoto extends Component {
               >Upload Picture
               </Button>
             </Form>
-
-
           </Modal.Content>
         </Modal>
-
         {error && <p style={{ color: "red" }}>{error.message}</p>}
       </React.Fragment>
     );
   };
 }
-
 export default connect(
   (state) => ({
     updateResult: state.users.setPhoto.result,
