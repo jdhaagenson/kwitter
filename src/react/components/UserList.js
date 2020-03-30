@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { getPhoto, searchUser } from "../../redux";
 import { Card, Divider, Header, Image } from "semantic-ui-react";
 import defaultPhoto from "./images/default_avatar.png";
+import { NavLink } from 'react-router-dom'
 
 const defaultImages = defaultPhoto;
 
@@ -28,8 +29,8 @@ class UserList extends Component {
                   size="mini"
                   circular
                 />
-                <span>{each.username}</span>
-                <Divider />
+                <span><NavLink to={`/profiles/${each.username}`}>{each.username}</NavLink></span>
+                <Divider/>
                 {/* </div> */}
               </React.Fragment>
             ))}

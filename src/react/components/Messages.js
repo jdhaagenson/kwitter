@@ -36,12 +36,6 @@ class Messages extends Component {
     console.log(newMessage);
   };
 
-  handleClick = e => {
-    console.log(e.target.value);
-    console.dir(e.target);
-    e.preventDefault();
-    this.props.getUser(e.target)
-  };
 
   render() {
     if (this.props.result === null) {
@@ -65,7 +59,7 @@ class Messages extends Component {
                   <Feed.Label image={defaultPhoto || this.props.getPhoto(each.username)}/>
                   <Feed.Content>
                     <Feed.Summary>
-                      <NavLink to={`/profiles/${each.username}`} onClick={this.handleClick}>
+                      <NavLink to={`/profiles/${each.username}`}>
                         {each.username}
                       </NavLink> posted on their page
                       <Feed.Date>
