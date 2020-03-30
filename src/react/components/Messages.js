@@ -37,6 +37,8 @@ class Messages extends Component {
   };
 
   handleClick = e => {
+    console.log(e.target.value);
+    console.dir(e.target);
     e.preventDefault();
     this.props.getUser(e.target)
   };

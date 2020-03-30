@@ -21,10 +21,12 @@ class DeleteUser extends Component {
     return (
       <Modal
         trigger={
-          <Button icon="trash alternate" fluid onClick={this.handleOpen}>
+          <Button fluid onClick={this.handleOpen}>
+            <Icon name="trash alternate"/>
             Delete Profile
           </Button>
         }
+        color="red"
         open={this.state.modalOpen}
         onClose={this.handleClose}
         basic

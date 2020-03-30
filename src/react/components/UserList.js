@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { searchUser } from "../../redux";
+import { getPhoto, searchUser } from "../../redux";
 import { Card, Divider, Header, Image } from "semantic-ui-react";
 import defaultPhoto from "./images/default_avatar.png";
 
@@ -24,7 +24,7 @@ class UserList extends Component {
                 {/* <div style={{height: "50px", overflow: "scroll" }}> */}
                 <Image
                   key={each.id}
-                  src={each.pictureLocation || defaultImages}
+                  src={defaultImages}
                   size="mini"
                   circular
                 />
@@ -46,5 +46,5 @@ export default connect(
     loading: state.users.searchUser.loading,
     error: state.users.searchUser.error
   }),
-  { searchUser }
+  {searchUser, getPhoto}
 )(UserList);

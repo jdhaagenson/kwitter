@@ -1,10 +1,9 @@
 import React, { Component } from "react";
-import { Card, Button, Image, Header, Icon } from "semantic-ui-react";
+import { Button, Card, Header, Icon, Image } from "semantic-ui-react";
 import UploadPhoto from "./UploadPhoto";
 import { connect } from "react-redux";
-import { updateUser, getUser } from "../../redux";
+import { getUser, updateUser } from "../../redux";
 import UpdateUser from "./UpdateUser";
-import FavQuote from "./FavQuote";
 import defaultPhoto from "./images/default_avatar.png";
 import { NavLink } from "react-router-dom";
 
@@ -15,18 +14,19 @@ class UserInfo extends Component {
     displayName: "",
     password: "",
     about: "Update profile to add something about yourself.",
-    image: defaultImages
+    image: defaultImages,
+    username: "",
   };
 
-  handleUserUpdate = e => {
-    e.preventDefault();
-    this.props.updateUser(this.state);
-    this.setState({ open: false });
-  };
-
-  handleChange = e => {
-    this.setState({ [e.target.name]: e.target.value });
-  };
+  // handleUserUpdate = e => {
+  //   e.preventDefault();
+  //   this.props.updateUser(this.state);
+  //   this.setState({ open: false });
+  // };
+  //
+  // handleChange = e => {
+  //   this.setState({ [e.target.name]: e.target.value });
+  // };
 
   componentDidMount() {
     this.props.getUser(this.props.username);

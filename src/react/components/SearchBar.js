@@ -41,14 +41,24 @@ class SearchBar extends Component {
       if (this.state.value.length < 1) return this.setState(initialState);
 
       const re = new RegExp(_.escapeRegExp(this.state.value), "i");
-      const isMatch = result => re.test(result.username);
+      const isMatch = result => re.test(result.title);
+      const filteredResults = _.reduce(
+        source,
+        (memo, data, name) => {
+          const results = _.filter(data.results, isMatch);
+          if (results.length) memo[name] = {name, results};
+          return memo
+        },
+        {},
+      );
 
       this.setState({
         isLoading: false,
-        results: _.filter(source, isMatch)
-      });
-    }, 300);
+        results: filteredResults,
+      })
+    }, 300)
   };
+
   handleChange = e => {
     e.preventDefault();
     this.setState({value: e.target.value});
