@@ -5,6 +5,7 @@ import { getUser, updateUser } from "../../redux";
 import UpdateUser from "./UpdateUser";
 import defaultPhoto from "./images/default_avatar.png";
 import { NavLink } from "react-router-dom";
+import { domain } from "../../redux/helpers";
 
 const defaultImages = defaultPhoto;
 
@@ -47,11 +48,11 @@ class UserInfo extends Component {
             // header={this.props.displayName}
             // description={user.about}
           >
-            <Image src={this.state.image}/>
+            <Image src={this.props.pictureLocation ? domain + this.props.pictureLocation : this.state.image}/>
             <Header>{this.props.displayName}</Header>
             <Card.Meta>{"@" + this.props.username}</Card.Meta>
             <Card.Meta>
-              <span className="date" icon="calendar alternate outline">
+              <span className="date">
                 <Icon name="calendar alternate outline"/>
                 Joined in 2020
               </span>
@@ -71,11 +72,11 @@ class UserInfo extends Component {
               // header={this.props.displayName}
               // description={user.about}
             >
-              <Image src={this.state.image}/>
+              <Image src={this.props.pictureLocation ? domain + this.props.pictureLocation : this.state.image}/>
               <Header>{this.props.displayName}</Header>
               <Card.Meta>{"@" + this.props.username}</Card.Meta>
               <Card.Meta>
-              <span className="date" icon="calendar alternate outline">
+              <span className="date">
                 <Icon name="calendar alternate outline"/>
                 Joined in 2020
               </span>
@@ -102,7 +103,7 @@ class UserInfo extends Component {
               }
               description={user.about}
             >
-              <Image src={this.state.image}/>
+              <Image src={this.props.pictureLocation ? domain + this.props.pictureLocation : this.state.image}/>
               <Header>{this.props.createResult.user.displayName}</Header>
               <Card.Meta>{"@" + this.props.username}</Card.Meta>
               <Card.Meta>

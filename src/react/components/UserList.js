@@ -3,7 +3,8 @@ import { connect } from "react-redux";
 import { getPhoto, searchUser } from "../../redux";
 import { Card, Divider, Header, Image } from "semantic-ui-react";
 import defaultPhoto from "./images/default_avatar.png";
-import { NavLink } from 'react-router-dom'
+import { NavLink } from 'react-router-dom';
+import { domain } from "../../redux/helpers";
 
 const defaultImages = defaultPhoto;
 
@@ -11,6 +12,7 @@ class UserList extends Component {
   componentDidMount() {
     this.props.searchUser();
   }
+
   render() {
     if (this.props.result === null) {
       return <div>empty</div>;
@@ -25,7 +27,7 @@ class UserList extends Component {
                 {/* <div style={{height: "50px", overflow: "scroll" }}> */}
                 <Image
                   key={each.id}
-                  src={defaultImages}
+                  src={each.pictureLocation ? domain + each.pictureLocation : defaultImages}
                   size="mini"
                   circular
                 />
