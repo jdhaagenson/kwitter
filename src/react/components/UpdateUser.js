@@ -1,39 +1,48 @@
 import React, { Component } from "react";
-import { Modal, Button, Image, Header, Form, Icon } from "semantic-ui-react";
+import { Button, Form, Header, Icon, Image, Modal } from "semantic-ui-react";
 import { connect } from "react-redux";
-import { updateUser, getUser } from "../../redux";
+import { getUser, updateUser } from "../../redux";
 import defaultImage from "./images/default_avatar.png";
-
-import UploadPhoto from "./UploadPhoto";
 
 class UpdateUser extends Component {
   state = {
     password: "",
     displayName: "",
-    about: ""
+    about: "",
+    open: false
   };
 
   handleChange = e => {
     // e.preventDefault()
-    this.setState({ [e.target.name]: e.target.value });
+    this.setState({[e.target.name]: e.target.value});
+  };
+  handleOpen = e => {
+    e.preventDefault();
+    this.setState({open: true})
   };
 
   handleUserUpdate = e => {
     e.preventDefault();
-    this.props.updateUser(this.state);
+    this.props.updateUser({
+      about: this.state.about,
+      password: this.state.password,
+      displayName: this.state.displayName
+    });
+    this.setState({open: false})
   };
 
   render() {
-    const { error } = this.props;
+    const {error} = this.props;
     // const user = this.state;
 
     return (
       <React.Fragment>
         <div>
           <Modal
+            open={this.state.open}
             trigger={
-              <Button fluid>
-                <Icon name="edit outline" />
+              <Button onClick={this.handleOpen} fluid>
+                <Icon name="edit outline"/>
                 Update Profile
               </Button>
             }
